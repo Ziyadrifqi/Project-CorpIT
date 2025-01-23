@@ -1,0 +1,1171 @@
+INFO - 2024-11-14 01:36:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 01:36:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 01:36:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 01:36:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 01:37:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:24:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:25:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:26:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-11-14 02:26:08 --> mysqli_sql_exception: Table 'komik.departements' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Controllers\Hirarki\DepartementController.php(25): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+#8 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+#9 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2024-11-14 02:26:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.departements' doesn't exist
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `departements`', [], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Hirarki\DepartementController.php(25): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-11-14 02:26:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.departements' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `departements`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `departements`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `departements`', [], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Hirarki\DepartementController.php(25): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-11-14 02:26:08 --> [Caused by] mysqli_sql_exception: Table 'komik.departements' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *
+FROM `departements`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `departements`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `departements`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `departements`', [], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Hirarki\DepartementController.php(25): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:26:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:26:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:27:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:27:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:32:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:35:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:35:54 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:37:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:37:03 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:37:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:37:34 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:37:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:37:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:37:38 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:40:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:40:06 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:48:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 02:48:01 --> ErrorException: Undefined variable $directorate
+[Method: GET, Route: admin/hirarki/division/edit/11]
+in APPPATH\Views\admin\hirarki\division\edit.php on line 52.
+ 1 APPPATH\Views\admin\hirarki\division\edit.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $directorate', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php', 52)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(71): view('admin/hirarki/division/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->edit('11')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 02:56:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:58:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:58:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:58:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 02:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:00:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:00:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:00:48 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(26): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:07:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:07:49 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(26): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:09:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:09:13 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(31): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:09:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:09:16 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(31): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:09:44 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(31): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:10:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:11:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:16:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:16:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:32:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:32:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:32:54 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:33:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:33:12 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:33:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:33:13 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:33:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:33:33 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:34:41 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:36:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:36:07 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:36:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:36:09 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:36:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:36:09 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:36:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:36:10 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:36:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:36:10 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:45:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:45:37 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:45:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:45:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:45:48 --> BadMethodCallException: Call to undefined method App\Models\Hirarki\DirectorateModel::getDepartementsWithDirectorate
+[Method: GET, Route: admin/hirarki/departement]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\Hirarki\DepartementController.php(27): CodeIgniter\Model->__call('getDepartementsWithDirectorate', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:46:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:46:12 --> ErrorException: Undefined variable $departements
+[Method: GET, Route: admin/hirarki/departement]
+in APPPATH\Views\admin\hirarki\departement\index.php on line 46.
+ 1 APPPATH\Views\admin\hirarki\departement\index.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $departements', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\index.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/departement/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DepartementController.php(29): view('admin/hirarki/departement/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:46:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:46:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:47:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:47:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 03:48:57 --> ErrorException: Undefined array key "directorate_name"
+[Method: GET, Route: admin/hirarki/division]
+in APPPATH\Views\admin\hirarki\division\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\division\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "directorate_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\division\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/division/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\DivisionController.php(28): view('admin/hirarki/division/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DivisionController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DivisionController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 03:49:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:49:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:49:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:50:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:50:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:51:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:51:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:52:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:52:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:52:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:53:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:53:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:54:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 03:54:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:05:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:05:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:05:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:08:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:08:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:09:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:09:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:09:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:10:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:11:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:41:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:45:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:47:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:49:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:54:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:59:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:59:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 04:59:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:45:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:45:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:49:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 06:49:23 --> ErrorException: Undefined variable $dir
+[Method: GET, Route: admin/hirarki/departement/create]
+in APPPATH\Views\admin\hirarki\departement\create.php on line 54.
+ 1 APPPATH\Views\admin\hirarki\departement\create.php(54): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dir', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\create.php', 54)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\create.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/departement/create', [], true)
+ 5 APPPATH\Controllers\Hirarki\DepartementController.php(41): view('admin/hirarki/departement/create', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->create()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 06:50:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:50:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:51:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:51:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:51:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:51:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:51:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:52:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:52:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:54:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:54:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:55:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:55:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:55:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:55:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:58:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 06:58:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:05:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:09:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 07:09:49 --> ErrorException: Undefined array key "name"
+[Method: GET, Route: admin/hirarki/departement/edit/6]
+in APPPATH\Views\admin\hirarki\departement\edit.php on line 40.
+ 1 APPPATH\Views\admin\hirarki\departement\edit.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\edit.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/departement/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DepartementController.php(78): view('admin/hirarki/departement/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->edit('6')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 07:10:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 07:10:13 --> ErrorException: Undefined variable $div
+[Method: GET, Route: admin/hirarki/departement/edit/6]
+in APPPATH\Views\admin\hirarki\departement\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\departement\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $div', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\departement\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/departement/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\DepartementController.php(78): view('admin/hirarki/departement/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\DepartementController->edit('6')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\DepartementController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 07:10:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:11:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:11:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:12:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:12:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:14:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:14:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:14:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:14:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:14:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 07:55:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:27:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:27:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:27:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-11-14 08:27:44 --> mysqli_sql_exception: Table 'komik.sub_departements' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Controllers\Hirarki\SubdepartController.php(24): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+#8 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+#9 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2024-11-14 08:27:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sub_departements' doesn't exist
+[Method: GET, Route: admin/hirarki/subdepart]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `sub_departements`', [], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Hirarki\SubdepartController.php(24): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-11-14 08:27:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sub_departements' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `sub_departements`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `sub_departements`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `sub_departements`', [], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Hirarki\SubdepartController.php(24): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-11-14 08:27:44 --> [Caused by] mysqli_sql_exception: Table 'komik.sub_departements' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT *
+FROM `sub_departements`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `sub_departements`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `sub_departements`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `sub_departements`', [], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Hirarki\SubdepartController.php(24): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:28:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:36:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:36:14 --> ErrorException: Undefined variable $subdeparts
+[Method: GET, Route: admin/hirarki/subdepart]
+in APPPATH\Views\admin\hirarki\subdepart\index.php on line 46.
+ 1 APPPATH\Views\admin\hirarki\subdepart\index.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdeparts', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(29): view('admin/hirarki/subdepart/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:36:22 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart]
+in APPPATH\Views\admin\hirarki\subdepart\index.php on line 46.
+ 1 APPPATH\Views\admin\hirarki\subdepart\index.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(29): view('admin/hirarki/subdepart/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:36:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:36:23 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart]
+in APPPATH\Views\admin\hirarki\subdepart\index.php on line 46.
+ 1 APPPATH\Views\admin\hirarki\subdepart\index.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(29): view('admin/hirarki/subdepart/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:37:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:37:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:37:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:38:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:38:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:39:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:39:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:39:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:40:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:40:06 --> ErrorException: Undefined variable $dep
+[Method: GET, Route: admin/hirarki/subdepart]
+in APPPATH\Views\admin\hirarki\subdepart\index.php on line 51.
+ 1 APPPATH\Views\admin\hirarki\subdepart\index.php(51): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dep', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php', 51)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(29): view('admin/hirarki/subdepart/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:40:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:40:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:40:38 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart]
+in APPPATH\Views\admin\hirarki\subdepart\index.php on line 46.
+ 1 APPPATH\Views\admin\hirarki\subdepart\index.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php', 46)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/index', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(29): view('admin/hirarki/subdepart/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:41:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:56:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:56:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:07 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:56:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:16 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:17 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:18 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:56:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 08:56:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:21 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:56:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:56:59 --> ErrorException: Undefined array key "id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:57:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:57:11 --> ErrorException: Undefined variable $subdeparts
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdeparts', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:57:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:57:21 --> ErrorException: Undefined variable $subdepart
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 32.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $subdepart', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 32)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:58:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:58:07 --> ErrorException: Undefined array key "name"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 40.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:58:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:58:08 --> ErrorException: Undefined array key "name"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 40.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 08:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 08:59:05 --> ErrorException: Undefined array key "name"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 40.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(40): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 40)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:00:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:00:27 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:01:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:01:15 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:01:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:01:16 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:01:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:01:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:01:21 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:01:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:01:54 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 4 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:01:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:01:56 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 4 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:02:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:02:15 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 4 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:02:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:02:17 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 4 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:02:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:02:33 --> ErrorException: Undefined variable $departements
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 54.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(54): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $departements', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 54)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:02:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:02:42 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:10:52 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:10:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:10:54 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/4]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('4')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:11:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:11:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-11-14 09:11:19 --> ErrorException: Undefined array key "departement_id"
+[Method: GET, Route: admin/hirarki/subdepart/edit/5]
+in APPPATH\Views\admin\hirarki\subdepart\edit.php on line 55.
+ 1 APPPATH\Views\admin\hirarki\subdepart\edit.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "departement_id"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php', 55)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\hirarki\\subdepart\\edit.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/hirarki/subdepart/edit', [], true)
+ 5 APPPATH\Controllers\Hirarki\SubdepartController.php(75): view('admin/hirarki/subdepart/edit', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Hirarki\SubdepartController->edit('5')
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hirarki\SubdepartController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-11-14 09:13:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:13:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:13:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:13:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:13:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:13:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:17:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:18:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:18:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:19:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:20:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:32:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:32:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:32:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:32:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-11-14 09:32:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

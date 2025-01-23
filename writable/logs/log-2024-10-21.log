@@ -1,0 +1,1379 @@
+INFO - 2024-10-21 03:18:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:21:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:22:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:22:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:23:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:24:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:24:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 03:24:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:30:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 04:30:12 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 04:32:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 04:32:12 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 04:34:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:35:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 04:35:39 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: user/]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/index', [], true)
+10 APPPATH\Controllers\User.php(18): view('user/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 04:35:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:47:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:48:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:49:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:50:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:54:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:56:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 04:57:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:00:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:05:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:18:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:21:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:21:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:21:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:24:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:27:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:28:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:29:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:29:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:29:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:31:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:45:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:45:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:45:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:45:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:45:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:47:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:47:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:47:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:47:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:53:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:56:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:56:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:56:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:58:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:58:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:59:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:59:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:59:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 05:59:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:03:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:03:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:04:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:04:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:04:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:04:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:05:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:06:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:08:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:11:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 06:11:42 --> Error: Class "App\Models\GroupUserModel" not found
+[Method: GET, Route: /]
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 06:12:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 06:12:00 --> Error: Class "App\Models\GroupUserModel" not found
+[Method: GET, Route: /]
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 06:13:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 06:13:09 --> Error: Class "App\Models\GroupUserModel" not found
+[Method: GET, Route: /]
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 06:13:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 06:13:11 --> Error: Class "App\Models\GroupUserModel" not found
+[Method: GET, Route: /]
+in APPPATH\Controllers\Home.php on line 16.
+ 1 SYSTEMPATH\CodeIgniter.php(903): App\Controllers\Home->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(500): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 7 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 06:13:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:13:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:13:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:15:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:15:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:18:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 06:20:21 --> ErrorException: Undefined variable $title
+[Method: GET, Route: /]
+in APPPATH\Views\pages\template.php on line 7.
+ 1 APPPATH\Views\pages\template.php(7): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php', 7)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('pages/template', [], true)
+ 5 APPPATH\Controllers\Home.php(39): view('pages/template')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->user()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 06:20:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 06:21:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:07:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:08:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:09:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:10:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:11:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:13:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:16:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:16:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:17:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:18:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:19:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:20:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:20:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:23:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 08:23:37 --> ErrorException: Undefined variable $title
+[Method: GET, Route: article]
+in APPPATH\Views\pages\template.php on line 7.
+ 1 APPPATH\Views\pages\template.php(7): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php', 7)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('pages/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\ArticleController.php(28): view('pages/home', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 08:23:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:27:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:27:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-21 08:28:15 --> mysqli_sql_exception: Column 'group_id' cannot be null in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `ar...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ar...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ar...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ar...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(429): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(840): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\ci4crud\system\Model.php(837): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\ci4crud\system\BaseModel.php(751): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\ci4crud\app\Models\ArticleModel.php(28): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\ci4crud\app\Controllers\ArticleController.php(52): App\Models\ArticleModel->saveArticle(Array)
+#10 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\ArticleController->store()
+#11 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+#12 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#14 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#15 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#16 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#17 {main}
+CRITICAL - 2024-10-21 08:28:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'group_id' cannot be null
+[Method: POST, Route: article/store]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (:title:, :content:, :author:, :group_id:)', [...], false)
+ 2 SYSTEMPATH\Model.php(429): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(837): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Models\ArticleModel.php(28): CodeIgniter\BaseModel->save([...])
+ 7 APPPATH\Controllers\ArticleController.php(52): App\Models\ArticleModel->saveArticle([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->store()
+ 9 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+10 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 08:28:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'group_id' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (\'Masakan Nikmat\', \'apalah artinya\', \'ZiyadRifqi\', NULL)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (\'Masakan Nikmat\', \'apalah artinya\', \'ZiyadRifqi\', NULL)')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (:title:, :content:, :author:, :group_id:)', [...], false)
+ 4 SYSTEMPATH\Model.php(429): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(837): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Models\ArticleModel.php(28): CodeIgniter\BaseModel->save([...])
+ 9 APPPATH\Controllers\ArticleController.php(52): App\Models\ArticleModel->saveArticle([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->store()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 08:28:15 --> [Caused by] mysqli_sql_exception: Column 'group_id' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (\'Masakan Nikmat\', \'apalah artinya\', \'ZiyadRifqi\', NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (\'Masakan Nikmat\', \'apalah artinya\', \'ZiyadRifqi\', NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (\'Masakan Nikmat\', \'apalah artinya\', \'ZiyadRifqi\', NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2340): CodeIgniter\Database\BaseConnection->query('INSERT INTO `articles` (`title`, `content`, `author`, `group_id`) VALUES (:title:, :content:, :author:, :group_id:)', [...], false)
+ 5 SYSTEMPATH\Model.php(429): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(840): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(837): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Models\ArticleModel.php(28): CodeIgniter\BaseModel->save([...])
+10 APPPATH\Controllers\ArticleController.php(52): App\Models\ArticleModel->saveArticle([...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->store()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 08:32:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:32:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:32:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:33:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:35:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:36:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:36:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:41:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:43:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:43:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:44:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:45:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:45:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:45:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:50:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:58:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:58:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 08:58:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:04:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:05:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:05:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 09:05:58 --> ErrorException: Undefined array key "group_name"
+[Method: GET, Route: article]
+in APPPATH\Views\admin\article\index.php on line 28.
+ 1 APPPATH\Views\admin\article\index.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "group_name"', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\article\\index.php', 28)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\admin\\article\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/article/index', [], true)
+ 5 APPPATH\Controllers\ArticleController.php(23): view('admin/article/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 09:13:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:13:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:13:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:13:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:13:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:14:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:15:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:16:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:16:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:16:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:16:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:17:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:18:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:18:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:18:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:19:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:19:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 09:19:27 --> ErrorException: Undefined variable $title
+[Method: GET, Route: article]
+in APPPATH\Views\pages\template.php on line 7.
+ 1 APPPATH\Views\pages\template.php(7): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php', 7)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\pages\\template.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('pages/template', [], true)
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('pages/home', [], true)
+ 6 APPPATH\Controllers\ArticleController.php(45): view('pages/home', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->userIndex()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 09:19:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:19:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:19:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:20:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 09:20:05 --> BadMethodCallException: Call to undefined method App\Models\ArticleModel::getAllArticles
+[Method: GET, Route: article]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\ArticleController.php(19): CodeIgniter\Model->__call('getAllArticles', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 09:20:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 09:20:24 --> BadMethodCallException: Call to undefined method App\Models\ArticleModel::getAllArticles
+[Method: GET, Route: article]
+in SYSTEMPATH\Model.php on line 967.
+ 1 APPPATH\Controllers\ArticleController.php(19): CodeIgniter\Model->__call('getAllArticles', [])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ArticleController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ArticleController))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 09:20:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:20:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 09:21:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:07:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:08:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:17:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 12:17:29 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:18:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 12:18:30 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 12:20:16 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:20:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 12:20:17 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+10 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 12:24:57 --> Error: Class "App\Models\SidebarMenuModel" not found
+[Method: GET, Route: admin/user_roles]
+in APPPATH\Views\layout\header.php on line 2.
+ 1 SYSTEMPATH\View\View.php(234): include()
+ 2 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 4 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 5 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 6 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 7 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+ 9 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+11 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+12 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:26:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-21 12:26:18 --> mysqli_sql_exception: Table 'komik.sidebar_menu_permisions' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, ...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, ...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, ...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, ...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\app\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+#8 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#9 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#10 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('layout/header', Array, true)
+#11 C:\xampp\htdocs\ci4crud\app\Views\layout\index.php(1): view('layout/header')
+#12 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#14 C:\xampp\htdocs\ci4crud\system\View\View.php(250): CodeIgniter\View\View->render('layout/index', Array, true)
+#15 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('admin/user_role...', Array, true)
+#16 C:\xampp\htdocs\ci4crud\app\Controllers\UserRoleManagement.php(22): view('admin/user_role...', Array)
+#17 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+#18 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+#19 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#20 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#21 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#22 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#23 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#24 {main}
+CRITICAL - 2024-10-21 12:26:19 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permisions' doesn't exist
+[Method: GET, Route: admin/user_roles]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 9 APPPATH\Views\layout\index.php(1): view('layout/header')
+10 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+11 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+12 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+13 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+14 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+15 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+16 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+17 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:26:19 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permisions' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 8 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 9 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+11 APPPATH\Views\layout\index.php(1): view('layout/header')
+12 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+13 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+14 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+15 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+16 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+17 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+18 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+19 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+20 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+21 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+22 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+23 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:26:19 --> [Caused by] mysqli_sql_exception: Table 'komik.sidebar_menu_permisions' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permisions` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 9 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+10 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+11 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+12 APPPATH\Views\layout\index.php(1): view('layout/header')
+13 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+14 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+15 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+16 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+17 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+18 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+19 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+20 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+21 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+22 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+23 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+24 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:26:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-21 12:26:58 --> mysqli_sql_exception: Table 'komik.sidebar_menu_permision' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, ...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, ...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, ...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, ...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\app\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+#8 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#9 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#10 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('layout/header', Array, true)
+#11 C:\xampp\htdocs\ci4crud\app\Views\layout\index.php(1): view('layout/header')
+#12 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#14 C:\xampp\htdocs\ci4crud\system\View\View.php(250): CodeIgniter\View\View->render('layout/index', Array, true)
+#15 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('admin/user_role...', Array, true)
+#16 C:\xampp\htdocs\ci4crud\app\Controllers\UserRoleManagement.php(22): view('admin/user_role...', Array)
+#17 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+#18 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+#19 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#20 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#21 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#22 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#23 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#24 {main}
+CRITICAL - 2024-10-21 12:26:58 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permision' doesn't exist
+[Method: GET, Route: admin/user_roles]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 9 APPPATH\Views\layout\index.php(1): view('layout/header')
+10 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+11 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+12 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+13 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+14 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+15 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+16 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+17 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:26:58 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permision' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 8 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 9 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+11 APPPATH\Views\layout\index.php(1): view('layout/header')
+12 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+13 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+14 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+15 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+16 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+17 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+18 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+19 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+20 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+21 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+22 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+23 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:26:58 --> [Caused by] mysqli_sql_exception: Table 'komik.sidebar_menu_permision' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permision` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 9 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+10 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+11 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+12 APPPATH\Views\layout\index.php(1): view('layout/header')
+13 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+14 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+15 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+16 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+17 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+18 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+19 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+20 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+21 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+22 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+23 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+24 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:27:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:28:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:28:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 12:55:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-21 12:55:00 --> mysqli_sql_exception: Table 'komik.sidebar_menu_permission' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, ...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, ...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, ...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, ...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\app\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+#8 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#9 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#10 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('layout/header', Array, true)
+#11 C:\xampp\htdocs\ci4crud\app\Views\layout\index.php(1): view('layout/header')
+#12 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#14 C:\xampp\htdocs\ci4crud\system\View\View.php(250): CodeIgniter\View\View->render('layout/index', Array, true)
+#15 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('admin/user_role...', Array, true)
+#16 C:\xampp\htdocs\ci4crud\app\Controllers\UserRoleManagement.php(22): view('admin/user_role...', Array)
+#17 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+#18 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+#19 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#20 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#21 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#22 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#23 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#24 {main}
+CRITICAL - 2024-10-21 12:55:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permission' doesn't exist
+[Method: GET, Route: admin/user_roles]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 9 APPPATH\Views\layout\index.php(1): view('layout/header')
+10 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+11 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+12 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+13 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+14 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+15 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+16 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+17 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:55:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permission' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 8 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 9 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+11 APPPATH\Views\layout\index.php(1): view('layout/header')
+12 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+13 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+14 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+15 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+16 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+17 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+18 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+19 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+20 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+21 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+22 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+23 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:55:00 --> [Caused by] mysqli_sql_exception: Table 'komik.sidebar_menu_permission' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 9 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+10 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+11 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+12 APPPATH\Views\layout\index.php(1): view('layout/header')
+13 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+14 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+15 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+16 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+17 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+18 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+19 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+20 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+21 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+22 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+23 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+24 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:55:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-10-21 12:55:59 --> mysqli_sql_exception: Table 'komik.sidebar_menu_permission' doesn't exist in C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 C:\xampp\htdocs\ci4crud\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, ...', 0)
+#1 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, ...')
+#2 C:\xampp\htdocs\ci4crud\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, ...')
+#3 C:\xampp\htdocs\ci4crud\system\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, ...', Array, false)
+#4 C:\xampp\htdocs\ci4crud\system\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\ci4crud\system\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\ci4crud\app\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\ci4crud\app\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+#8 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#9 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#10 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('layout/header', Array, true)
+#11 C:\xampp\htdocs\ci4crud\app\Views\layout\index.php(1): view('layout/header')
+#12 C:\xampp\htdocs\ci4crud\system\View\View.php(234): include('C:\\xampp\\htdocs...')
+#13 C:\xampp\htdocs\ci4crud\system\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#14 C:\xampp\htdocs\ci4crud\system\View\View.php(250): CodeIgniter\View\View->render('layout/index', Array, true)
+#15 C:\xampp\htdocs\ci4crud\system\Common.php(1171): CodeIgniter\View\View->render('admin/user_role...', Array, true)
+#16 C:\xampp\htdocs\ci4crud\app\Controllers\UserRoleManagement.php(22): view('admin/user_role...', Array)
+#17 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+#18 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+#19 C:\xampp\htdocs\ci4crud\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#20 C:\xampp\htdocs\ci4crud\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#21 C:\xampp\htdocs\ci4crud\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#22 C:\xampp\htdocs\ci4crud\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#23 C:\xampp\htdocs\ci4crud\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#24 {main}
+CRITICAL - 2024-10-21 12:55:59 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permission' doesn't exist
+[Method: GET, Route: admin/user_roles]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 2 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 5 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 9 APPPATH\Views\layout\index.php(1): view('layout/header')
+10 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+11 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+12 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+13 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+14 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+15 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+16 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+17 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:55:59 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'komik.sidebar_menu_permission' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 4 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 7 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 8 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 9 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+11 APPPATH\Views\layout\index.php(1): view('layout/header')
+12 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+13 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+14 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+15 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+16 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+17 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+18 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+19 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+20 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+21 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+22 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+23 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+CRITICAL - 2024-10-21 12:55:59 --> [Caused by] mysqli_sql_exception: Table 'komik.sidebar_menu_permission' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = 1
+AND `sm`.`parent_id` = 0
+AND `sp`.`group_id` = 1
+ORDER BY `sm`.`order_num` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1644): CodeIgniter\Database\BaseConnection->query('SELECT `sm`.*, `sp`.`permission_id`, `sp`.`group_id`
+FROM (`sidebar_menu`, `sidebar_menu` `sm`)
+LEFT JOIN `sidebar_menu_permission` `sp` ON `sm`.`id` = `sp`.`menu_id`
+WHERE `sm`.`is_active` = :sm.is_active:
+AND `sm`.`parent_id` = :sm.parent_id:
+AND `sp`.`group_id` = :sp.group_id:
+ORDER BY `sm`.`order_num` ASC', [...], false)
+ 5 SYSTEMPATH\Model.php(321): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(676): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Models\SidebarMenu.php(23): CodeIgniter\BaseModel->findAll()
+ 8 APPPATH\Views\layout\header.php(4): App\Models\SidebarMenu->getMenusWithChildren(1)
+ 9 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+10 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+11 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+12 APPPATH\Views\layout\index.php(1): view('layout/header')
+13 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+14 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+15 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+16 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('admin/user_roles', [], true)
+17 APPPATH\Controllers\UserRoleManagement.php(22): view('admin/user_roles', [...])
+18 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UserRoleManagement->index()
+19 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UserRoleManagement))
+20 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+21 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+22 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+23 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+24 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 12:58:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:09:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:12:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:13:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:13:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:13:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:14:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:15:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:15:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:20:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:31:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 13:31:03 --> ErrorException: Undefined property: CodeIgniter\View\View::$db
+[Method: GET, Route: user]
+in APPPATH\Views\layout\header.php on line 110.
+ 1 APPPATH\Views\layout\header.php(110): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$db', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 110)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/index', [], true)
+10 APPPATH\Controllers\User.php(18): view('user/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 13:35:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 13:35:59 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: user]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/index', [], true)
+10 APPPATH\Controllers\User.php(18): view('user/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 13:37:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 13:37:04 --> ErrorException: Undefined variable $menus
+[Method: GET, Route: user]
+in APPPATH\Views\layout\header.php on line 105.
+ 1 APPPATH\Views\layout\header.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $menus', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 105)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/index', [], true)
+10 APPPATH\Controllers\User.php(18): view('user/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 13:37:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:38:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-10-21 13:38:09 --> ErrorException: Undefined property: CodeIgniter\View\View::$db
+[Method: GET, Route: user]
+in APPPATH\Views\layout\header.php on line 110.
+ 1 APPPATH\Views\layout\header.php(110): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: CodeIgniter\\View\\View::$db', 'C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php', 110)
+ 2 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\header.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('layout/header', [], true)
+ 5 APPPATH\Views\layout\index.php(1): view('layout/header')
+ 6 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\ci4crud\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('user/index', [], true)
+10 APPPATH\Controllers\User.php(18): view('user/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\User->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\User))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\ci4crud\\public\\index.php')
+INFO - 2024-10-21 13:38:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:42:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:46:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:48:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:49:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:49:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:51:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:53:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:53:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:53:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:54:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-10-21 13:54:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

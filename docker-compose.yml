@@ -1,0 +1,50 @@
+services:
+  # Layanan aplikasi PHP
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itcorporate_app
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8080:80"  # Akses aplikasi melalui http://localhost:8080
+    depends_on:
+      - db
+    networks:
+      - ci4network
+
+  # Layanan MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: itcorporate_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: komik
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql 
+    networks:
+      - ci4network
+
+  # Layanan phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: itcorporate_phpmyadmin
+    ports:
+      - "8081:80"  # Akses phpMyAdmin melalui http://localhost:8081
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    depends_on:
+      - db
+    networks:
+      - ci4network
+
+networks:
+  ci4network:
+    driver: bridge

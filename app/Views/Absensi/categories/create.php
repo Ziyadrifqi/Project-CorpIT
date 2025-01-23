@@ -1,0 +1,44 @@
+<?= $this->extend('layout/index'); ?>
+<?= $this->section('page-content'); ?>
+
+<div class="container mt-4">
+    <div class="card-header">
+        <div class="container-fluid">
+            <h1 class="h3 mb-4 text-gray-800"><?= esc($title); ?></h1>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-plus me-1"></i>
+                New Add Attandance Categpries Form
+                <a href="<?= base_url('/Absensi/categories'); ?>" class="text-primary float-end" style="text-decoration: none;">
+                    <i class="fas fa-arrow-left"></i> Back to Attandance Categories
+                </a>
+            </div>
+            <div class="card-body">
+                <?php if (session()->has('error')): ?>
+                    <div class="alert alert-danger">
+                        <?= session()->get('error') ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (session()->has('validation')): ?>
+                    <div class="alert alert-danger">
+                        <?= session()->get('validation')->listErrors() ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="/Absensi/categories/store" method="post">
+                    <?= csrf_field() ?>
+                    <div class="form-group mb-3">
+                        <label for="name">Category Name</label>
+                        <input type="text" name="name" class="form-control" id="name" required>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->endSection(); ?>
