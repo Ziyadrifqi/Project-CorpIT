@@ -90,7 +90,7 @@
                                     <li class="mb-2">
                                         <a href="#" onclick="filterSingleCategory('category-<?= $category['id'] ?>')" class="d-flex justify-content-between align-items-center">
                                             <span><?= esc($category['name']) ?></span>
-                                            <span class="badge bg-primary">(<?= count($filesByCategory[$category['id']] ?? []) ?>)</span>
+                                            <span>(<?= count($filesByCategory[$category['id']] ?? []) ?>)</span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
