@@ -78,13 +78,25 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Article Type</label>
+                            <select class="form-control" id="type" name="type">
+                                <option value="public" <?= old('type', $article['type'] ?? '') == 'public' ? 'selected' : '' ?>>Public</option>
+                                <option value="internal" <?= old('type', $article['type'] ?? '') == 'internal' ? 'selected' : '' ?>>Internal</option>
+                            </select>
+                            <small class="text-muted">
+                                Public: Articles can be accessed by all users without login, with no distribution required.<br>
+                                Internal: Articles can only be accessed by logged-in users, with an additional option for distribution to specific categories.
+                            </small>
+                        </div>
+                    </div>
                     <!-- Distribution Selection -->
-                    <div class="card">
+                    <div class="card distribution-section" style="display: <?= old('type', $article['type'] ?? '') == 'internal' ? 'block' : 'none' ?>">
                         <div class="col-12">
                             <div class="card shadow-sm">
                                 <div class="card-header">
-                                    <h5 class="form-label">Distribution</h5>
+                                    <h5 class="form-label">Distribution (For Internal Articles Only)</h5>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -216,6 +228,15 @@
         });
 
         CKFinder.setupCKEditor(editor);
+
+        document.getElementById('type').addEventListener('change', function() {
+            const distributionSection = document.querySelector('.distribution-section');
+            if (this.value === 'internal') {
+                distributionSection.style.display = 'block';
+            } else {
+                distributionSection.style.display = 'none';
+            }
+        });
     });
 </script>
 <?= $this->endSection() ?>

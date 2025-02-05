@@ -108,11 +108,26 @@
                                 value="<?= old('updated_at', date('Y-m-d', strtotime($file['updated_at']))) ?>">
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="type" class="form-label">WI Type</label>
+                            <select class="form-control" id="type" name="type">
+                                <option value="public" <?= old('type', $file['type'] ?? '') == 'public' ? 'selected' : '' ?>>Public</option>
+                                <option value="internal" <?= old('type', $file['type'] ?? '') == 'internal' ? 'selected' : '' ?>>Internal</option>
+                            </select>
+                            <small class="text-muted">
+                                Public: WI can be accessed by all users without login, with no distribution required.<br>
+                                Internal: WI can only be accessed by logged-in users, with an additional option for distribution to specific categories.
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Distribution section -->
+                    <div class="card distribution-section" style="display: <?= old('type', $file['type'] ?? '') == 'internal' ? 'block' : 'none' ?>">
                         <div class="col-12">
                             <div class="card shadow-sm">
                                 <div class="card-header">
-                                    <h5 class="form-label">Distribution</h5>
+                                    <h5 class="form-label">Distribution (For Internal WI Only)</h5>
                                 </div>
                                 <div class="row">
                                     <?php
@@ -220,6 +235,14 @@
             placeholder: 'Select a Category',
             allowClear: true,
             closeOnSelect: false
+        });
+        document.getElementById('type').addEventListener('change', function() {
+            const distributionSection = document.querySelector('.distribution-section');
+            if (this.value === 'internal') {
+                distributionSection.style.display = 'block';
+            } else {
+                distributionSection.style.display = 'none';
+            }
         });
     });
 </script>

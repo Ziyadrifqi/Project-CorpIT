@@ -5,29 +5,33 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-//halaman untuk user
-$routes->get('/', 'Pages::index');
-$routes->get('/home', 'Pages::index');
-$routes->get('pages/profile', 'Pages::profile'); //halaman profile user
-$routes->get('pages/article', 'Pages::article'); //halaman article di user
-$routes->get('pages/publication', 'Pages::publication'); //halaman work instruction di user
+// Halaman untuk user
+$routes->get('/', 'Pages::index'); // Halaman utama
+$routes->get('/home', 'Pages::index'); // Halaman home
+$routes->get('pages/profile', 'Pages::profile'); // Halaman profile user
+$routes->get('pages/article', 'Pages::article'); // Halaman article di user
+$routes->get('pages/publication', 'Pages::publication'); // Halaman work instruction di user
 $routes->get('pages/view/(:num)', 'Pages::view/$1');
-$routes->post('/pages/profile/updated', 'Pages::updateProfile'); //update profile user
-$routes->get('pages/createTicket', 'Pages::createTicket'); //membuat ticket
-$routes->post('/pages/Ticket', 'Pages::storeTicket'); //menyimpan setelah buat ticket
-//monitoring ticket
+$routes->post('/pages/profile/updated', 'Pages::updateProfile'); // Update profile user
+$routes->get('pages/createTicket', 'Pages::createTicket'); // Membuat ticket
+$routes->post('/pages/Ticket', 'Pages::storeTicket'); // Menyimpan setelah buat ticket
+// Monitoring ticket
 $routes->match(['get', 'post'], 'pages/monitoringTicket', 'Pages::monitoringTicket');
 $routes->post('pages/searchTicket', 'Pages::searchTicket');
 $routes->add('pages/monitoring_ticket/(:any)', 'Pages::monitoring_ticket/$1');
 
+// Halaman untuk template/index
+$routes->get('/corpIT', 'Pages::index'); // Akses tanpa login
 
-$routes->get('/', 'Home::user');
-$routes->get('user', 'User::index'); //halaman profile admin & superadmin
-$routes->post('/user/update', 'User::updateProfile'); //update profile admin & superadmin
-
-//untuk melakukan login dan register
+// Untuk melakukan login dan register
 $routes->get('/login', 'Home::index');
 $routes->get('/register', 'Home::register');
+
+// Halaman admin & superadmin
+$routes->get('/user', 'User::index'); // Halaman profile admin & superadmin
+$routes->post('/user/update', 'User::updateProfile'); // Update profile admin & superadmin
+$routes->post('user/upload_ttd', 'User::uploadTtd');
+$routes->post('/user/delete_ttd', 'User::deleteTtd');
 
 //untuk halaman absensi admin
 $routes->get('absensi', 'Absensi\Absensi::index');
@@ -94,6 +98,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('fileupload/edit/(:num)', 'FileUploadController::edit/$1');
     $routes->post('fileupload/update/(:num)', 'FileUploadController::update/$1');
     $routes->get('fileupload/delete/(:num)', 'FileUploadController::delete/$1');
+    $routes->post('fileupload/delete/(:num)', 'FileUploadController::delete/$1');
 
     //halaman hirarki directorate yang dicontrol oleh superadmin
     $routes->get('hirarki/directorate', 'Hirarki\DirectorateController::index');
@@ -136,11 +141,21 @@ $routes->group('admin', function ($routes) {
         $routes->post('update/(:num)', 'Activity\AdminActivity::update/$1');
         $routes->post('delete/(:num)', 'Activity\AdminActivity::delete/$1');
         $routes->get('export/(:alpha)', 'Activity\AdminActivity::export/$1');
+        $routes->get('bulk-upload', 'Activity\AdminActivity::bulkUpload');
+        $routes->get('lembur.xlsx', 'Activity\AdminActivity::downloadTemplate');
+        $routes->post('process-bulk-upload', 'Activity\AdminActivity::processBulkUpload');
         $routes->get('exportsuper/(:alpha)', 'Activity\AdminActivity::exportsuper/$1'); // eksport untuk superadmin
     });
 });
 
 $routes->get('activity/history', 'Activity\AdminActivity::history'); //halaman history tracking activity di superadmin
+
+$routes->get('guest-visitor', 'GuestVisitorController::index');
+$routes->get('guest-visitor/create', 'GuestVisitorController::create');
+$routes->post('guest-visitor/save', 'GuestVisitorController::save');
+
+$routes->get('token', 'TokenController::index');
+$routes->post('token/refresh', 'TokenController::refresh');
 
 // halaman category permission untuk user yang dicontrol oleh superadmin
 $routes->group('admin/category-permissions', function ($routes) {

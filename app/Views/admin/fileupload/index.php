@@ -62,10 +62,14 @@
                                     <td>
                                         <?php
                                         $distributions = [];
-                                        foreach ($file['distributions'] as $dist) {
-                                            $distributions[] = ucfirst(esc($dist['target_type']));
+                                        if (!empty($file['distributions'])) {
+                                            foreach ($file['distributions'] as $dist) {
+                                                $distributions[] = ucfirst(esc($dist['target_type']));
+                                            }
+                                            echo esc(implode(', ', array_unique($distributions)));
+                                        } else {
+                                            echo "Public";
                                         }
-                                        echo esc(implode(', ', array_unique($distributions)));
                                         ?>
                                     </td>
                                     <td><?= esc(date('d M Y', strtotime($file['created_at']))) ?></td>

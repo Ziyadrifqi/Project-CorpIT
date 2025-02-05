@@ -13,7 +13,8 @@ class UserModel extends Model
         'email',
         'username',
         'fullname',
-        'active'
+        'active',
+        'signature'
     ];
 
     // Fungsi untuk mendapatkan semua user aktif
@@ -56,5 +57,22 @@ class UserModel extends Model
         return $this->like('username', $keyword)
             ->orLike('email', $keyword)
             ->findAll();
+    }
+
+    // Update user profile
+    public function updateProfile($userId, $data)
+    {
+        return $this->update($userId, $data);
+    }
+
+    // Update user signature
+    public function updateSignature($userId, $fileName)
+    {
+        return $this->update($userId, ['signature' => $fileName]);
+    }
+    // Delete user signature
+    public function deleteSignature($userId)
+    {
+        return $this->update($userId, ['signature' => null]); // Set the signature field to null
     }
 }

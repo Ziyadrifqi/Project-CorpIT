@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Laporan Absensi</title>
+    <title>Rekapitulasi Lembur</title>
     <style>
         @page {
             margin: 20mm 15mm 20mm 15mm;
@@ -14,143 +14,184 @@
         }
 
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
         }
 
-        .company-name {
+        .logo {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin-right: 25px;
+        }
+
+        .header-text {
+            text-align: center;
             font-weight: bold;
-            font-size: 14pt;
-            margin: 0;
         }
 
-        .company-address {
-            font-size: 9pt;
-            margin: 5px 0;
-            color: #333;
+        .employee-info {
+            margin-bottom: 30px;
         }
 
-        .report-title {
-            font-weight: bold;
-            font-size: 12pt;
-            margin: 10px 0;
-            text-decoration: underline;
+        .employee-info table {
+            border: none;
+            width: 100%;
+            /* Menyesuaikan lebar tabel dengan kontainer */
+            table-layout: fixed;
+            /* Mengatur agar lebar kolom proporsional */
         }
 
-        .report-info {
-            margin-bottom: 15px;
-            font-size: 9pt;
+        .employee-info td {
+            padding: 5px;
+            border: none;
+            text-align: left;
         }
 
-        table {
+        .employee-info td:first-child {
+            width: 30%;
+            /* Memberikan lebar yang lebih kecil untuk kolom kiri */
+        }
+
+        .employee-info td:nth-child(2) {
+            width: 70%;
+            /* Memberikan lebih banyak ruang untuk kolom kanan */
+        }
+
+        .overtime-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
-            font-size: 9pt;
+            table-layout: fixed;
         }
 
-        table,
-        th,
-        td {
-            border: 1px solid #000;
+
+        .overtime-table th,
+        .overtime-table td {
+            border: 1px solid black;
             padding: 4px;
-        }
-
-        .table-header {
-            background-color: #f2f2f2;
-            font-weight: bold;
             text-align: center;
         }
 
-        .table-footer {
-            font-weight: bold;
-            background-color: #f2f2f2;
+        .overtime-table td {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        .text-center {
-            text-align: center;
+        .overtime-table th {
+            background-color: #f4801e;
+            color: white;
         }
 
-        .text-right {
-            text-align: right;
+        .description {
+            text-align: left;
         }
 
-        .signature {
+        .signature-section {
+            width: 100%;
             margin-top: 30px;
-            text-align: right;
+            clear: both;
         }
 
-        .no-data {
+        .signature-box-left {
+            float: left;
             text-align: center;
-            padding: 20px;
-            font-style: italic;
+            width: 200px;
+        }
+
+        .signature-box-right {
+            float: right;
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-space {
+            height: 40px;
+        }
+
+        .title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1 class="company-name">PT. APLINUSA LINTASARTA</h1>
-        <p class="company-address">
-            Jakarta Pusat, Menara Thamrin 12th Floor<br>
-            Jl. M.H. Thamrin Kav.3 Jakarta 10250<br>
-            Telepon: +6221 230 2345 | Email: info@lintasarta.co.id
-        </p>
-        <hr>
-        <h2 class="report-title">LAPORAN ABSENSI</h2>
-        <div class="report-info">
-            <table style="border:none;">
+    <!-- Recap Page -->
+    <div class="container">
+        <div class="header">
+            <img src="<?= FCPATH . 'img/lintas.jpg' ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+            <div class="header-text">
+                <strong>APLIKANUSA LINTASARTA</strong><br>
+                REKAPITULASI LEMBUR (NON SHIFT)
+            </div>
+        </div>
+
+        <div class="employee-info">
+            <table>
                 <tr>
-                    <td style="border:none; width: 30%;">Periode</td>
-                    <td style="border:none;">: <?= $selectedMonth ?></td>
+                    <td>NAMA</td>
+                    <td>: <?= user()->username ?></td>
                 </tr>
                 <tr>
-                    <td style="border:none;">Tanggal Cetak</td>
-                    <td style="border:none;">: <?= date('d F Y') ?></td>
+                    <td>JABATAN</td>
+                    <td>: <?= user()->position ?? '-' ?></td>
                 </tr>
-                <?php if (isset($selectedUser) && $selectedUser !== 'all'): ?>
-                    <tr>
-                        <td style="border:none;">User</td>
-                        <td style="border:none;">: <?= $userName ?? '-' ?></td>
-                    </tr>
-                <?php endif; ?>
-                <?php if (isset($selectedCategory) && $selectedCategory): ?>
-                    <tr>
-                        <td style="border:none;">Kategori</td>
-                        <td style="border:none;">: <?= $categoryName ?? '-' ?></td>
-                    </tr>
-                <?php endif; ?>
+                <tr>
+                    <td>DEPT</td>
+                    <td>: <?= $userData['department_name'] ?? '-' ?></td>
+                </tr>
+                <tr>
+                    <td>SUB DEPT</td>
+                    <td>: <?= $userData['sub_department_name'] ?? '-' ?></td>
+                </tr>
+                <tr>
+                    <td>LOKASI</td>
+                    <td>: Menara Thamrin, Jakarta Pusat</td>
+                </tr>
+                <tr>
+                    <td>PERIODE</td>
+                    <td>: <?= $selectedMonth ?></td>
+                </tr>
             </table>
         </div>
-    </div>
 
-    <?php if (empty($absensi)): ?>
-        <div class="no-data">
-            Tidak ada data absensi untuk periode yang dipilih
-        </div>
-    <?php else: ?>
-        <table>
+        <table class="overtime-table">
             <thead>
-                <tr class="table-header">
-                    <th style="width: 4%;">No</th>
-                    <th style="width: 10%;">User</th>
-                    <th style="width: 8%;">Tanggal</th>
-                    <th style="width: 12%;">Kategori</th>
-                    <th style="width: 15%;">Judul Kegiatan</th>
-                    <th style="width: 7%;">Jam Masuk</th>
-                    <th style="width: 7%;">Jam Keluar</th>
-                    <th style="width: 8%;">Tanggal Keluar</th>
-                    <th style="width: 9%;">Total Jam</th>
-                    <th style="width: 12%;">Kegiatan Harian</th>
-                    <th style="width: 8%;">No Tiket</th>
+                <tr>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 15%;">User</th>
+                    <th style="width: 10%;">Tanggal</th>
+                    <th style="width: 10%;">Kategori</th>
+                    <th style="width: 10%;">Jam Masuk</th>
+                    <th style="width: 10%;">Jam Keluar</th>
+                    <th style="width: 10%;">Total Lembur</th>
+                    <th style="width: 20%;">Deskripsi Lembur</th>
+                    <th style="width: 10%;">No. Tiket</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $no = 1;
                 $totalHours = 0;
-                foreach ($absensi as $item):
-                    // Hitung total jam
+                foreach ($absensi as $index => $item):
                     if ($item['jam_masuk'] && $item['jam_keluar']) {
                         $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
                         $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
@@ -159,47 +200,196 @@
                         $hours = floor($diffMinutes / 60);
                         $minutes = $diffMinutes % 60;
                         $totalHoursItem = sprintf('%d jam %02d menit', $hours, $minutes);
-                        $totalHoursDecimal = $diffMinutes / 60;
+                        $totalHours += $diffMinutes / 60;
                     } else {
                         $totalHoursItem = '-';
-                        $totalHoursDecimal = 0;
                     }
-                    $totalHours += $totalHoursDecimal;
                 ?>
                     <tr>
-                        <td class="text-center"><?= $no++ ?></td>
+                        <td><?= $index + 1 ?></td>
                         <td><?= esc($item['user_name']) ?></td>
-                        <td class="text-center"><?= date('d/m/Y', strtotime($item['tanggal'])) ?></td>
+                        <td><?= date('d/m/Y', strtotime($item['tanggal'])) ?></td>
                         <td><?= esc($item['category_name']) ?></td>
-                        <td><?= esc($item['judul_kegiatan']) ?></td>
-                        <td class="text-center"><?= $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-' ?></td>
-                        <td class="text-center"><?= $item['jam_keluar'] ? date('H:i', strtotime($item['jam_keluar'])) : '-' ?></td>
-                        <td class="text-center"><?= $item['tanggal_keluar'] ? date('d/m/Y', strtotime($item['tanggal_keluar'])) : '-' ?></td>
-                        <td class="text-center"><?= $totalHoursItem ?></td>
-                        <td><?= nl2br(esc($item['kegiatan_harian'])) ?></td>
-                        <td class="text-center"><?= esc($item['no_tiket']) ?: '-' ?></td>
+                        <td><?= $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-' ?></td>
+                        <td><?= $item['jam_keluar'] ? date('H:i', strtotime($item['jam_keluar'])) : '-' ?></td>
+                        <td><?= $totalHoursItem ?></td>
+                        <td class="description"><?= $item['kegiatan_harian'] ?? '-' ?></td>
+                        <td><?= $item['no_tiket'] ?? '-' ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
             <tfoot>
-                <tr class="table-footer">
-                    <td colspan="8" class="text-right">Total Jam</td>
-                    <td colspan="3" class="text-center"><?= sprintf('%.2f jam', $totalHours) ?></td>
+                <tr>
+                    <td colspan="6" style="text-align: right;"><strong>Total Jam Lembur</strong></td>
+                    <td colspan="3"><strong><?= sprintf('%.2f jam', $totalHours) ?></strong></td>
                 </tr>
             </tfoot>
         </table>
 
-        <div class="signature">
-            <p>
-                Jakarta, <?= date('d F Y') ?><br>
-                Mengetahui,<br>
-                Kepala Departemen
-                <br><br><br><br>
-                ______________________<br>
-                NIP.
-            </p>
+        <div class="signature-section">
+            <div class="signature-box-left">
+                <p>Menyetujui,</p>
+                <div class="signature-space"></div>
+                <p><u>RAHARDIKA NUR PERMANA</u><br>
+                    NIK: 92161515</p>
+            </div>
+            <div class="signature-box-right">
+                <p>Dibuat Oleh,</p>
+                <?php if (isset($signature_path) && $signature_path): ?>
+                    <div class="signature-img">
+                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
+                <p><u><?= user()->username ?></u><br>
+                    NIK: <?= user()->nik ?? '-' ?></p>
+            </div>
         </div>
-    <?php endif; ?>
+    </div>
+
+    <!-- Individual Forms for Each Entry -->
+    <?php foreach ($absensi as $index => $item):
+        if ($item['jam_masuk'] && $item['jam_keluar']):
+    ?>
+            <div class="page-break" style="margin: 0; padding: 0;">
+                <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 0.7;">
+                    <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
+                        <div class="form-section" style="font-size: 12px;">Form lembur karyawan Non shift</div>
+                        <img src="<?= FCPATH . 'img/lintas.jpg' ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+                        <div class="header-text" style="font-size: 16px;">SURAT TUGAS LEMBUR</div>
+                    </div>
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                        <p style="margin: 0;">Di instruksikan kepada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Nama</td>
+                                <td style="padding: 2px;">: <?= esc($item['user_name']) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">NIK</td>
+                                <td style="padding: 2px;">: <?= $item['nik'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Bagian/Divisi</td>
+                                <td style="padding: 2px;">: <?= $userData['department_name'] ?? '-' ?> / <?= $userData['division_name'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Lokasi Kerja</td>
+                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? '-' ?></td>
+                            </tr>
+                        </table>
+
+                        <!-- Overtime Details -->
+                        <p>Untuk melaksanakan lembur pada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Hari/Tanggal</td>
+                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['tanggal'])) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Jam</td>
+                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['jam_masuk'])) ?> s.d <?= date('H:i', strtotime($item['jam_keluar'])) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                        <p style="margin: 5px 0;">
+                            <strong><?= $item['kegiatan_harian'] ?></strong>
+                            <?php if (!empty($item['no_tiket'])): ?>
+                                (<strong>#<?= $item['no_tiket'] ?></strong>)
+                            <?php endif; ?>
+                        </p>
+
+                        <!-- Signatures -->
+                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                                <p>Menyetujui,</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
+                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
+                                <p>Yang di beri tugas,</p>
+                                <div class="signature-space" style="height: 30px;"></div>
+                                <p><u><?= esc($item['user_name']) ?></u><br><br>NIK: <?= $item['nik'] ?? '-' ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;">LAPORAN PELAKSANAAN LEMBUR</div>
+
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                        <p>Berdasarkan Surat Tugas Lembur No : ................................ yang bertanda tangan di bawah ini :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Nama</td>
+                                <td style="padding: 2px;">: <?= esc($item['user_name']) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">NIK</td>
+                                <td style="padding: 2px;">: <?= $item['nik'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Bagian/Divisi</td>
+                                <td style="padding: 2px;">: <?= $item['department_name'] ?? '-' ?> / <?= $item['division_name'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Lokasi Kerja</td>
+                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? '-' ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Telah melaksanakan lembur pada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Hari/Tanggal</td>
+                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['tanggal'])) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Jam</td>
+                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['jam_masuk'])) ?> s.d <?= date('H:i', strtotime($item['jam_keluar'])) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                        <p style="margin: 5px 0;">
+                            <strong><?= $item['kegiatan_harian'] ?></strong> (<strong>#<?= $item['no_tiket'] ?></strong>)
+                        </p>
+
+                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                                <p>Menyetujui,</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
+                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
+                                <p>Yang di beri tugas,</p>
+                                <?php if (isset($signature_path) && $signature_path): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= esc($item['user_name']) ?></u><br><br>NIK: <?= $item['nik'] ?? '-' ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <?php
+        endif;
+    endforeach;
+    ?>
 </body>
 
 </html>

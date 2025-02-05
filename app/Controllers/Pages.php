@@ -27,16 +27,15 @@ class Pages extends BaseController
 
     public function index()
     {
-        // Load text helper (if using character_limiter)
         helper('text');
 
         // Get the logged-in user's ID
-        $userId = user()->id;
+        $userId = user()->id ?? null; // Use null if not logged in
 
-        // Get user groups
-        $userGroups = $this->getUserGroups($userId);
+        // Get user groups if logged in
+        $userGroups = $userId ? $this->getUserGroups($userId) : [];
 
-        // Fetch articles based on user groups
+        // Fetch articles based on user groups or show public articles if not logged in
         $articles = $this->articleModel->getArticlesForUser($userGroups);
 
         // Fetch categories
@@ -51,14 +50,19 @@ class Pages extends BaseController
         ];
 
         // Load the appropriate view based on user group
-        $groupId = $this->getUserGroupId($userId);
-
-        if ($groupId == 2) {
-            return view('template/index', $data);
+        if ($userId) {
+            $groupId = $this->getUserGroupId($userId);
+            if ($groupId == 2) {
+                return view('template/index', $data);
+            } else {
+                return view('user/index', $data);
+            }
         } else {
-            return view('user/index', $data);
+            // If not logged in, just show the public view
+            return view('template/index', $data);
         }
     }
+
     private function getUserGroupId($userId)
     {
         $group = $this->db->table('auth_groups_users')
@@ -202,7 +206,7 @@ class Pages extends BaseController
     {
         helper('text');
 
-        $userId = user()->id;
+        $userId = user()->id ?? null;
         $userGroups = $this->getUserGroups($userId);
         $files = $this->fileUploadModel->getFileForUser($userGroups);
         $categories = $this->categoryModel->findAll();
@@ -233,7 +237,7 @@ class Pages extends BaseController
 
     public function viewFile($id)
     {
-        $userId = user()->id;
+        $userId = user()->id ?? null;
         $userGroups = $this->getUserGroups($userId);
         $file = $this->fileUploadModel->getFileWithDistributions($id);
 
@@ -261,14 +265,14 @@ class Pages extends BaseController
     public function article()
     {
         helper('text');
-        $userId = user()->id;
-        $userGroups = $this->getUserGroups($userId);
+        $userId = user()->id ?? null;
+        $userGroups = $userId ? $this->getUserGroups($userId) : null;
 
         // Pagination configuration
         $perPage = 6; // Number of articles per page
         $page = $this->request->getVar('page') ?? 1;
 
-        // Get articles accessible to the user
+        // Get articles accessible to the user (or public articles for non-logged in users)
         $articles = $this->articleModel->getArticlesForUser($userGroups);
         $categories = $this->categoryModel->findAll();
 
@@ -312,14 +316,19 @@ class Pages extends BaseController
     public function view($id)
     {
         helper('text');
-        $userId = user()->id;
-        $userGroups = $this->getUserGroups($userId);
+        $userId = user()->id ?? null;
+        $userGroups = $userId ? $this->getUserGroups($userId) : null;
 
         // Get article with distributions
         $article = $this->articleModel->getArticleWithDistributions($id);
 
         if (empty($article)) {
             return redirect()->to('/pages/index')->with('error', 'Artikel tidak ditemukan.');
+        }
+
+        // Check if article is public or user has access
+        if ($article['type'] !== 'public' && !$userId) {
+            return redirect()->to('/login')->with('error', 'Please login to view this article.');
         }
 
         // Get articles accessible to the user
@@ -359,10 +368,10 @@ class Pages extends BaseController
     }
     public function getRecentPosts($limit = 3)
     {
-        $userId = user()->id;
-        $userGroups = $this->getUserGroups($userId);
+        $userId = user()->id ?? null;
+        $userGroups = $userId ? $this->getUserGroups($userId) : null;
 
-        // Get articles accessible to the user
+        // Get articles accessible to the user or public articles for non-logged in users
         $articles = $this->articleModel->getArticlesForUser($userGroups);
 
         $recentPosts = [];

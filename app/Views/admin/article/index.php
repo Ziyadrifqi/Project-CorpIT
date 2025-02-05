@@ -55,10 +55,14 @@
                                     <td>
                                         <?php
                                         $distributions = [];
-                                        foreach ($article['distributions'] as $dist) {
-                                            $distributions[] = ucfirst(esc($dist['target_type']));
+                                        if (!empty($article['distributions'])) {
+                                            foreach ($article['distributions'] as $dist) {
+                                                $distributions[] = ucfirst(esc($dist['target_type']));
+                                            }
+                                            echo esc(implode(', ', array_unique($distributions)));
+                                        } else {
+                                            echo "Public";
                                         }
-                                        echo esc(implode(', ', array_unique($distributions)));
                                         ?>
                                     </td>
                                     <td><?= esc(date('d M Y', strtotime($article['created_at']))) ?></td>

@@ -25,7 +25,25 @@
 
                 <form action="<?= base_url('admin/activity/update/' . $activity['id']) ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field() ?>
-
+                    <div class="mb-3">
+                        <label for="task" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik"
+                            value="<?= old('nik', $activity['nik']) ?>" required maxlength="8"
+                            pattern="\d{1,8}" title="Masukkan hingga 8 angka"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);">
+                    </div>
+                    <div class="mb-3">
+                        <label for="task" class="form-label">Pemberi Tugas</label>
+                        <input type="text" class="form-control" id="pbr_tugas" name="pbr_tugas"
+                            value="<?= old('pbr_tugas', $activity['pbr_tugas']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="task" class="form-label">No. Ticket</label>
+                        <input type="text" class="form-control" id="no_tiket" name="no_tiket"
+                            value="<?= old('no_tiket', $activity['no_tiket']) ?>" required maxlength="6"
+                            pattern="\d{6}" title="Masukkan tepat 6 angka"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);">
+                    </div>
                     <div class="mb-3">
                         <label for="activity_date" class="form-label">Date</label>
                         <input type="date" class="form-control" id="activity_date" name="activity_date"

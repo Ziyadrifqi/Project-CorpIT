@@ -202,20 +202,22 @@
                                                 <a href="<?= base_url() ?>">Home</a>
                                             </li>
                                             <li class="has-dropdown active menu-thumb">
-                                                <a href="<?= base_url('pages/publication') ?>">Work Instruction</a>
+                                                <a href="<?= base_url('pages/article') ?>">Article</a>
                                             </li>
                                             <li class="has-dropdown active menu-thumb">
-                                                <a href="<?= base_url('pages/article') ?>">Artikel</a>
+                                                <a href="<?= base_url('pages/publication') ?>">Work Instruction</a>
                                             </li>
-                                            <li>
-                                                <a href="<?= base_url('pages/monitoringTicket') ?>">
-                                                    Monitoring Ticket
-                                                    <i class="fas fa-angle-down"></i>
-                                                </a>
-                                                <ul class="submenu">
-                                                    <li><a href="<?= base_url('pages/createTicket') ?>">Create Ticket</a></li>
-                                                </ul>
-                                            </li>
+                                            <?php if (logged_in()): ?>
+                                                <li>
+                                                    <a href="<?= base_url('pages/monitoringTicket') ?>">
+                                                        Monitoring Ticket
+                                                        <i class="fas fa-angle-down"></i>
+                                                    </a>
+                                                    <ul class="submenu">
+                                                        <li><a href="<?= base_url('pages/createTicket') ?>">Create Ticket</a></li>
+                                                    </ul>
+                                                </li>
+                                            <?php endif; ?>
                                         </ul>
                                     </nav>
                                 </div>
@@ -224,22 +226,39 @@
                         <div class="header-right d-flex justify-content-end align-items-center">
                             <div class="dropdown">
                                 <a href="#" class="dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="far fa-user"></i> <?= user()->username; ?>
+                                    <i class="far fa-user"></i>
+                                    <?= logged_in() ? user()->username : 'Guest'; // Display username if logged in, otherwise show 'Guest' 
+                                    ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="<?= base_url('pages/profile') ?>">
-                                            <i class="fas fa-user-circle me-2"></i> Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                            <i class="fas fa-sign-out-alt me-2"></i> Logout
-                                        </a>
-                                    </li>
+                                    <?php if (logged_in()): // Check if user is logged in 
+                                    ?>
+                                        <li>
+                                            <a class="dropdown-item" href="<?= base_url('pages/profile') ?>">
+                                                <i class="fas fa-user-circle me-2"></i> Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                            </a>
+                                        </li>
+                                    <?php else: // If not logged in 
+                                    ?>
+                                        <li>
+                                            <a class="dropdown-item" href="<?= base_url('login') ?>">
+                                                <i class="fas fa-sign-in-alt me-2"></i> Login
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="<?= base_url('register') ?>">
+                                                <i class="fas fa-user-plus me-2"></i> Register
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
                             </div>
                             <div class="header__hamburger d-block d-xl-none my-auto ms-3">

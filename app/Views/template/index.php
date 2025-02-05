@@ -91,12 +91,12 @@
             </div>
 
             <!-- svg') ?> Mask -->
-            <svg> xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position: absolute;">
-               <clipPath id="heroMask2">
-                  <path
-                     d="M0 50C0 22.3858 22.3858 0 50 0H1780C1807.61 0 1830 22.3858 1830 50V774C1830 801.614 1807.61 824 1780 824H1042.05C1015.85 824 991.426 810.575 977.326 788.498C947.176 741.292 878.083 741.197 848.055 788.482C834.009 810.601 809.627 824 783.425 824H50C22.3858 824 0 801.614 0 774V50Z"
-                     fill="#384BFF" />
-               </clipPath>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" style="position: absolute;">
+               <defs>
+                  <clipPath id="heroMask2" clipPathUnits="objectBoundingBox">
+                     <path d="M0 50C0 22.3858 22.3858 0 50 0H1780C1807.61 0 1830 22.3858 1830 50V774C1830 801.614 1807.61 824 1780 824H1042.05C1015.85 824 991.426 810.575 977.326 788.498C947.176 741.292 878.083 741.197 848.055 788.482C834.009 810.601 809.627 824 783.425 824H50C22.3858 824 0 801.614 0 774V50Z" fill="#384BFF" />
+                  </clipPath>
+               </defs>
             </svg>
          </div>
       </div>

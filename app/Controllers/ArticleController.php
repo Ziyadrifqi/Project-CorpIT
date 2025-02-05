@@ -55,6 +55,7 @@ class ArticleController extends BaseController
             'author' => 'required',
             'image' => 'uploaded[image]|is_image[image]|max_size[image,2048]',
             'category_id' => 'required',
+            'type' => 'required|in_list[public,internal]'
         ];
 
         if (!$this->validate($rules)) {
@@ -66,17 +67,20 @@ class ArticleController extends BaseController
         try {
             // Get selected category IDs
             $categoryIds = $this->request->getPost('category_id');
+            $type = $this->request->getPost('type');
 
-            // Validate access for each selected category
-            $userId = user()->id;
-            foreach ($categoryIds as $categoryId) {
-                $hasAccess = $this->categoryPermissionModel->where([
-                    'user_id' => $userId,
-                    'category_id' => $categoryId
-                ])->first();
+            // Validasi akses kategori hanya jika artikel bertipe internal
+            if ($type === 'internal') {
+                $userId = user()->id;
+                foreach ($categoryIds as $categoryId) {
+                    $hasAccess = $this->categoryPermissionModel->where([
+                        'user_id' => $userId,
+                        'category_id' => $categoryId
+                    ])->first();
 
-                if (!$hasAccess) {
-                    throw new \Exception('You do not have permission to use category ID: ' . $categoryId);
+                    if (!$hasAccess) {
+                        throw new \Exception('You do not have permission to use category ID: ' . $categoryId);
+                    }
                 }
             }
 
@@ -86,6 +90,7 @@ class ArticleController extends BaseController
                 'content' => $this->request->getPost('content'),
                 'author' => $this->request->getPost('author'),
                 'status' => $this->request->getPost('status', 'draft'),
+                'type' => $type,
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ];
@@ -114,61 +119,63 @@ class ArticleController extends BaseController
                 ]);
             }
 
-            // Proses distribusi
-            $distributions = [];
+            // Proses distribusi hanya jika artikel bertipe internal
+            if ($type === 'internal') {
+                $distributions = [];
 
-            // Proses direktori
-            if ($directorateIds = $this->request->getPost('directorate_ids')) {
-                foreach ($directorateIds as $id) {
-                    $distributions[] = [
-                        'article_id' => $articleId,
-                        'target_type' => 'directorate',
-                        'target_id' => $id,
-                        'created_at' => date('Y-m-d H:i:s')
-                    ];
+                // Proses distribusi seperti sebelumnya...
+                if ($directorateIds = $this->request->getPost('directorate_ids')) {
+                    foreach ($directorateIds as $id) {
+                        $distributions[] = [
+                            'article_id' => $articleId,
+                            'target_type' => 'directorate',
+                            'target_id' => $id,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
                 }
-            }
 
-            // Proses divisi
-            if ($divisionIds = $this->request->getPost('division_ids')) {
-                foreach ($divisionIds as $id) {
-                    $distributions[] = [
-                        'article_id' => $articleId,
-                        'target_type' => 'division',
-                        'target_id' => $id,
-                        'created_at' => date('Y-m-d H:i:s')
-                    ];
+                // Proses divisi
+                if ($divisionIds = $this->request->getPost('division_ids')) {
+                    foreach ($divisionIds as $id) {
+                        $distributions[] = [
+                            'article_id' => $articleId,
+                            'target_type' => 'division',
+                            'target_id' => $id,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
                 }
-            }
 
-            // Proses departemen
-            if ($departmentIds = $this->request->getPost('department_ids')) {
-                foreach ($departmentIds as $id) {
-                    $distributions[] = [
-                        'article_id' => $articleId,
-                        'target_type' => 'department',
-                        'target_id' => $id,
-                        'created_at' => date('Y-m-d H:i:s')
-                    ];
+                // Proses departemen
+                if ($departmentIds = $this->request->getPost('department_ids')) {
+                    foreach ($departmentIds as $id) {
+                        $distributions[] = [
+                            'article_id' => $articleId,
+                            'target_type' => 'department',
+                            'target_id' => $id,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
                 }
-            }
 
-            // Proses sub departemen
-            if ($subDepartmentIds = $this->request->getPost('sub_department_ids')) {
-                foreach ($subDepartmentIds as $id) {
-                    $distributions[] = [
-                        'article_id' => $articleId,
-                        'target_type' => 'sub_department',
-                        'target_id' => $id,
-                        'created_at' => date('Y-m-d H:i:s')
-                    ];
+                // Proses sub departemen
+                if ($subDepartmentIds = $this->request->getPost('sub_department_ids')) {
+                    foreach ($subDepartmentIds as $id) {
+                        $distributions[] = [
+                            'article_id' => $articleId,
+                            'target_type' => 'sub_department',
+                            'target_id' => $id,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
                 }
-            }
 
-            // Simpan distribusi jika ada
-            if (!empty($distributions)) {
-                if (!$this->distributionModel->insertBatch($distributions)) {
-                    throw new \Exception('Failed to save distributions');
+                // Simpan distribusi jika ada
+                if (!empty($distributions)) {
+                    if (!$this->distributionModel->insertBatch($distributions)) {
+                        throw new \Exception('Failed to save distributions');
+                    }
                 }
             }
 
@@ -184,113 +191,6 @@ class ArticleController extends BaseController
             log_message('error', '[Article Store] Error: ' . $e->getMessage());
             return redirect()->back()->withInput()
                 ->with('error', 'Failed to create article: ' . $e->getMessage());
-        }
-    }
-
-    private function processHierarchicalDistributions()
-    {
-        $distributions = [];
-
-        // Dapatkan tingkat distribusi yang dipilih
-        $directorateIds = $this->request->getPost('directorate_ids') ?: [];
-        $divisionIds = $this->request->getPost('division_ids') ?: [];
-        $departmentIds = $this->request->getPost('department_ids') ?: [];
-        $subDepartmentIds = $this->request->getPost('sub_department_ids') ?: [];
-
-        // Proses dari level tertinggi hingga terendah
-        if (!empty($directorateIds)) {
-            // Jika direktorat dipilih, sertakan semua tingkatan di bawahnya
-            foreach ($directorateIds as $directorateId) {
-                $distributions[] = ['type' => 'directorate', 'id' => $directorateId];
-                $this->addEntitiesBelow($directorateId, 'directorate', $distributions);
-            }
-        } elseif (!empty($divisionIds)) {
-            // Jika divisi dipilih, sertakan semua tingkatan di bawahnya
-            foreach ($divisionIds as $divisionId) {
-                $distributions[] = ['type' => 'division', 'id' => $divisionId];
-                $this->addEntitiesBelow($divisionId, 'division', $distributions);
-            }
-        } elseif (!empty($departmentIds)) {
-            // Jika departemen dipilih, sertakan semua sub_departemen di bawahnya
-            foreach ($departmentIds as $departmentId) {
-                $distributions[] = ['type' => 'department', 'id' => $departmentId];
-                $this->addEntitiesBelow($departmentId, 'department', $distributions);
-            }
-        }
-
-        // Tangani sub_departemen secara mandiri
-        if (!empty($subDepartmentIds)) {
-            foreach ($subDepartmentIds as $subDepartmentId) {
-                $distributions[] = ['type' => 'sub_department', 'id' => $subDepartmentId];
-            }
-        }
-
-        // Remove duplicates
-        return array_values(array_unique($distributions, SORT_REGULAR));
-    }
-
-    private function addEntitiesBelow($entityId, $entityType, &$distributions)
-    {
-        switch ($entityType) {
-            case 'directorate':
-                // Dapatkan semua divisi di bawah direktorat ini
-                $divisions = $this->db->table('divisions')
-                    ->where('directorate_id', $entityId)
-                    ->get()->getResultArray();
-
-                foreach ($divisions as $division) {
-                    $distributions[] = ['type' => 'division', 'id' => $division['id']];
-
-                    // Dapatkan semua departemen di bawah divisi ini
-                    $departments = $this->db->table('departments')
-                        ->where('division_id', $division['id'])
-                        ->get()->getResultArray();
-
-                    foreach ($departments as $department) {
-                        $distributions[] = ['type' => 'department', 'id' => $department['id']];
-
-                        // Dapatkan semua sub_departemen di bawah departemen ini
-                        $subDepartments = $this->db->table('sub_departments')
-                            ->where('department_id', $department['id'])
-                            ->get()->getResultArray();
-
-                        foreach ($subDepartments as $subDepartment) {
-                            $distributions[] = ['type' => 'sub_department', 'id' => $subDepartment['id']];
-                        }
-                    }
-                }
-                break;
-
-            case 'division':
-                // Dapatkan semua departemen di bawah divisi ini
-                $departments = $this->db->table('departments')
-                    ->where('division_id', $entityId)
-                    ->get()->getResultArray();
-
-                foreach ($departments as $department) {
-                    $distributions[] = ['type' => 'department', 'id' => $department['id']];
-
-                    // Dapatkan semua sub_departemen di bawah departemen ini
-                    $subDepartments = $this->db->table('sub_departments')
-                        ->where('department_id', $department['id'])
-                        ->get()->getResultArray();
-
-                    foreach ($subDepartments as $subDepartment) {
-                        $distributions[] = ['type' => 'sub_department', 'id' => $subDepartment['id']];
-                    }
-                }
-                break;
-
-            case 'department':
-                // Dapatkan semua sub_departemen di bawah departemen ini
-                $subDepartments = $this->db->table('sub_departments')
-                    ->where('department_id', $entityId)
-                    ->get()->getResultArray();
-
-                foreach ($subDepartments as $subDepartment) {
-                    $distributions[] = ['type' => 'sub_department', 'id' => $subDepartment['id']];
-                }
-                break;
         }
     }
 
@@ -362,30 +262,26 @@ class ArticleController extends BaseController
 
     public function update($id)
     {
-        // Aturan validasi untuk artikel
         $rules = [
             'title' => 'required|min_length[3]',
             'content' => 'required',
             'author' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'type' => 'required|in_list[public,internal]'
         ];
 
-        // Jika validasi gagal, kembali ke halaman sebelumnya dengan pesan kesalahan
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        // Memulai transaksi database
         $this->db->transStart();
 
         try {
-            // Mendapatkan ID pengguna yang sedang login
             $userId = user()->id;
-
-            // Mendapatkan kategori yang dipilih (sekarang dalam bentuk array)
             $categoryIds = $this->request->getPost('category_id');
+            $type = $this->request->getPost('type');
 
-            // Validasi akses ke setiap kategori yang dipilih
+            // Validasi akses kategori
             foreach ($categoryIds as $categoryId) {
                 $hasAccess = $this->categoryPermissionModel->where([
                     'user_id' => $userId,
@@ -397,67 +293,108 @@ class ArticleController extends BaseController
                 }
             }
 
-            // Menyiapkan data artikel untuk diupdate
+            // Data artikel
             $articleData = [
                 'title' => $this->request->getPost('title'),
                 'content' => $this->request->getPost('content'),
                 'author' => $this->request->getPost('author'),
                 'status' => $this->request->getPost('status'),
+                'type' => $type,
                 'updated_at' => date('Y-m-d H:i:s')
             ];
 
-            // Melakukan update artikel
-            $success = $this->articleModel->update($id, $articleData);
-
-            if (!$success) {
+            // Update artikel
+            if (!$this->articleModel->update($id, $articleData)) {
                 throw new \Exception('Failed to update article');
             }
 
-            // Proses gambar jika ada
+            // Proses gambar
             $imageFile = $this->request->getFile('image');
             if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
                 $currentArticle = $this->articleModel->find($id);
-                $oldImage = $currentArticle['image'];
-
-                // Hapus gambar lama jika ada
-                if ($oldImage && file_exists(ROOTPATH . 'public/img/articles/' . $oldImage)) {
-                    unlink(ROOTPATH . 'public/img/articles/' . $oldImage);
+                if ($currentArticle['image'] && file_exists(ROOTPATH . 'public/img/articles/' . $currentArticle['image'])) {
+                    unlink(ROOTPATH . 'public/img/articles/' . $currentArticle['image']);
                 }
-
-                // Upload gambar baru
                 $newImageName = $id . '.' . $imageFile->getExtension();
                 $imageFile->move(ROOTPATH . 'public/img/articles/', $newImageName);
-                $articleData['image'] = $newImageName; // Simpan nama gambar baru
+                $this->articleModel->update($id, ['image' => $newImageName]);
             }
 
-            // Hapus kategori lama
+            // Update kategori
             $this->db->table('article_categories')->where('article_id', $id)->delete();
+            foreach ($categoryIds as $categoryId) {
+                $this->db->table('article_categories')->insert([
+                    'article_id' => $id,
+                    'category_id' => $categoryId
+                ]);
+            }
 
-            // Simpan kategori baru
-            if ($categoryIds) {
-                foreach ($categoryIds as $categoryId) {
-                    $this->db->table('article_categories')->insert([
-                        'article_id' => $id,
-                        'category_id' => $categoryId
-                    ]);
+            // Hanya proses distribusi jika tipe internal
+            if ($type === 'internal') {
+                // Hapus distribusi lama
+                $this->db->table('article_distributions')->where('article_id', $id)->delete();
+
+                $distributions = [];
+
+                // Proses distribusi untuk tiap level
+                if ($directorateIds = $this->request->getPost('directorate_ids')) {
+                    foreach ($directorateIds as $dirId) {
+                        $distributions[] = [
+                            'article_id' => $id,
+                            'target_type' => 'directorate',
+                            'target_id' => $dirId,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
+                }
+
+                if ($divisionIds = $this->request->getPost('division_ids')) {
+                    foreach ($divisionIds as $divId) {
+                        $distributions[] = [
+                            'article_id' => $id,
+                            'target_type' => 'division',
+                            'target_id' => $divId,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
+                }
+
+                if ($departmentIds = $this->request->getPost('department_ids')) {
+                    foreach ($departmentIds as $deptId) {
+                        $distributions[] = [
+                            'article_id' => $id,
+                            'target_type' => 'department',
+                            'target_id' => $deptId,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
+                }
+
+                if ($subDepartmentIds = $this->request->getPost('sub_department_ids')) {
+                    foreach ($subDepartmentIds as $subDeptId) {
+                        $distributions[] = [
+                            'article_id' => $id,
+                            'target_type' => 'sub_department',
+                            'target_id' => $subDeptId,
+                            'created_at' => date('Y-m-d H:i:s')
+                        ];
+                    }
+                }
+
+                // Insert distribusi baru jika ada
+                if (!empty($distributions)) {
+                    $this->distributionModel->insertBatch($distributions);
                 }
             }
 
-            // Proses distribusi jika ada
-            $distributions = $this->processHierarchicalDistributions();
-            $this->distributionModel->updateDistributions($id, $distributions);
-
-            // Menyelesaikan transaksi
             $this->db->transComplete();
 
             if ($this->db->transStatus() === false) {
                 throw new \Exception('Transaction failed');
             }
 
-            // Redirect ke halaman daftar artikel dengan pesan sukses
             return redirect()->to('/admin/article')->with('success', 'Article updated successfully');
         } catch (\Exception $e) {
-            // Jika terjadi kesalahan, rollback transaksi
             $this->db->transRollback();
             log_message('error', '[Article Update] Error: ' . $e->getMessage());
             return redirect()->back()->withInput()

@@ -77,18 +77,30 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="type" class="form-label">WI Type</label>
+                            <select class="form-control" id="type" name="type">
+                                <option value="public" <?= old('type', $file['type'] ?? '') == 'public' ? 'selected' : '' ?>>Public</option>
+                                <option value="internal" <?= old('type', $file['type'] ?? '') == 'internal' ? 'selected' : '' ?>>Internal</option>
+                            </select>
+                            <small class="text-muted">
+                                Public: WI can be accessed by all users without login, with no distribution required.<br>
+                                Internal: WI can only be accessed by logged-in users, with an additional option for distribution to specific categories.
+                            </small>
+                        </div>
+                    </div>
                     <!-- Distribution Selection -->
-                    <div class="card mt-4">
+                    <div class="card distribution-section" style="display: <?= old('type', $file['type'] ?? '') == 'internal' ? 'block' : 'none' ?>">
                         <div class="col-12">
                             <div class="card shadow-sm">
                                 <div class="card-header">
-                                    <h5>Distribution</h5>
+                                    <h5 class="form-label">Distribution (For Internal WI Only)</h5>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Directorates</label>
-                                        <select class="form-control" id="select2direc" name="directorate_ids[]" multiple="multiple" required>
+                                        <select class="form-control" id="select2direc" name="directorate_ids[]" multiple="multiple">
                                             <?php foreach ($directorates as $directorate): ?>
                                                 <option value="<?= $directorate['id'] ?>" <?= in_array($directorate['id'], old('directorate_ids', [])) ? 'selected' : '' ?>>
                                                     <?= esc($directorate['name']) ?>
@@ -136,6 +148,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Upload</button>
                     </div>
@@ -192,6 +205,14 @@
             placeholder: 'Select Category',
             allowClear: true,
             closeOnSelect: false
+        });
+        document.getElementById('type').addEventListener('change', function() {
+            const distributionSection = document.querySelector('.distribution-section');
+            if (this.value === 'internal') {
+                distributionSection.style.display = 'block';
+            } else {
+                distributionSection.style.display = 'none';
+            }
         });
     });
 </script>

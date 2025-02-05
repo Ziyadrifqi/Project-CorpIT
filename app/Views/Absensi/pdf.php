@@ -22,6 +22,8 @@
 
         .logo {
             width: 100px;
+            height: auto;
+            display: block;
             margin-right: 25px;
         }
 
@@ -36,30 +38,47 @@
 
         .employee-info table {
             border: none;
-            width: 60%;
+            width: 100%;
+            /* Menyesuaikan lebar tabel dengan kontainer */
+            table-layout: fixed;
+            /* Mengatur agar lebar kolom proporsional */
         }
 
         .employee-info td {
             padding: 5px;
             border: none;
+            text-align: left;
         }
 
         .employee-info td:first-child {
-            width: 120px;
+            width: 30%;
+            /* Memberikan lebar yang lebih kecil untuk kolom kiri */
+        }
+
+        .employee-info td:nth-child(2) {
+            width: 70%;
+            /* Memberikan lebih banyak ruang untuk kolom kanan */
         }
 
         .overtime-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 30px;
-            font-size: small;
+            table-layout: fixed;
         }
+
 
         .overtime-table th,
         .overtime-table td {
             border: 1px solid black;
             padding: 4px;
             text-align: center;
+        }
+
+        .overtime-table td {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .overtime-table th {
@@ -90,7 +109,7 @@
         }
 
         .signature-space {
-            height: 60px;
+            height: 40px;
         }
 
         .title {
@@ -119,7 +138,7 @@
     <!-- Recap Page -->
     <div class="container">
         <div class="header">
-            <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo">
+            <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
             <div class="header-text">
                 <strong>APLIKANUSA LINTASARTA</strong><br>
                 REKAPITULASI LEMBUR (NON SHIFT)
@@ -158,12 +177,13 @@
         <table class="overtime-table">
             <thead>
                 <tr>
-                    <th>Tanggal</th>
-                    <th>Hari</th>
-                    <th>Jam Masuk</th>
-                    <th>Jam Keluar</th>
-                    <th>Total Lembur</th>
-                    <th>Deskripsi Lembur</th>
+                    <th style="width: 5%;">No</th>
+                    <th style="width: 10%;">Tanggal</th>
+                    <th style="width: 10%;">Hari</th>
+                    <th style="width: 10%;">Jam Masuk</th>
+                    <th style="width: 10%;">Jam Keluar</th>
+                    <th style="width: 10%;">Total Lembur</th>
+                    <th style="width: 20%;">Deskripsi Lembur</th>
                 </tr>
             </thead>
             <tbody>
@@ -189,6 +209,7 @@
                     }
                 ?>
                     <tr>
+                        <td><?= $index + 1 ?></td>
                         <td><?= date('d/m/Y', strtotime($item['tanggal'])) ?></td>
                         <td><?= date('l', strtotime($item['tanggal'])) ?></td>
                         <td><?= $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-' ?></td>
@@ -200,7 +221,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" style="text-align: right;"><strong>Total Jam Lembur</strong></td>
+                    <td colspan="5" style="text-align: right;"><strong>Total Jam Lembur</strong></td>
                     <td colspan="2"><strong><?= sprintf('%.2f jam', $totalHours) ?></strong></td>
                 </tr>
             </tfoot>
@@ -215,7 +236,13 @@
             </div>
             <div class="signature-box-right">
                 <p>Dibuat Oleh,</p>
-                <div class="signature-space"></div>
+                <?php if (isset($signature_path) && $signature_path): ?>
+                    <div class="signature-img">
+                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
                 <p><u><?= user()->username ?></u><br>
                     NIK: <?= user()->nik ?? '-' ?></p>
             </div>
@@ -226,13 +253,13 @@
         if ($item['jam_masuk'] && $item['jam_keluar']): // Only create forms for valid entries
     ?>
             <div class="page-break" style="margin: 0; padding: 0;">
-                <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 1.5;">
+                <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 0.7;">
                     <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
                         <div class="form-section" style="font-size: 12px;">Form lembur karyawan Non shift</div>
-                        <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo">
-                        <div class="header-text" style="font-size: 16px;">SURAT TUGAS LEMBUR</div>
+                        <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+                        <div class="header-text" style="font-size: 16px;"><u>SURAT TUGAS LEMBUR</u></div>
                     </div>
-                    <div class="form-section" style="font-size: 12px; line-height: 1;">
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
                         <p style="margin: 0;">Di instruksikan kepada :</p>
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
@@ -241,7 +268,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= user()->nik ?? '-' ?></td>
+                                <td style="padding: 2px;">: <?= $item['nik'] ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Bagian/Divisi</td>
@@ -250,6 +277,10 @@
                             <tr>
                                 <td style="padding: 2px;">Lokasi Kerja</td>
                                 <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?></td>
                             </tr>
                         </table>
 
@@ -273,21 +304,27 @@
                         <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
                             <div class="signature-box-left" style="width: 45%; font-size: 12px;">
                                 <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 30px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br>NIK: 92161515</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
                             </div>
                             <div class="signature-box-right" style="width: 45%; font-size: 12px;">
                                 <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
                                 <p>Yang di beri tugas,</p>
-                                <div class="signature-space" style="height: 30px;"></div>
-                                <p><u><?= user()->username ?></u><br>NIK: <?= user()->nik ?? '-' ?></p>
+                                <?php if (isset($signature_path) && $signature_path): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= user()->username ?></u><br><br>NIK: <?= $item['nik'] ?></p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;">LAPORAN PELAKSANAAN LEMBUR</div>
+                    <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;"><u>LAPORAN PELAKSANAAN LEMBUR</u></div>
 
-                    <div class="form-section" style="font-size: 12px; line-height: 0.9;">
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
                         <p>Berdasarkan Surat Tugas Lembur No : ................................ yang bertanda tangan di bawah ini :</p>
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
@@ -296,7 +333,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= user()->nik ?? '-' ?></td>
+                                <td style="padding: 2px;">: <?= $item['nik'] ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Bagian/Divisi</td>
@@ -305,6 +342,10 @@
                             <tr>
                                 <td style="padding: 2px;">Lokasi Kerja</td>
                                 <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?></td>
                             </tr>
                         </table>
 
@@ -328,14 +369,20 @@
                         <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
                             <div class="signature-box-left" style="width: 45%; font-size: 12px;">
                                 <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 30px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br>NIK: 92161515</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
                             </div>
                             <div class="signature-box-right" style="width: 45%; font-size: 12px;">
                                 <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
                                 <p>Yang di beri tugas,</p>
-                                <div class="signature-space" style="height: 30px;"></div>
-                                <p><u><?= user()->username ?></u><br>NIK: <?= user()->nik ?? '-' ?></p>
+                                <?php if (isset($signature_path) && $signature_path): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= user()->username ?></u><br><br>NIK: <?= $item['nik'] ?></p>
                             </div>
                         </div>
                     </div>

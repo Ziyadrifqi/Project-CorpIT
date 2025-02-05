@@ -11,7 +11,7 @@ class AbsensiModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['user_id', 'tanggal', 'jam_masuk', 'jam_keluar', 'tanggal_keluar', 'status', 'category_id', 'judul_kegiatan', 'kegiatan_harian', 'no_tiket'];
+    protected $allowedFields = ['user_id', 'tanggal', 'jam_masuk', 'jam_keluar', 'tanggal_keluar', 'status', 'category_id', 'judul_kegiatan', 'kegiatan_harian', 'no_tiket', 'pbr_tugas', 'nik'];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';

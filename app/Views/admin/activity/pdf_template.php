@@ -1,178 +1,393 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Activity Report</title>
+    <title>Rekapitulasi Lembur</title>
     <style>
+        @page {
+            margin: 20mm 15mm 20mm 15mm;
+        }
+
         body {
             font-family: Arial, sans-serif;
             font-size: 10pt;
         }
 
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
         }
 
-        .company-name {
+        .logo {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin-right: 25px;
+        }
+
+        .header-text {
+            text-align: center;
             font-weight: bold;
-            font-size: 14pt;
-            margin: 0;
         }
 
-        .company-address {
-            font-size: 9pt;
-            margin: 5px 0;
-            color: #333;
+        .employee-info {
+            margin-bottom: 30px;
         }
 
-        .report-title {
-            font-weight: bold;
-            font-size: 12pt;
-            margin: 10px 0;
-            text-decoration: underline;
+        .employee-info table {
+            border: none;
+            width: 100%;
+            /* Menyesuaikan lebar tabel dengan kontainer */
+            table-layout: fixed;
+            /* Mengatur agar lebar kolom proporsional */
         }
 
-        .report-info {
-            margin-bottom: 15px;
-            font-size: 9pt;
+        .employee-info td {
+            padding: 5px;
+            border: none;
+            text-align: left;
         }
 
-        table {
+        .employee-info td:first-child {
+            width: 30%;
+            /* Memberikan lebar yang lebih kecil untuk kolom kiri */
+        }
+
+        .employee-info td:nth-child(2) {
+            width: 70%;
+            /* Memberikan lebih banyak ruang untuk kolom kanan */
+        }
+
+        .overtime-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
+            table-layout: fixed;
         }
 
-        table,
-        th,
-        td {
-            border: 1px solid #000;
-            padding: 5px;
-            font-size: 9pt;
+
+        .overtime-table th,
+        .overtime-table td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
         }
 
-        .table-header {
+        .overtime-table td {
+            word-wrap: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .overtime-table th {
             background-color: #f4801e;
-            font-weight: bold;
-            text-align: center;
+            color: white;
         }
 
-        .text-center {
-            text-align: center;
+        .description {
+            text-align: left;
         }
 
-        .text-right {
-            text-align: right;
-        }
-
-        .signature {
+        .signature-section {
+            width: 100%;
             margin-top: 30px;
-            text-align: right;
+            clear: both;
         }
 
-        .no-data {
+        .signature-box-left {
+            float: left;
             text-align: center;
-            padding: 20px;
-            font-style: italic;
-            color: #666;
+            width: 200px;
+        }
+
+        .signature-box-right {
+            float: right;
+            text-align: center;
+            width: 200px;
+        }
+
+        .signature-space {
+            height: 40px;
+        }
+
+        .signature-img {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signature-img img {
+            max-width: 100px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
+        .title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
         }
 
         .page-break {
-            page-break-after: always;
+            page-break-before: always;
         }
 
-        .footer {
-            position: fixed;
-            bottom: -20px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 8pt;
-            color: #666;
+        .container {
+            width: 100%;
+            margin-bottom: 20px;
         }
 
-        .data-row:nth-child(even) {
-            background-color: #f9f9f9;
+        .form-section {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1 class="company-name">PT. APLIKANUSA LINTASARTA</h1>
-        <p class="company-address">
-            Jakarta Pusat, Menara Thamrin 12th Floor<br>
-            Jl. M.H. Thamrin Kav.3 Jakarta 10250<br>
-            Telepon: +6221 230 2345 | Email: info@lintasarta.co.id
-        </p>
-        <hr>
-        <h2 class="report-title">ACTIVITY REPORT</h2>
-    </div>
-
-    <div class="report-info">
-        <table style="border: none;">
-            <tr>
-                <td style="border: none; width: 30%;">Periode</td>
-                <td style="border: none;">: <?= $selectedMonth ?></td>
-            </tr>
-            <tr>
-                <td style="border: none;">Print Date</td>
-                <td style="border: none;">: <?= date('d F Y') ?></td>
-            </tr>
-            <tr>
-                <td style="border: none;">Name</td>
-                <td style="border: none;">: <?= $username ?></td>
-            </tr>
-            <tr>
-                <td style="border: none;">Total Activities</td>
-                <td style="border: none;">: <?= $totalActivities ?></td>
-            </tr>
-        </table>
-    </div>
-
-    <?php if (empty($activities)): ?>
-        <div class="no-data">
-            No activities found for the selected period.
+    <div class="container">
+        <div class="header">
+            <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+            <div class="header-text">
+                <strong>APLIKANUSA LINTASARTA</strong><br>
+                REKAPITULASI LEMBUR (NON SHIFT)
+            </div>
         </div>
-    <?php else: ?>
-        <table>
-            <thead>
-                <tr class="table-header">
-                    <th style="width: 5%;">No</th>
-                    <th style="width: 12%;">Date</th>
-                    <th style="width: 20%;">Task</th>
-                    <th style="width: 23%;">Description</th>
-                    <th style="width: 15%;">Location</th>
-                    <th style="width: 12%;">Start Time</th>
-                    <th style="width: 12%;">End Time</th>
+
+        <div class="employee-info">
+            <table>
+                <tr>
+                    <td>NAMA</td>
+                    <td>: <?= user()->username ?></td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($activities as $index => $activity): ?>
-                    <tr class="data-row">
-                        <td class="text-center"><?= $index + 1 ?></td>
-                        <td class="text-center"><?= date('d/m/Y', strtotime($activity['activity_date'])) ?></td>
-                        <td><?= esc($activity['task']) ?></td>
-                        <td><?= esc($activity['description']) ?></td>
-                        <td><?= esc($activity['location']) ?></td>
-                        <td class="text-center"><?= date('H:i', strtotime($activity['start_time'])) ?></td>
-                        <td class="text-center"><?= date('H:i', strtotime($activity['end_time'])) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-
-        <div class="signature">
-            <p>
-                Jakarta, <?= date('d F Y') ?><br>
-                Mengetahui,<br><br><br><br>
-                <br>
-                <?= $username ?><br>
-                NIK: <?= user()->nik ?? '-' ?>
-            </p>
+                <tr>
+                    <td>JABATAN</td>
+                    <td>: <?= user()->position ?? '-' ?></td>
+                </tr>
+                <tr>
+                    <td>DEPT</td>
+                    <td>: <?= $userData['department_name'] ?? '-' ?></td>
+                </tr>
+                <tr>
+                    <td>SUB DEPT</td>
+                    <td>: <?= $userData['sub_department_name'] ?? '-' ?></td>
+                </tr>
+                <tr>
+                    <td>LOKASI</td>
+                    <td>: Menara Thamrin, Jakarta Pusat</td>
+                </tr>
+                <tr>
+                    <td>PERIODE</td>
+                    <td>: <?= $selectedMonth ?></td>
+                </tr>
+            </table>
         </div>
-    <?php endif; ?>
+
+        <?php if (empty($activities)): ?>
+            <p>No activities found for the selected period.</p>
+        <?php else: ?>
+            <table class="overtime-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Date</th>
+                        <th>Day</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Total Lembur</th>
+                        <th>Description</th>
+                        <th>No Ticket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($activities as $index => $activity): ?>
+                        <?php
+                        $start = strtotime($activity['start_time']);
+                        $end = strtotime($activity['end_time']);
+                        $totalLembur = sprintf('%d jam %02d menit', floor(($end - $start) / 3600), ($end - $start) % 3600 / 60);
+                        $hari = ["Sunday" => "Minggu", "Monday" => "Senin", "Tuesday" => "Selasa", "Wednesday" => "Rabu", "Thursday" => "Kamis", "Friday" => "Jumat", "Saturday" => "Sabtu"];
+                        ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= date('d/m/Y', strtotime($activity['activity_date'])) ?></td>
+                            <td><?= $hari[date('l', strtotime($activity['activity_date']))] ?></td>
+                            <td><?= date('H:i', strtotime($activity['start_time'])) ?></td>
+                            <td><?= date('H:i', strtotime($activity['end_time'])) ?></td>
+                            <td><?= $totalLembur ?></td>
+                            <td><?= esc($activity['description']) ?></td>
+                            <td><?= esc($activity['no_tiket']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+
+        <div class="signature-section">
+            <div class="signature-box-left">
+                <p>Menyetujui,</p>
+                <div class="signature-space"></div>
+                <p><u>RAHARDIKA NUR PERMANA</u><br>NIK: 92161515</p>
+            </div>
+            <div class="signature-box-right">
+                <p>Dibuat Oleh,</p>
+                <?php if (isset($signature_path) && $signature_path): ?>
+                    <div class="signature-img">
+                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
+                <p><u><?= user()->username ?></u><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
+            </div>
+        </div>
+    </div>
+    <!-- Individual Overtime Forms -->
+    <?php foreach ($activities as $index => $item):
+        if ($item['start_time'] && $item['end_time']): // Only create forms for valid entries
+    ?>
+            <div class="page-break" style="margin: 0; padding: 0;">
+                <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 0.7;">
+                    <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
+                        <div class="form-section" style="font-size: 12px;">Form lembur karyawan Non shift</div>
+                        <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+                        <div class="header-text" style="font-size: 16px;"><u>SURAT TUGAS LEMBUR</u></div>
+                    </div>
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                        <p style="margin: 0;">Di instruksikan kepada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Nama</td>
+                                <td style="padding: 2px;">: <?= user()->username ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">NIK</td>
+                                <td style="padding: 2px;">: <?= esc($activity['nik']) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Bagian/Divisi</td>
+                                <td style="padding: 2px;">: <?= $userData['department_name'] ?? '-' ?> / <?= $userData['division_name'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Lokasi Kerja</td>
+                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Untuk melaksanakan lembur pada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Hari/Tanggal</td>
+                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['activity_date'])) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Jam</td>
+                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['start_time'])) ?> s.d <?= date('H:i', strtotime($item['end_time'])) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                        <p style="margin: 5px 0;">
+                            <strong><?= $item['description'] ?></strong> (<strong>#<?= $item['no_tiket'] ?></strong>)
+                        </p>
+
+                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                                <p>Menyetujui,</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
+                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['activity_date'])) ?></div>
+                                <p>Yang di beri tugas,</p>
+                                <?php if (isset($signature_path) && $signature_path): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= user()->username ?></u><br><br>NIK: <?= esc($activity['nik']) ?></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;"><u>LAPORAN PELAKSANAAN LEMBUR</u></div>
+
+                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                        <p>Berdasarkan Surat Tugas Lembur No : ................................ yang bertanda tangan di bawah ini :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Nama</td>
+                                <td style="padding: 2px;">: <?= user()->username ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">NIK</td>
+                                <td style="padding: 2px;">: <?= esc($activity['nik']) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Bagian/Divisi</td>
+                                <td style="padding: 2px;">: <?= $userData['department_name'] ?? '-' ?> / <?= $userData['division_name'] ?? '-' ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Lokasi Kerja</td>
+                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Pemberi Tugas</td>
+                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Telah melaksanakan lembur pada :</p>
+                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                            <tr>
+                                <td style="padding: 2px;">Hari/Tanggal</td>
+                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['activity_date'])) ?></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px;">Jam</td>
+                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['start_time'])) ?> s.d <?= date('H:i', strtotime($item['end_time'])) ?></td>
+                            </tr>
+                        </table>
+
+                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                        <p style="margin: 5px 0;">
+                            <strong><?= $item['description'] ?></strong> (<strong>#<?= $item['no_tiket'] ?></strong>)
+                        </p>
+
+                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                                <p>Menyetujui,</p>
+                                <div class="signature-space" style="height: 60px;"></div>
+                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
+                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['activity_date'])) ?></div>
+                                <p>Yang di beri tugas,</p>
+                                <?php if (isset($signature_path) && $signature_path): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= user()->username ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <?php
+        endif;
+    endforeach;
+    ?>
+
 </body>
 
 </html>

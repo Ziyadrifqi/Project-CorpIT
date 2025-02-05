@@ -5,11 +5,12 @@ namespace App\Controllers;
 class User extends BaseController
 {
     protected $db;
+    protected $userModel;
 
     public function __construct()
     {
-        // Memuat database
         $this->db = \Config\Database::connect();
+        $this->userModel = new \App\Models\UserModel();
     }
 
     public function index()
@@ -62,5 +63,64 @@ class User extends BaseController
         // Update data pengguna di database
         $this->db->table('users')->update($data, ['id' => $userId]);
         return redirect()->to('/user')->with('success', 'Profile updated successfully');
+    }
+    public function uploadTtd()
+    {
+        $userId = user()->id;
+
+        // Validate uploaded file
+        $validationRules = [
+            'signature' => [
+                'rules' => 'uploaded[signature]|mime_in[signature,image/png,image/jpg,image/jpeg]|max_size[signature,2048]',
+                'errors' => [
+                    'uploaded' => 'Please select a file to upload',
+                    'mime_in' => 'File type must be PNG, JPG, or JPEG',
+                    'max_size' => 'File size must not exceed 2MB'
+                ]
+            ]
+        ];
+
+        if (!$this->validate($validationRules)) {
+            return redirect()->back()->withInput()->with('error', $this->validator->getError('signature'));
+        }
+
+        // Get the uploaded file
+        $file = $this->request->getFile('signature');
+
+        // Get current user data
+        $user = $this->db->table('users')->getWhere(['id' => $userId])->getRow();
+
+        // Delete old signature if exists
+        if ($user->signature && file_exists('img/ttd/' . $user->signature)) {
+            unlink('img/ttd/' . $user->signature);
+        }
+
+        // Generate new filename
+        $fileName = $userId . '_' . date('Ymd_His') . '.' . $file->getExtension();
+
+        // Move file to public/img/ttd directory
+        $file->move('img/ttd', $fileName);
+
+        // Update database
+        $this->db->table('users')->update(['signature' => $fileName], ['id' => $userId]);
+
+        return redirect()->to('/user')->with('success', 'Signature uploaded successfully');
+    }
+    public function deleteTtd()
+    {
+        $userId = user()->id;
+
+        // Get current user data
+        $user = $this->db->table('users')->getWhere(['id' => $userId])->getRow();
+
+        // Check if the signature exists and delete it
+        if ($user->signature && file_exists('img/ttd/' . $user->signature)) {
+            unlink('img/ttd/' . $user->signature);  // Delete the signature file
+        }
+
+        // Update the database to remove the signature
+        $this->db->table('users')->update(['signature' => null], ['id' => $userId]);
+
+        return redirect()->to('/user')->with('success', 'Signature deleted successfully');
     }
 }

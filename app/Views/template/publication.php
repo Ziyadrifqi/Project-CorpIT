@@ -31,60 +31,49 @@
 <section class="news-standard fix section-padding">
     <div class="container">
         <div class="row g-4">
+            <!-- Main Content -->
             <div class="col-12 col-lg-8">
-                <?php if (!empty($categories)): ?>
-                    <div class="mb-4">
-                        <select class="form-select mb-3" id="categorySelect" onchange="filterCategory()">
-                            <option value="all">All Categories</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="category-<?= $category['id'] ?>"><?= esc($category['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                <?php endif; ?>
-
-                <div class="publication-standard-wrapper">
-                    <?php foreach ($categories as $category): ?>
-                        <div class="category-section" id="category-<?= $category['id'] ?>">
-                            <h3 class="mb-4"><?= esc($category['name']); ?></h3>
-                            <?php if (!empty($filesByCategory[$category['id']])): ?>
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Description</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($filesByCategory[$category['id']] as $file): ?>
-                                                <tr>
-                                                    <td>
-                                                        <a href="<?= base_url('pages/viewFile/' . $file['id']); ?>" class="text-dark">
-                                                            <?= esc($file['title']) ?>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <?= character_limiter(esc($file['description']), 100); ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if (!empty($file['full_path'])): ?>
-                                                            <a href="/<?= $file['file_path']; ?>" target="_blank" class="btn btn-outline-primary btn-sm">
-                                                                <i class="fa-solid fa-eye me-1"></i>Preview
-                                                            </a>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            <?php else: ?>
-                                <p class="text-center text-muted">Tidak ada file dalam kategori ini.</p>
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm table-hover" id="publicationTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($categories as $category):
+                                if (!empty($filesByCategory[$category['id']])):
+                                    foreach ($filesByCategory[$category['id']] as $file): ?>
+                                        <tr class="category-row category-<?= $category['id'] ?>">
+                                            <td class="text-center align-middle"> <?= $no++; ?> </td>
+                                            <td class="align-middle"> <?= esc($category['name']); ?> </td>
+                                            <td class="align-middle">
+                                                <a href="<?= base_url('pages/viewFile/' . $file['id']); ?>" class="text-dark">
+                                                    <?= esc($file['title']) ?>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle"> <?= esc($file['author']); ?> </td>
+                                            <td class="align-middle"> <?= character_limiter(esc($file['description']), 100); ?> </td>
+                                            <td class="text-center align-middle">
+                                                <?php if (!empty($file['full_path'])): ?>
+                                                    <a href="/<?= $file['file_path']; ?>" target="_blank" class="btn btn-outline-primary btn-sm">
+                                                        <i class="fa-solid fa-eye me-1"></i> Preview
+                                                    </a>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                            <?php endforeach;
+                                endif;
+                            endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- Sidebar -->
@@ -96,12 +85,12 @@
                             <h3>Categories</h3>
                         </div>
                         <div class="news-widget-categories">
-                            <ul>
+                            <ul class="list-unstyled">
                                 <?php foreach ($categories as $category): ?>
-                                    <li>
-                                        <a href="#" onclick="filterSingleCategory('category-<?= $category['id'] ?>')">
-                                            <?= esc($category['name']) ?>
-                                            <span>(<?= count($filesByCategory[$category['id']] ?? []) ?>)</span>
+                                    <li class="mb-2">
+                                        <a href="#" onclick="filterSingleCategory('category-<?= $category['id'] ?>')" class="d-flex justify-content-between align-items-center">
+                                            <span><?= esc($category['name']) ?></span>
+                                            <span class="badge bg-primary">(<?= count($filesByCategory[$category['id']] ?? []) ?>)</span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -115,33 +104,13 @@
 </section>
 
 <script>
-    function filterCategory() {
-        var selectedCategory = document.getElementById('categorySelect').value;
-        filterSingleCategory(selectedCategory);
-    }
-
-    function filterSingleCategory(categoryId) {
-        var sections = document.querySelectorAll('.category-section');
-        sections.forEach(function(section) {
-            if (categoryId === 'all' || section.id === categoryId) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
+    function filterSingleCategory(categoryClass) {
+        let rows = document.querySelectorAll('.category-row');
+        rows.forEach(row => {
+            row.style.display = row.classList.contains(categoryClass) ? '' : 'none';
         });
-
-        if (categoryId !== 'all') {
-            document.getElementById('categorySelect').value = categoryId;
-        }
-
-        // Scroll to the selected category section
-        var targetSection = document.getElementById(categoryId);
-        if (targetSection) {
-            targetSection.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
     }
 </script>
+
 
 <?php echo view('template/footer'); ?>

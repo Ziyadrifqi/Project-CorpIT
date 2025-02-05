@@ -15,7 +15,10 @@ class AdminActivityModel extends Model
         'start_time',
         'end_time',
         'activity_date',
-        'description'
+        'description',
+        'nik',
+        'pbr_tugas',
+        'no_tiket',
     ];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
@@ -70,6 +73,39 @@ class AdminActivityModel extends Model
             ->orderBy('a.start_time', 'DESC')
             ->get()
             ->getResultArray();
+    }
+
+    public function bulkInsertActivities($activities)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table($this->table);
+
+        $inserted = 0;
+        $skipped = 0;
+
+        $db->transStart();
+
+        foreach ($activities as $activity) {
+            try {
+                $result = $builder->insert($activity);
+                if ($result) {
+                    $inserted++;
+                } else {
+                    $skipped++;
+                }
+            } catch (\Exception $e) {
+                log_message('error', 'Bulk insert error: ' . $e->getMessage());
+                $skipped++;
+            }
+        }
+
+        $db->transComplete();
+
+        return [
+            'success' => $db->transStatus(),
+            'inserted' => $inserted,
+            'skipped' => $skipped
+        ];
     }
 
     public function storeActivity($data)

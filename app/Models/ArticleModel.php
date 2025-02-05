@@ -8,7 +8,7 @@ class ArticleModel extends Model
 {
     protected $table = 'articles';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['title', 'content', 'author', 'status', 'image',  'created_at', 'updated_at'];
+    protected $allowedFields = ['title', 'content', 'author', 'status', 'image', 'type', 'created_at', 'updated_at'];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -37,19 +37,29 @@ class ArticleModel extends Model
     public function getAllArticlesWithDistributions(): array
     {
         $builder = $this->db->table('articles a');
-
-        // Mengambil artikel dan nama kategori dengan join ke tabel relasi
         $builder->select('a.*, GROUP_CONCAT(c.name) AS category_names')
             ->join('article_categories ac', 'ac.article_id = a.id', 'left')
             ->join('categories c', 'c.id = ac.category_id', 'left')
-            ->groupBy('a.id') // Mengelompokkan hasil berdasarkan ID artikel
+            ->groupBy('a.id')
             ->orderBy('a.created_at', 'DESC');
 
-        $articles = $builder->get()->getResultArray();
+        // Ambil semua artikel jika user login
+        if (logged_in()) {
+            $articles = $builder->get()->getResultArray();
+        } else {
+            // Jika tidak login, hanya ambil artikel public yang published
+            $articles = $builder->where('a.type', 'public')
+                ->where('a.status', 'published')
+                ->get()->getResultArray();
+        }
 
+        // Ambil distribusi hanya untuk artikel internal
         foreach ($articles as &$article) {
-            // Mendapatkan distribusi artikel
-            $article['distributions'] = $this->getDistributionsByArticleId($article['id']);
+            if ($article['type'] === 'internal') {
+                $article['distributions'] = $this->getDistributionsByArticleId($article['id']);
+            } else {
+                $article['distributions'] = [];
+            }
         }
 
         return $articles;
@@ -90,35 +100,30 @@ class ArticleModel extends Model
         return $article;
     }
 
-    public function getArticlesForUser(array $userData): array
+
+    public function getArticlesForUser(?array $userData = null): array
     {
         $builder = $this->db->table('articles a');
-        // Select all article fields and concatenate category names
         $builder->select('a.*, GROUP_CONCAT(DISTINCT c.id) as category_ids, GROUP_CONCAT(DISTINCT c.name) AS category_names');
-
-        // Join the article_distributions table
-        $builder->join('article_distributions ad', 'a.id = ad.article_id', 'left');
-
-        // Join the article_categories table to get category information
         $builder->join('article_categories ac', 'a.id = ac.article_id', 'left');
         $builder->join('categories c', 'ac.category_id = c.id', 'left');
 
-        // Build user conditions
-        $conditions = $this->buildUserConditions($userData);
-
-        // Apply conditions if they exist
-        if (!empty($conditions)) {
-            $builder->where('(' . implode(' OR ', $conditions) . ')');
+        if ($userData) {
+            // User sudah login, gunakan kondisi akses berdasarkan grup
+            $builder->join('article_distributions ad', 'a.id = ad.article_id', 'left');
+            $conditions = $this->buildUserConditions($userData);
+            if (!empty($conditions)) {
+                $builder->where('(' . implode(' OR ', $conditions) . ')');
+            }
+        } else {
+            // User belum login, hanya tampilkan artikel public
+            $builder->where('a.type', 'public');
         }
 
-        // Ensure only published articles are returned
         $builder->where('a.status', 'published');
-
-        // Group by article ID to aggregate category names
         $builder->groupBy('a.id');
         $builder->orderBy('a.created_at', 'DESC');
 
-        // Execute the query and return results
         return $builder->get()->getResultArray();
     }
 

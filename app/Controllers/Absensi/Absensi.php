@@ -203,6 +203,14 @@ class Absensi extends BaseController
             $validation = \Config\Services::validation();
 
             $rules = [
+                'nik' => [
+                    'rules' => 'required|regex_match[/^\d{8}$/]',
+                    'errors' => [
+                        'required' => 'NIK is required.',
+                        'regex_match' => 'NIK must be exactly 8 digits.'
+                    ]
+                ],
+                'pbr_tugas' => 'required|min_length[5]',
                 'kegiatan_harian' => 'required|min_length[10]',
                 'no_tiket' => [
                     'rules' => 'required|regex_match[/^\d{6}$/]',
@@ -232,6 +240,8 @@ class Absensi extends BaseController
             // Jika status masih pending, update status menjadi hadir
             $updateData = [
                 'id' => $absensi['id'],
+                'nik' => $this->request->getPost('nik'),
+                'pbr_tugas' => $this->request->getPost('pbr_tugas'),
                 'kegiatan_harian' => $this->request->getPost('kegiatan_harian'),
                 'no_tiket' => $this->request->getPost('no_tiket'),
                 'status' => 'hadir' // Update status ke hadir
@@ -260,10 +270,10 @@ class Absensi extends BaseController
                 ]);
             }
 
-            if (empty($absensi['kegiatan_harian']) || empty($absensi['no_tiket'])) {
+            if (empty($absensi['kegiatan_harian']) || empty($absensi['no_tiket']) || empty($absensi['nik']) || empty($absensi['pbr_tugas'])) {
                 return $this->response->setJSON([
                     'status' => false,
-                    'message' => 'You must fill in the daily activities and ticket number first'
+                    'message' => 'You must fill in the daily activities, ticket number, NIK, and assignor first'
                 ]);
             }
 
@@ -472,11 +482,12 @@ class Absensi extends BaseController
         $sheet->setCellValue('F1', 'End Time');
         $sheet->setCellValue('G1', 'End Date');
         $sheet->setCellValue('H1', 'Total Hours');
-        $sheet->setCellValue('I1', 'Daily Activities');
-        $sheet->setCellValue('J1', 'Ticket Number');
+        $sheet->setCellValue('I1', 'Assignor');
+        $sheet->setCellValue('J1', 'Daily Activities');
+        $sheet->setCellValue('K1', 'Ticket Number');
 
         // Apply header style
-        $sheet->getStyle('A1:J1')->applyFromArray($headerStyle);
+        $sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
 
         // Set column widths
         $sheet->getColumnDimension('A')->setWidth(5);
@@ -487,8 +498,9 @@ class Absensi extends BaseController
         $sheet->getColumnDimension('F')->setWidth(10);
         $sheet->getColumnDimension('G')->setWidth(15);
         $sheet->getColumnDimension('H')->setWidth(15);
-        $sheet->getColumnDimension('I')->setWidth(30);
-        $sheet->getColumnDimension('J')->setWidth(15);
+        $sheet->getColumnDimension('I')->setWidth(15);
+        $sheet->getColumnDimension('J')->setWidth(30);
+        $sheet->getColumnDimension('K')->setWidth(15);
 
         // Set data
         $row = 2;
@@ -518,11 +530,12 @@ class Absensi extends BaseController
             }
 
             $sheet->setCellValue('H' . $row, $totalHoursItem);
-            $sheet->setCellValue('I' . $row, $item['kegiatan_harian'] ?? '-');
-            $sheet->setCellValue('J' . $row, $item['no_tiket'] ?? '-');
+            $sheet->setCellValue('I' . $row, $item['pbr_tugas'] ?? '-');
+            $sheet->setCellValue('J' . $row, $item['kegiatan_harian'] ?? '-');
+            $sheet->setCellValue('K' . $row, $item['no_tiket'] ?? '-');
 
             // Style for data rows
-            $sheet->getStyle('A' . $row . ':J' . $row)->applyFromArray([
+            $sheet->getStyle('A' . $row . ':K' . $row)->applyFromArray([
                 'alignment' => [
                     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
                 ],
@@ -592,7 +605,10 @@ class Absensi extends BaseController
             'userData' => $userData
         ];
 
-        $data['logo_path'] = FCPATH . 'img/lintas.png';
+        $data['logo_path'] = FCPATH . 'img/lintas.jpg';
+        // Retrieve user signature
+        $signaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
+        $data['signature_path'] = (file_exists($signaturePath) && $userData['signature']) ? $signaturePath : null;
 
         // Load mPDF
         $mpdf = new \Mpdf\Mpdf();
@@ -838,7 +854,14 @@ class Absensi extends BaseController
         $selectedUser = $this->request->getGet('user');
         $startDate = date('Y-m-01', strtotime($selectedMonth));
         $endDate = date('Y-m-t', strtotime($selectedMonth));
-
+        // Get user details with joined tables
+        $userModel = new \App\Models\UserModel();
+        $userData = $userModel->select('users.*, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
+            ->join('departments', 'departments.id = users.department_id', 'left')
+            ->join('divisions', 'divisions.id = users.division_id', 'left')
+            ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
+            ->where('users.id', user_id())
+            ->first();
         // Ambil data absensi dengan filter
         $absensiData = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, $selectedCategory, $selectedUser);
 
@@ -850,7 +873,8 @@ class Absensi extends BaseController
         // Data untuk view
         $data = [
             'absensi' => $absensiData,
-            'selectedMonth' => date('F Y', strtotime($selectedMonth))
+            'selectedMonth' => date('F Y', strtotime($selectedMonth)),
+            'userData' => $userData
         ];
 
         // Load mPDF

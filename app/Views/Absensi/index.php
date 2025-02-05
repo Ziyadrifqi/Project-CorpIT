@@ -75,9 +75,21 @@
                         <?php endif; ?>
 
                         <!-- Activities Form -->
-                        <?php if ($absensi['status'] == 'hadir' && (empty($absensi['kegiatan_harian']) || empty($absensi['no_tiket']))): ?>
+                        <?php if ($absensi['status'] == 'hadir' && (empty($absensi['kegiatan_harian']) || empty($absensi['no_tiket']) || empty($absensi['nik']) || empty($absensi['pbr_tugas']))): ?>
                             <div class="mb-4">
                                 <form id="kegiatanForm" class="p-3 border rounded">
+                                    <div class="mb-3">
+                                        <label for="nik" class="form-label fw-bold">NIK</label>
+                                        <input type="text" class="form-control" id="nik" name="nik"
+                                            required placeholder="Enter 8-digit NIK"
+                                            maxlength="8" pattern="^\d{8}$" title="Please enter exactly 8 digits">
+                                        <div class="form-text text-muted">Must be exactly 8 digits</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="pbr_tugas" class="form-label fw-bold">Overtime assignor </label>
+                                        <input type="text" class="form-control" id="pbr_tugas" name="pbr_tugas"
+                                            rows="4" required placeholder="Enter your Assignor...">
+                                    </div>
                                     <div class="mb-3">
                                         <label for="kegiatan_harian" class="form-label fw-bold">Daily Activities</label>
                                         <textarea class="form-control" id="kegiatan_harian" name="kegiatan_harian"
@@ -100,17 +112,21 @@
                         <?php endif; ?>
 
                         <!-- Display Submitted Activities -->
-                        <?php if (!empty($absensi['kegiatan_harian']) && !empty($absensi['no_tiket'])): ?>
+                        <?php if (!empty($absensi['kegiatan_harian']) && !empty($absensi['no_tiket']) && !empty($absensi['nik']) && !empty($absensi['pbr_tugas'])): ?>
                             <div class="mb-4 p-3 border rounded">
                                 <h6 class="fw-bold mb-3">Daily Activities:</h6>
                                 <p class="text-muted mb-3"><?= nl2br(esc($absensi['kegiatan_harian'])) ?></p>
+
                                 <h6 class="fw-bold mb-2">Ticket Number:</h6>
-                                <p class="text-muted mb-0"><?= esc($absensi['no_tiket']) ?></p>
+                                <p class="text-muted mb-3"><?= esc($absensi['no_tiket']) ?></p>
+
+                                <h6 class="fw-bold mb-2">Assignor:</h6>
+                                <p class="text-muted mb-0"><?= esc($absensi['pbr_tugas']) ?></p>
                             </div>
                         <?php endif; ?>
 
                         <!-- Tap Out Section -->
-                        <?php if ($absensi['status'] == 'hadir' && !empty($absensi['kegiatan_harian']) && !empty($absensi['no_tiket'])): ?>
+                        <?php if ($absensi['status'] == 'hadir' && !empty($absensi['kegiatan_harian']) && !empty($absensi['no_tiket']) && !empty($absensi['nik']) && !empty($absensi['pbr_tugas'])): ?>
                             <div class="text-center">
                                 <?php if ($absensi['tanggal'] < date('Y-m-d')): ?>
                                     <button class="btn btn-warning btn-lg px-4 rounded-pill" data-bs-toggle="modal" data-bs-target="#correctTapOutModal">

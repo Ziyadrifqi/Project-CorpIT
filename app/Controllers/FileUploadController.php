@@ -56,7 +56,6 @@ class FileUploadController extends Controller
         return view('admin/fileupload/create', $data);
     }
 
-    // Store new file upload
     public function store()
     {
         $userId = user_id();
@@ -78,7 +77,8 @@ class FileUploadController extends Controller
             'description' => 'required',
             'author' => 'required',
             'userfile' => 'uploaded[userfile]|max_size[userfile,15360]',
-
+            'type' => 'required|in_list[public,internal]',
+            'category_id' => 'required',
         ];
 
         if (!$this->validate($rules)) {
@@ -87,6 +87,13 @@ class FileUploadController extends Controller
 
         $file = $this->request->getFile('userfile');
         $fileName = $file->getRandomName();
+
+        // Create upload path if it doesn't exist
+        $uploadPath = FCPATH . 'public/fileupload';
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
         $now = date('Y-m-d H:i:s');
         $data = [
             'title' => $this->request->getPost('title'),
@@ -94,6 +101,7 @@ class FileUploadController extends Controller
             'author' => $this->request->getPost('author'),
             'status' => $this->request->getPost('status', 'draft'),
             'file_path' => 'public/fileupload/' . $fileName,
+            'type' => $this->request->getPost('type'),
             'created_at' => $now,
             'updated_at' => $now
         ];
@@ -101,76 +109,92 @@ class FileUploadController extends Controller
         // Start database transaction
         $this->db->transStart();
 
-        // Pindahkan file
-        $file->move('public/fileupload', $fileName);
+        try {
+            // Verify and move file
+            if ($file->isValid() && !$file->hasMoved()) {
+                if (!$file->move($uploadPath, $fileName)) {
+                    throw new \Exception('Failed to move uploaded file');
+                }
+            } else {
+                throw new \Exception('Invalid file upload');
+            }
 
-        // Masukkan data file ke dalam database
-        $fileId = $this->fileUploadModel->insert($data);
+            // Insert data file ke dalam database
+            $fileId = $this->fileUploadModel->insert($data);
+            if (!$fileId) {
+                throw new \Exception('Failed to save file data');
+            }
 
-        // Simpan kategori yang dipilih ke dalam tabel file_categories
-        foreach ($selectedCategoryIds as $categoryId) {
-            $this->db->table('file_categories')->insert([
-                'fileuploads_id' => $fileId,
-                'category_id' => $categoryId
-            ]);
-        }
+            // Simpan kategori yang dipilih ke dalam tabel file_categories
+            foreach ($selectedCategoryIds as $categoryId) {
+                $this->db->table('file_categories')->insert([
+                    'fileuploads_id' => $fileId,
+                    'category_id' => $categoryId
+                ]);
+            }
 
-        $this->db->transComplete();
+            // Save distributions only for internal files
+            if ($data['type'] === 'internal') {
+                $distributions = $this->procesHierarchicalDistributions();
+                if (!empty($distributions)) {
+                    if (!$this->distributionModel->saveDistributions($fileId, $distributions)) {
+                        throw new \Exception('Failed to save distributions');
+                    }
+                }
+            }
 
-        // Proses distribusi hierarkis
-        $distributions = $this->processHierarchicalDistributions();
+            $this->db->transComplete();
 
-        if (!$this->distributionModel->saveDistributions($fileId, $distributions)) {
+            if ($this->db->transStatus() === false) {
+                throw new \Exception('Transaction failed');
+            }
+
+            return redirect()->to('/admin/fileuploads')->with('success', 'File uploaded successfully');
+        } catch (\Exception $e) {
             $this->db->transRollback();
-            return redirect()->back()->with('error', 'Failed to save distributions');
+            log_message('error', '[FileUpload Store] Error: ' . $e->getMessage());
+            return redirect()->back()->withInput()
+                ->with('error', 'Failed to upload file: ' . $e->getMessage());
         }
-
-        $this->db->transComplete();
-
-        if ($this->db->transStatus() === false) {
-            return redirect()->back()->with('error', 'Failed to save File');
-        }
-        return redirect()->to('/admin/fileuploads')->with('success', 'File created successfully');
     }
-    private function processHierarchicalDistributions()
+
+    private function procesHierarchicalDistributions()
     {
         $distributions = [];
 
-        // Dapatkan tingkat distribusi yang dipilih
         $directorateIds = $this->request->getPost('directorate_ids') ?: [];
         $divisionIds = $this->request->getPost('division_ids') ?: [];
         $departmentIds = $this->request->getPost('department_ids') ?: [];
         $subDepartmentIds = $this->request->getPost('sub_department_ids') ?: [];
 
-        // Proses dari level tertinggi hingga terendah
-        if (!empty($directorateIds)) {
-            // Jika direktorat dipilih, sertakan semua tingkatan di bawahnya
-            foreach ($directorateIds as $directorateId) {
-                $distributions[] = ['type' => 'directorate', 'id' => $directorateId];
-                $this->addEntitiesBelow($directorateId, 'directorate', $distributions);
-            }
-        } elseif (!empty($divisionIds)) {
-            // Jika divisi dipilih, sertakan semua tingkatan di bawahnya
-            foreach ($divisionIds as $divisionId) {
-                $distributions[] = ['type' => 'division', 'id' => $divisionId];
-                $this->addEntitiesBelow($divisionId, 'division', $distributions);
-            }
-        } elseif (!empty($departmentIds)) {
-            // Jika departemen dipilih, sertakan semua sub_departemen di bawahnya
-            foreach ($departmentIds as $departmentId) {
-                $distributions[] = ['type' => 'department', 'id' => $departmentId];
-                $this->addEntitiesBelow($departmentId, 'department', $distributions);
-            }
-        }
-
-        // Tangani sub_departemen secara mandiri
+        // Prioritize selections from bottom-up
         if (!empty($subDepartmentIds)) {
             foreach ($subDepartmentIds as $subDepartmentId) {
                 $distributions[] = ['type' => 'sub_department', 'id' => $subDepartmentId];
             }
         }
 
-        // Remove duplicates
+        if (!empty($departmentIds)) {
+            foreach ($departmentIds as $departmentId) {
+                $distributions[] = ['type' => 'department', 'id' => $departmentId];
+                $this->addEntitiesBelow($departmentId, 'department', $distributions);
+            }
+        }
+
+        if (!empty($divisionIds)) {
+            foreach ($divisionIds as $divisionId) {
+                $distributions[] = ['type' => 'division', 'id' => $divisionId];
+                $this->addEntitiesBelow($divisionId, 'division', $distributions);
+            }
+        }
+
+        if (!empty($directorateIds)) {
+            foreach ($directorateIds as $directorateId) {
+                $distributions[] = ['type' => 'directorate', 'id' => $directorateId];
+                $this->addEntitiesBelow($directorateId, 'directorate', $distributions);
+            }
+        }
+
         return array_values(array_unique($distributions, SORT_REGULAR));
     }
 
@@ -319,7 +343,8 @@ class FileUploadController extends Controller
             'title' => 'required|min_length[3]',
             'description' => 'required',
             'author' => 'required',
-            'updated_at' => 'required|valid_date[Y-m-d]'
+            'updated_at' => 'required|valid_date[Y-m-d]',
+            'type' => 'required|in_list[public,internal]'
         ];
 
         // Tambah rule untuk file jika ada file baru diupload
@@ -344,6 +369,7 @@ class FileUploadController extends Controller
             'description' => $this->request->getPost('description'),
             'author' => $this->request->getPost('author'),
             'status' => $this->request->getPost('status'),
+            'type' => $this->request->getPost('type'),
             'updated_at' => $updated_at
         ];
 
@@ -372,9 +398,13 @@ class FileUploadController extends Controller
             }
 
             // Proses distribusi
-            $distributions = $this->processHierarchicalDistributions();
-            $this->distributionModel->updateDistributions($id, $distributions);
 
+            if ($updateData['type'] === 'internal') {
+                $distributions = $this->procesHierarchicalDistributions();
+                if (!$this->distributionModel->updateDistributions($id, $distributions)) {
+                    throw new \Exception('Failed to save distributions');
+                }
+            }
             // Update database
             $this->fileUploadModel->update($id, $updateData);
 

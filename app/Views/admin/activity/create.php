@@ -25,6 +25,27 @@
 
                 <form action="<?= base_url('admin/activity/store') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field() ?>
+                    <div class="mb-3">
+                        <label for="nik" class="form-label">NIK</label>
+                        <input type="text" class="form-control" id="nik" name="nik"
+                            value="<?= old('nik') ?>" required maxlength="8"
+                            pattern="\d{1,8}" title="Masukkan hingga 8 angka"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 8);">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pbr_tugas" class="form-label">Pemberi Tugas</label>
+                        <input type="text" class="form-control" id="pbr_tugas" name="pbr_tugas"
+                            value="<?= old('pbr_tugas') ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="no_ticket" class="form-label">No. Ticket</label>
+                        <input type="text" class="form-control" id="no_tiket" name="no_tiket"
+                            value="<?= old('no_tiket') ?>" required maxlength="6"
+                            pattern="\d{6}" title="Masukkan tepat 6 angka"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 6);">
+                    </div>
 
                     <div class="mb-3">
                         <label for="activity_date" class="form-label">Date</label>

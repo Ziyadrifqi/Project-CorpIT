@@ -8,7 +8,7 @@ class FileUploadModel extends Model
 {
     protected $table = 'fileuploads';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['title', 'description', 'author',  'file_path', 'status'];
+    protected $allowedFields = ['title', 'description', 'author',  'file_path', 'status', 'type'];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
@@ -78,35 +78,48 @@ class FileUploadModel extends Model
             ->groupBy('a.id') // Mengelompokkan hasil berdasarkan ID artikel
             ->orderBy('a.created_at', 'DESC');
 
-        $files = $builder->get()->getResultArray();
+        // Ambil semua artikel jika user login
+        if (logged_in()) {
+            $files = $builder->get()->getResultArray();
+        } else {
+            // Jika tidak login, hanya ambil artikel public yang published
+            $files = $builder->where('a.type', 'public')
+                ->where('a.status', 'published')
+                ->get()->getResultArray();
+        }
 
         foreach ($files as &$file) {
             // Mendapatkan distribusi artikel
-            $file['distributions'] = $this->getDistributionsByFileId($file['id']);
+            if ($file['type'] === 'internal') {
+                $file['distributions'] = $this->getDistributionsByFileId($file['id']);
+            } else {
+                $file['distributions'] = [];
+            }
         }
 
         return $files;
     }
 
-    public function getFileForUser(array $userData): array
+    public function getFileForUser(?array $userData = null): array
     {
         $builder = $this->db->table('fileuploads a');
         // Select all file fields and concatenate category names
         $builder->select('a.*, GROUP_CONCAT(DISTINCT c.id) as category_id, GROUP_CONCAT(DISTINCT c.name) AS category_names');
 
-        // Join the file_distributions table
-        $builder->join('file_distributions ad', 'a.id = ad.fileuploads_id', 'left');
-
         // Join the file_categories table to get category information
         $builder->join('file_categories ac', 'a.id = ac.fileuploads_id', 'left');
         $builder->join('categories c', 'ac.category_id = c.id', 'left');
 
-        // Build user conditions
-        $conditions = $this->buildUserConditions($userData);
-
-        // Apply conditions if they exist
-        if (!empty($conditions)) {
-            $builder->where('(' . implode(' OR ', $conditions) . ')');
+        if ($userData) {
+            // User sudah login, gunakan kondisi akses berdasarkan grup
+            $builder->join('file_distributions ad', 'a.id = ad.fileuploads_id', 'left');
+            $conditions = $this->buildUserConditions($userData);
+            if (!empty($conditions)) {
+                $builder->where('(' . implode(' OR ', $conditions) . ')');
+            }
+        } else {
+            // User belum login, hanya tampilkan artikel public
+            $builder->where('a.type', 'public');
         }
 
         // Ensure only published file are returned
