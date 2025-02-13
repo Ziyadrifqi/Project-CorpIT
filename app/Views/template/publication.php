@@ -55,7 +55,7 @@
                                             <td class="text-center align-middle"> <?= $no++; ?> </td>
                                             <td class="align-middle"> <?= esc($category['name']); ?> </td>
                                             <td class="align-middle">
-                                                <a href="<?= base_url('pages/viewFile/' . $file['id']); ?>" class="text-dark">
+                                                <a class="text-dark">
                                                     <?= esc($file['title']) ?>
                                                 </a>
                                             </td>
@@ -102,14 +102,34 @@
         </div>
     </div>
 </section>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    function filterSingleCategory(categoryClass) {
-        let rows = document.querySelectorAll('.category-row');
-        rows.forEach(row => {
-            row.style.display = row.classList.contains(categoryClass) ? '' : 'none';
+    $(document).ready(function() {
+        // Initialize DataTable
+        let table = $('#publicationTable').DataTable({
+            responsive: true,
+            "pageLength": 10,
+            "language": {
+                "lengthMenu": "Show _MENU_ entries per page",
+                "zeroRecords": "No matching records found",
+                "info": "Showing page _PAGE_ of _PAGES_",
+                "infoEmpty": "No records available",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            }
         });
-    }
+
+        // Function to filter by category
+        window.filterSingleCategory = function(categoryClass) {
+            table.columns(1).search('').draw();
+            let categoryName = categoryClass.replace('category-', '');
+            let rows = document.querySelectorAll('.category-row');
+            rows.forEach(row => {
+                row.style.display = row.classList.contains(categoryClass) ? '' : 'none';
+            });
+        }
+    });
 </script>
 
 

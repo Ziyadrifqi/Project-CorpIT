@@ -152,10 +152,8 @@ $routes->get('activity/history', 'Activity\AdminActivity::history'); //halaman h
 
 $routes->get('guest-visitor', 'GuestVisitorController::index');
 $routes->get('guest-visitor/create', 'GuestVisitorController::create');
-$routes->post('guest-visitor/save', 'GuestVisitorController::save');
-
-$routes->get('token', 'TokenController::index');
-$routes->post('token/refresh', 'TokenController::refresh');
+$routes->post('guest-visitor/store', 'GuestVisitorController::store');
+$routes->get('guest-visitor/history', 'GuestVisitorController::history');
 
 // halaman category permission untuk user yang dicontrol oleh superadmin
 $routes->group('admin/category-permissions', function ($routes) {

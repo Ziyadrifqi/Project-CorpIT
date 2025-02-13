@@ -1,7 +1,7 @@
 <?= $this->extend('layout/index'); ?>
 <?= $this->section('page-content'); ?>
 
-<div class="container mt-2">
+<div class="container mt-4">
     <div class="card-header">
         <div class="container-fluid">
             <h1 class="h3 mb-4 text-gray-800"><?= esc($title); ?></h1>
@@ -11,58 +11,64 @@
                 <i class="fas fa-plus me-1"></i>
                 New Guest Visitor Form
                 <a href="<?= base_url('guest-visitor') ?>" class="text-primary float-end" style="text-decoration: none;">
-                    <i class="fas fa-arrow-left"></i> Back to Guest List
+                    <i class="fas fa-arrow-left"></i> Back to Guest Visitor
                 </a>
             </div>
             <div class="card-body">
-                <?php if (isset($validation)): ?>
+                <?php if (session()->has('errors')): ?>
                     <div class="alert alert-danger">
-                        <?= $validation->listErrors() ?>
+                        <ul>
+                            <?php foreach (session('errors') as $error): ?>
+                                <li><?= esc($error) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
                 <?php endif; ?>
 
-                <form action="<?= base_url('guest-visitor/save') ?>" method="post">
-                    <?= csrf_field() ?>
-
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        Guest name will be automatically generated in format: GUEST[DATE]_[NUMBER]
+                <?php if (session()->has('error')): ?>
+                    <div class="alert alert-danger">
+                        <?= esc(session('error')) ?>
                     </div>
+                <?php endif; ?>
 
+                <form action="<?= base_url('guest-visitor/store') ?>" method="POST" enctype="multipart/form-data">
+                    <?= csrf_field() ?>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?= old('email') ?>" required>
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="phone" class="form-control <?= session('errors.phone') ? 'is-invalid' : '' ?>"
+                            id="phone" name="phone" value="<?= old('phone') ?>" required>
+                        <?php if (session('errors.phone')): ?>
+                            <div class="invalid-feedback"><?= session('errors.phone') ?></div>
+                        <?php endif ?>
                     </div>
 
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="notify" name="notify" checked>
-                            <label class="form-check-label" for="notify">
-                                Send email notification
-                            </label>
+                        <div class="input-group">
+                            <input type="password" class="form-control <?= session('errors.password') ? 'is-invalid' : '' ?>"
+                                id="password" name="password" required>
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <?php if (session('errors.password')): ?>
+                                <div class="invalid-feedback"><?= session('errors.password') ?></div>
+                            <?php endif ?>
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="is_enabled" name="is_enabled" checked>
-                            <label class="form-check-label" for="is_enabled">
-                                Enable Account
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="valid_till_days" class="form-label">Valid for (days)</label>
-                        <input type="number" class="form-control" id="valid_till_days" name="valid_till_days" value="5" min="1" max="365">
+                        <label for="valid_days" class="form-label">Valid Days</label>
+                        <input type="number" class="form-control <?= session('errors.valid_days') ? 'is-invalid' : '' ?>"
+                            id="valid_days" name="valid_days" value="<?= old('valid_days') ?>" required min="1" max="30">
+                        <?php if (session('errors.valid_days')): ?>
+                            <div class="invalid-feedback"><?= session('errors.valid_days') ?></div>
+                        <?php endif ?>
+                        <small class="text-muted">Enter a number between 1 and 30 days</small>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Create Guest</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Create Guest
+                        </button>
                     </div>
                 </form>
             </div>
@@ -70,26 +76,32 @@
     </div>
 </div>
 
-<!-- Loading Modal -->
-<div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-                <p class="mt-2">Creating guest visitor...</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?= $this->endSection(); ?>
-
-<?= $this->section('scripts'); ?>
 <script>
-    document.querySelector('form').addEventListener('submit', function() {
-        new bootstrap.Modal(document.getElementById('loadingModal')).show();
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const icon = this.querySelector('i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+
+    // Auto-dismiss alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+        const alerts = document.querySelectorAll('.alert');
+
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000); // 5 seconds
+        });
     });
 </script>
 <?= $this->endSection(); ?>
