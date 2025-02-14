@@ -34,6 +34,14 @@
                 <form action="<?= base_url('guest-visitor/store') ?>" method="POST" enctype="multipart/form-data">
                     <?= csrf_field() ?>
                     <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="Email" class="form-control <?= session('errors.email') ? 'is-invalid' : '' ?>"
+                            id="email" name="email" value="<?= old('email') ?>" required>
+                        <?php if (session('errors.email')): ?>
+                            <div class="invalid-feedback"><?= session('errors.email') ?></div>
+                        <?php endif ?>
+                    </div>
+                    <div class="mb-3">
                         <label for="phone" class="form-label">Phone</label>
                         <input type="phone" class="form-control <?= session('errors.phone') ? 'is-invalid' : '' ?>"
                             id="phone" name="phone" value="<?= old('phone') ?>" required>

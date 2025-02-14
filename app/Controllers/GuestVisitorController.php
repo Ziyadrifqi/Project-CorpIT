@@ -16,6 +16,7 @@ class GuestVisitorController extends Controller
 
     public function __construct()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->tokenModel = new TokenModel();
         $this->guestVisitorModel = new GuestVisitorModel();
         $this->session = Services::session();
@@ -24,10 +25,14 @@ class GuestVisitorController extends Controller
 
     public function index()
     {
+        // Tambahkan debugging
+        $guests = $this->guestVisitorModel->getGuestsWithUserInfo();
+
         $data = [
             'title' => 'Guest Visitor Management',
-            'guests' => $this->guestVisitorModel->getGuestsWithUserInfo()
+            'guests' => $guests
         ];
+
         return view('guest_visitor/index', $data);
     }
 
@@ -42,11 +47,16 @@ class GuestVisitorController extends Controller
 
     public function store()
     {
+        if (!logged_in()) {
+            return redirect()->to('/login');
+        }
+
         // Validation rules
         $rules = [
             'password' => 'required|min_length[6]',
             'valid_days' => 'required|integer|greater_than[0]|less_than_equal_to[30]',
-            'phone' => 'required|min_length[10]|max_length[15]'
+            'phone' => 'required|min_length[10]|max_length[15]',
+            'email' => 'required|valid_email|min_length[10]|max_length[35]'
         ];
 
         if (!$this->validate($rules)) {
@@ -54,13 +64,13 @@ class GuestVisitorController extends Controller
         }
 
         try {
-            // Generate guest name
+            // Generate guest name with microseconds for better uniqueness
             $currentDate = date('dmY');
             $lastGuest = $this->guestVisitorModel->orderBy('id', 'DESC')->first();
             $counter = $lastGuest ? (intval(substr($lastGuest['guest_name'], -3)) + 1) : 1;
             $guestName = sprintf("GUEST%s_%03d", $currentDate, $counter);
 
-            // Get valid token using ensureValidToken
+            // Get valid token
             $token = $this->ensureValidToken();
 
             // Create guest via API
@@ -68,6 +78,7 @@ class GuestVisitorController extends Controller
             $apiResponse = $this->createGuestViaApi($token['access_token'], [
                 'name' => $guestName,
                 'phone' => $postData['phone'],
+                'email' => $postData['email'],
                 'password' => $postData['password'],
                 'valid_days' => $postData['valid_days']
             ]);
@@ -76,21 +87,26 @@ class GuestVisitorController extends Controller
                 throw new \Exception('Failed to create guest in the external system.');
             }
 
-            if (!isset($apiResponse['id'])) {
-                throw new \Exception('Invalid response from the external system.');
-            }
+            $userId = user_id();
 
             // Save to database
-            $this->guestVisitorModel->insert([
+            $inserted = $this->guestVisitorModel->insert([
                 'guest_name' => $guestName,
-                'guest_id' => $apiResponse['id'],
-                'user_id' => $this->session->get('user_id'),
+                'user_id' => $userId,
                 'status' => 1,
                 'phone' => $postData['phone'],
+                'password' => $postData['password'],
+                'email' => $postData['email'],
                 'valid_until' => date('Y-m-d H:i:s', strtotime("+{$postData['valid_days']} days"))
             ]);
 
-            return redirect()->to('/guest-visitor')->with('success', 'Guest visitor created successfully');
+            if ($inserted) {
+                // Add debugging
+                log_message('debug', 'Berhasil insert guest dengan ID: ' . $inserted);
+                return redirect()->to('/guest-visitor')->with('success', 'Guest visitor created successfully');
+            } else {
+                throw new \Exception('Failed to insert guest data');
+            }
         } catch (\Exception $e) {
             log_message('error', '[GuestVisitor] Error: ' . $e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Failed to create guest visitor: ' . $e->getMessage());
@@ -99,60 +115,48 @@ class GuestVisitorController extends Controller
 
     private function refreshToken()
     {
-        $currentToken = $this->tokenModel->getLatestToken();
-
-        // Debug log untuk cek token dari database
-        log_message('debug', 'Current token from DB: ' . json_encode($currentToken));
-
-        if (!$currentToken || empty($currentToken['refresh_token'])) {
-            log_message('error', '[Token Refresh] No valid refresh token found');
-            return null;
-        }
-
-        $url = "https://api-ap.central.arubanetworks.com/oauth2/token";
-        $params = [
-            'client_id' => 'uEDP1BABfpXMefVwonvHAarx4HwE7AXu',
-            'client_secret' => 'C3t4oi1JmQ7kyQiYKlpFQxZAvGQANKrO',
-            'grant_type' => 'refresh_token',
-            'refresh_token' => $currentToken['refresh_token']
-        ];
-
         try {
-            // Debug log untuk request
-            log_message('debug', 'Attempting token refresh with params: ' . json_encode($params));
+            $currentToken = $this->tokenModel->getLatestToken();
+            if (!$currentToken || empty($currentToken['refresh_token'])) {
+                throw new \Exception('No valid refresh token found');
+            }
+
+            $url = "https://api-ap.central.arubanetworks.com/oauth2/token";
+            $params = [
+                'client_id' => 'uEDP1BABfpXMefVwonvHAarx4HwE7AXu',
+                'client_secret' => 'C3t4oi1JmQ7kyQiYKlpFQxZAvGQANKrO',
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $currentToken['refresh_token']
+            ];
 
             $curl = Services::curlrequest();
             $response = $curl->post($url, [
                 'form_params' => $params,
                 'headers' => [
-                    'Accept' => 'application/json'
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded'
                 ],
-                'http_errors' => false,
-                'debug' => true
+                'http_errors' => false
             ]);
 
             $statusCode = $response->getStatusCode();
             $result = json_decode($response->getBody(), true);
 
-            // Debug log untuk response
-            log_message('debug', 'Token refresh response status: ' . $statusCode);
-            log_message('debug', 'Token refresh response body: ' . json_encode($result));
-
             if ($statusCode !== 200) {
                 throw new \Exception("Token refresh failed with status {$statusCode}: " . json_encode($result));
             }
 
-            // Save new token
+            // Simpan nilai expires_in langsung dari API
             $tokenData = [
                 'access_token' => $result['access_token'],
                 'refresh_token' => $result['refresh_token'],
-                'expires_in' => time() + $result['expires_in']
+                'expires_in' => $result['expires_in'],
+                'created_at' => date('Y-m-d H:i:s')
             ];
 
-            $saved = $this->tokenModel->saveNewToken($tokenData);
-
-            // Debug log untuk saving
-            log_message('debug', 'Token save result: ' . ($saved ? 'success' : 'failed'));
+            if (!$this->tokenModel->saveNewToken($tokenData)) {
+                throw new \Exception('Failed to save new token to database');
+            }
 
             return $tokenData;
         } catch (\Exception $e) {
@@ -165,24 +169,45 @@ class GuestVisitorController extends Controller
     {
         $url = "https://api-ap.central.arubanetworks.com/guest/v1/portals/fb276af6-96e1-4bef-bfac-4187421f2865/visitors";
 
-        $nextId = uniqid();
+        // Generate a UUID for the guest ID
+        $id = sprintf(
+            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff)
+        );
+
+        // Make sure name is explicitly included in both places
         $payload = [
-            'id' => $nextId,
-            'is_enabled' => true,
-            'valid_till_no_limit' => false,
-            'notify' => true,
-            'notify_to' => 'phone',
-            'name' => $data['name'],
-            'status' => true,
-            'user' => [
-                'phone' => $data['phone']
-            ],
-            'password' => $data['password'],
-            'valid_till_days' => intval($data['valid_days'])
+            'id' => $id,
+            'name' => $data['name'], // Add name at root level
+            'visitor' => [
+                'name' => $data['name'], // Add name in visitor object
+                'password' => $data['password'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'valid_till_days' => intval($data['valid_days']),
+                'is_enabled' => true,
+                'valid_till_no_limit' => false,
+                'notify' => true,
+                'notify_to' => ['phone'],
+                'status' => true
+            ]
         ];
 
         try {
             $curl = Services::curlrequest();
+
+            // Add detailed request logging
+            log_message('debug', 'Guest Creation Request - URL: ' . $url);
+            log_message('debug', 'Guest Creation Request - Payload: ' . json_encode($payload, JSON_PRETTY_PRINT));
+            log_message('debug', 'Guest Creation Request - Token: ' . substr($token, 0, 20) . '...');
+
             $response = $curl->post($url, [
                 'json' => $payload,
                 'headers' => [
@@ -190,32 +215,31 @@ class GuestVisitorController extends Controller
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json'
                 ],
-                'debug' => true,
-                'http_errors' => false // Don't throw exceptions for HTTP errors
+                'http_errors' => false
             ]);
 
             $statusCode = $response->getStatusCode();
-            $result = json_decode($response->getBody(), true);
+            $responseBody = json_decode($response->getBody(), true);
 
-            // Log the full response for debugging
-            log_message('debug', 'API Response Status: ' . $statusCode);
-            log_message('debug', 'API Response Body: ' . json_encode($result));
+            // Enhanced response logging
+            log_message('debug', 'Guest Creation Response - Status: ' . $statusCode);
+            log_message('debug', 'Guest Creation Response - Body: ' . json_encode($responseBody, JSON_PRETTY_PRINT));
 
             if ($statusCode !== 200) {
-                $errorMessage = isset($result['description']) ? $result['description'] : (isset($result['message']) ? $result['message'] : 'Unknown error');
-                throw new \Exception("API returned {$statusCode}: {$errorMessage}");
+                $errorDetail = isset($responseBody['description'])
+                    ? $responseBody['description']
+                    : (isset($responseBody['error_description'])
+                        ? $responseBody['error_description']
+                        : json_encode($responseBody));
+
+                throw new \Exception("API Error (Status {$statusCode}): {$errorDetail}");
             }
 
-            if (!isset($result['id'])) {
-                log_message('error', 'Invalid API response format: ' . json_encode($result));
-                throw new \Exception('Invalid response format from API');
-            }
-
-            return $result;
+            return $responseBody;
         } catch (\Exception $e) {
-            log_message('error', '[Guest Creation] Error: ' . $e->getMessage());
-            log_message('error', '[Guest Creation] Request payload: ' . json_encode($payload));
-            throw new \Exception('Failed to communicate with the external system: ' . $e->getMessage());
+            log_message('error', 'Guest Creation API Error: ' . $e->getMessage());
+            log_message('error', 'Stack trace: ' . $e->getTraceAsString());
+            throw new \Exception('Failed to create guest: ' . $e->getMessage());
         }
     }
 
@@ -225,20 +249,28 @@ class GuestVisitorController extends Controller
             return false;
         }
 
-        // Add a 5-minute buffer to prevent edge cases
-        $bufferTime = 300; // 5 minutes in seconds
-        return ($token['expires_in'] > (time() + $bufferTime));
+        // Buffer 5 menit
+        $bufferTime = 300;
+
+        // Hitung waktu expire
+        $createdTime = strtotime($token['created_at']);
+        $expiryTime = $createdTime + $token['expires_in'];
+
+        return ($expiryTime > (time() + $bufferTime));
     }
 
     private function ensureValidToken()
     {
         $token = $this->tokenModel->getLatestToken();
+        log_message('debug', 'Current token: ' . json_encode($token));
 
         if (!$this->isTokenValid($token)) {
+            log_message('debug', 'Token invalid or expired, refreshing...');
             $token = $this->refreshToken();
             if (!$token) {
                 throw new \Exception('Failed to obtain valid authentication token');
             }
+            log_message('debug', 'New token obtained: ' . json_encode($token));
         }
 
         return $token;

@@ -59,7 +59,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($guests as $guest): ?>
-                                <tr>
+                                <tr class="text-center">
                                     <td><?= $i++ ?></td>
                                     <td><?= esc($guest['guest_name']) ?></td>
                                     <td><?= esc($guest['email']) ?></td>

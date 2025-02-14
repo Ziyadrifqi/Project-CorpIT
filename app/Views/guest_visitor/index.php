@@ -25,28 +25,33 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="Guest_visitor">
                         <thead class="table-light">
                             <tr>
+                                <th>No</th>
                                 <th>Guest Name</th>
                                 <th>Phone</th>
-                                <th>Created By</th>
+                                <th>Password</th>
                                 <th>Status</th>
                                 <th>Created At</th>
+                                <th>Valid_until</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i = 1; ?>
                             <?php foreach ($guests as $guest): ?>
-                                <tr>
+                                <tr class="text-center">
+                                    <td><?= $i++ ?></td>
                                     <td><?= esc($guest['guest_name']) ?></td>
                                     <td><?= esc($guest['phone']) ?></td>
-                                    <td><?= esc($guest['created_by']) ?></td>
+                                    <td><?= esc($guest['password']) ?></td>
                                     <td>
                                         <span class="badge <?= $guest['status'] ? 'bg-success' : 'bg-danger' ?>">
                                             <?= $guest['status'] ? 'Active' : 'Inactive' ?>
                                         </span>
                                     </td>
                                     <td><?= esc($guest['created_at']) ?></td>
+                                    <td><?= esc($guest['valid_until']) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -70,4 +75,6 @@
     });
 </script>
 
+<?= $this->endSection(); ?>
+<?= $this->section('scripts'); ?>
 <?= $this->endSection(); ?>

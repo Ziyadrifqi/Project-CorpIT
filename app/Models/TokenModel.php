@@ -33,11 +33,16 @@ class TokenModel extends Model
 
     public function saveNewToken($tokenData)
     {
-        // Ensure expires_in is stored as a timestamp
-        if (isset($tokenData['expires_in']) && !is_numeric($tokenData['expires_in'])) {
-            $tokenData['expires_in'] = time() + (int)$tokenData['expires_in'];
-        }
+        // Pastikan expires_in integer
+        $tokenData['expires_in'] = (int)$tokenData['expires_in'];
 
-        return $this->save($tokenData);
+        // Cek existing token
+        $existingToken = $this->where('refresh_token', $tokenData['refresh_token'])->first();
+
+        if ($existingToken) {
+            return $this->update($existingToken['id'], $tokenData);
+        } else {
+            return $this->insert($tokenData);
+        }
     }
 }

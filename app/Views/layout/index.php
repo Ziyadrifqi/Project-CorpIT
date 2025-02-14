@@ -99,6 +99,8 @@
 
         // Inisialisasi DataTables untuk #historyactivity dengan teks bahasa Inggris
         initializeDataTable('#historyactivity');
+        // Inisialisasi DataTables untuk #Guest_visitor dengan teks bahasa Inggris
+        initializeDataTable('#Guest_visitor');
     });
 </script>
 
