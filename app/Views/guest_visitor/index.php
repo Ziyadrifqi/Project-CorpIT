@@ -27,7 +27,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="Guest_visitor">
                         <thead class="table-light">
-                            <tr>
+                            <tr class="text-center">
                                 <th>No</th>
                                 <th>Guest Name</th>
                                 <th>Phone</th>

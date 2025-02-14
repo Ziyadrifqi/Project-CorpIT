@@ -46,7 +46,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="guestHistoryTable">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>No</th>
                                 <th>Guest Name</th>
                                 <th>Email</th>
