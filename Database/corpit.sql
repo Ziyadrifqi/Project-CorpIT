@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 11:29 AM
+-- Generation Time: Feb 14, 2025 at 07:05 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -115,8 +115,7 @@ CREATE TABLE `admin_activities` (
 INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`) VALUES
 (1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-03 06:08:17', 1, '35647891', 'Rio Facrudin', '637484'),
 (3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-03 09:24:13', 3, '', 'Randi Salam', '728392'),
-(5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718'),
-(11, 'Training', 'Surabaya', '00:00:00', '00:41:00', '1970-01-01', 'Pelatihan teknis', '2025-02-04 16:30:44', '2025-02-04 16:30:44', 1, '45678912', 'Mark Lee', 'TKT125');
+(5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718');
 
 -- --------------------------------------------------------
 
@@ -685,7 +684,38 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (386, '::1', 'syakira02@gmail.com', 5, '2025-02-03 12:59:40', 1),
 (387, '::1', 'ziyad@gmail.com', 1, '2025-02-04 02:15:51', 1),
 (388, '::1', 'syakira02@gmail.com', 5, '2025-02-04 04:27:55', 1),
-(389, '::1', 'ziyad@gmail.com', 1, '2025-02-04 07:42:09', 1);
+(389, '::1', 'ziyad@gmail.com', 1, '2025-02-04 07:42:09', 1),
+(390, '::1', 'ziyad@gmail.com', 1, '2025-02-04 13:19:18', 1),
+(391, '::1', 'ziyad@gmail.com', 1, '2025-02-05 01:28:47', 1),
+(392, '::1', 'Rassya@gmail.com', 2, '2025-02-05 02:59:22', 1),
+(393, '::1', 'syakira02@gmail.com', 5, '2025-02-05 07:19:08', 1),
+(394, '::1', 'ziyad@gmail.com', 1, '2025-02-05 09:30:10', 1),
+(395, '::1', 'ziyad@gmail.com', 1, '2025-02-06 01:38:08', 1),
+(396, '::1', 'ziyad@gmail.com', 1, '2025-02-07 01:39:33', 1),
+(397, '::1', 'Rassya@gmail.com', 2, '2025-02-07 02:14:20', 1),
+(398, '::1', 'syakira02@gmail.com', 5, '2025-02-07 02:15:01', 1),
+(399, '::1', 'ziyad@gmail.com', 1, '2025-02-07 06:27:58', 1),
+(400, '::1', 'ziyad@gmail.com', 1, '2025-02-10 06:17:57', 1),
+(401, '::1', 'ziyad@gmail.com', 1, '2025-02-10 12:40:17', 1),
+(402, '::1', 'ziyad@gmail.com', 1, '2025-02-11 05:40:09', 1),
+(403, '::1', 'ziyad@gmail.com', NULL, '2025-02-12 02:02:02', 0),
+(404, '::1', 'ziyad@gmail.com', 1, '2025-02-12 02:02:09', 1),
+(405, '::1', 'Rassya@gmail.com', 2, '2025-02-12 02:48:24', 1),
+(406, '::1', 'syakira02@gmail.com', 5, '2025-02-12 02:48:44', 1),
+(407, '::1', 'ziyad@gmail.com', 1, '2025-02-12 08:09:35', 1),
+(408, '::1', 'syakira02@gmail.com', 5, '2025-02-12 08:09:53', 1),
+(409, '::1', 'ziyad@gmail.com', NULL, '2025-02-12 12:01:45', 0),
+(410, '::1', 'ziyad@gmail.com', 1, '2025-02-12 12:01:51', 1),
+(411, '::1', 'ziyad@gmail.com', NULL, '2025-02-12 12:31:38', 0),
+(412, '::1', 'ziyad@gmail.com', 1, '2025-02-12 12:31:45', 1),
+(413, '::1', 'ziyad@gmail.com', 1, '2025-02-13 01:22:01', 1),
+(414, '::1', 'syakira02@gmail.com', 5, '2025-02-13 03:41:04', 1),
+(415, '::1', 'ziyad@gmail.com', 1, '2025-02-13 06:46:19', 1),
+(416, '::1', 'rassya', NULL, '2025-02-13 09:23:52', 0),
+(417, '::1', 'Rassya@gmail.com', 2, '2025-02-13 09:23:58', 1),
+(418, '::1', 'ziyad@gmail.com', 1, '2025-02-13 12:08:19', 1),
+(419, '::1', 'ziyad@gmail.com', 1, '2025-02-14 01:28:16', 1),
+(420, '::1', 'syakira02@gmail.com', 5, '2025-02-14 02:01:20', 1);
 
 -- --------------------------------------------------------
 
@@ -938,6 +968,34 @@ INSERT INTO `file_distributions` (`id`, `target_id`, `target_type`, `created_at`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `guest_visitors`
+--
+
+CREATE TABLE `guest_visitors` (
+  `id` int(11) NOT NULL,
+  `guest_name` varchar(50) NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `valid_until` datetime DEFAULT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guest_visitors`
+--
+
+INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_at`, `updated_at`, `email`, `phone`, `valid_until`, `password`) VALUES
+(1, 'GUEST14022025362_001', 1, 1, '2025-02-14 01:46:05', '2025-02-14 01:46:05', 'ziyadrpe@gmail.com', '088280807652', '2025-02-19 01:46:05', 'zizi123'),
+(2, 'GUEST14022025_002', 1, 1, '2025-02-14 09:39:35', '2025-02-14 09:39:35', 'Rassya@gmail.com', '088282907652', '2025-02-20 09:39:35', 'ayss123'),
+(3, 'GUEST14022025_003', 1, 1, '2025-02-14 10:30:12', '2025-02-14 10:30:12', 'annindita@gmail.com', '088280197652', '2025-02-18 10:30:12', 'ditt123');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `menus`
 --
 
@@ -980,12 +1038,12 @@ INSERT INTO `menus` (`id`, `name`, `icon`, `url`, `parent_id`, `order_pos`, `is_
 (23, 'Category User Permission', 'fas fa-lock', 'admin/category-permissions', 24, 2, 1, '2024-11-21 13:29:06', '2024-12-03 08:54:03'),
 (24, 'Category Management', 'fas fa-th-list', NULL, NULL, 1, 1, '2024-11-22 08:42:32', '2024-11-24 13:08:34'),
 (25, 'Activity', NULL, NULL, NULL, 1, 1, '2025-01-14 02:41:40', '2025-01-14 02:41:40'),
-(26, 'Field Activities', 'fas fa-tasks', 'admin/activity', 19, 4, 1, '2025-01-14 02:44:28', '2025-02-01 14:17:13'),
+(26, 'Overtime Activity Manual', 'fas fa-tasks', 'admin/activity', 19, 4, 1, '2025-01-14 02:44:28', '2025-02-05 01:32:01'),
 (27, 'Admin Activities History', 'fas fa-clipboard-list', 'activity/history', 19, 4, 1, '2025-01-14 09:29:34', '2025-02-01 14:17:57'),
 (28, 'HOME', 'fas fa-home', 'user/', NULL, 0, 1, '2025-02-01 14:13:25', '2025-02-01 14:14:51'),
 (29, 'Manajemen Visitor', NULL, NULL, NULL, 2, 1, '2025-02-04 08:32:06', '2025-02-04 08:35:03'),
 (31, 'Guest Visitor', 'fas fa-users', 'guest-visitor', 29, 1, 1, '2025-02-04 08:32:50', '2025-02-04 08:32:50'),
-(32, 'Referesh Token', 'fas fa-sync', 'token', 29, 2, 1, '2025-02-04 09:00:06', '2025-02-04 09:00:06');
+(33, 'Guest Visitor history', 'fas fa-redo', 'guest-visitor/history', 29, 1, 1, '2025-02-12 02:51:49', '2025-02-12 02:58:47');
 
 -- --------------------------------------------------------
 
@@ -1087,7 +1145,8 @@ INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`, `created_at`) VALUES
 (34, 3, 28, '2025-02-01 14:14:08'),
 (35, 1, 29, '2025-02-04 08:33:24'),
 (36, 1, 31, '2025-02-04 08:33:24'),
-(37, 1, 32, '2025-02-04 09:00:27');
+(38, 3, 29, '2025-02-12 02:53:20'),
+(39, 3, 33, '2025-02-12 02:53:20');
 
 -- --------------------------------------------------------
 
@@ -1111,6 +1170,34 @@ INSERT INTO `sub_departments` (`id`, `department_id`, `name`) VALUES
 (3, 3, 'FSIDCA 1'),
 (4, 4, 'FSIDCA 2'),
 (5, 5, 'FSIDCA 3');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `id` int(11) NOT NULL,
+  `access_token` varchar(255) NOT NULL,
+  `refresh_token` varchar(255) NOT NULL,
+  `expires_in` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tokens`
+--
+
+INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `created_at`, `updated_at`) VALUES
+(7, 'hf7B5DHrHI9QebAaRRIJehvIBP2QD3Mn', 'TLkWGNqILZFPLsvcvlfjuvKMfw65mnWj', 7200, '2025-02-13 13:52:02', '2025-02-13 14:52:47'),
+(8, 'v4F7WcdutJxRquz2UYSL9vQnOzePGzV9', 'es6j0rmIAkz0IGfHT1beDlu3UH3sWWr5', 7200, '2025-02-13 15:22:11', '2025-02-13 15:22:11'),
+(9, 'fjWztQ1LNhmVWLfkj9A6GnIJXghHies8', 'ZdxT80ItIEYv9SiggIOgoKOovz3X6byJ', 1739442165, '2025-02-13 08:22:45', '2025-02-13 08:36:58'),
+(10, 'fjWztQ1LNhmVWLfkj9A6GnIJXghHies8', 'ZdxT80ItIEYv9SiggIOgoKOovz3X6byJ', 7061, '2025-02-13 15:25:39', '2025-02-13 15:25:39'),
+(11, 'TSJKT0VH7FtUwcQEACh8hrECQ67YFXw9', 'IuQsDV3d1P6dmYF16oNc0JEHBSBuKNbA', 7200, '2025-02-13 15:28:08', '2025-02-13 19:14:15'),
+(12, 'jIq3OwhNfu5InbZujCpf7QWoN1aMLH4d', 'N2fT92rPK8cZzktf5kFWYINQZ7PihZMA', 7200, '2025-02-14 01:28:35', '2025-02-14 01:28:35'),
+(13, '8CeWXEeuxbXtGFGTmmdvSVPVLlLmFzgi', 'elpj7PL1G8ao0Qc6m9e8K8YKZEpbZoBY', 7200, '2025-02-14 09:39:33', '2025-02-14 09:39:33');
 
 -- --------------------------------------------------------
 
@@ -1318,6 +1405,13 @@ ALTER TABLE `file_distributions`
   ADD KEY `fileuploads_id` (`fileuploads_id`);
 
 --
+-- Indexes for table `guest_visitors`
+--
+ALTER TABLE `guest_visitors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_guest_user` (`user_id`);
+
+--
 -- Indexes for table `menus`
 --
 ALTER TABLE `menus`
@@ -1354,6 +1448,12 @@ ALTER TABLE `sub_departments`
   ADD KEY `department_id` (`department_id`);
 
 --
+-- Indexes for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1385,7 +1485,7 @@ ALTER TABLE `absen_category`
 -- AUTO_INCREMENT for table `admin_activities`
 --
 ALTER TABLE `admin_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -1421,7 +1521,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=390;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=421;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1475,13 +1575,13 @@ ALTER TABLE `divisions`
 -- AUTO_INCREMENT for table `fileuploads`
 --
 ALTER TABLE `fileuploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `file_categories`
 --
 ALTER TABLE `file_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `file_distributions`
@@ -1490,10 +1590,16 @@ ALTER TABLE `file_distributions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
+-- AUTO_INCREMENT for table `guest_visitors`
+--
+ALTER TABLE `guest_visitors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1511,13 +1617,19 @@ ALTER TABLE `monitoring_tickets`
 -- AUTO_INCREMENT for table `role_menus`
 --
 ALTER TABLE `role_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `sub_departments`
 --
 ALTER TABLE `sub_departments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tokens`
+--
+ALTER TABLE `tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1613,6 +1725,12 @@ ALTER TABLE `file_categories`
 --
 ALTER TABLE `file_distributions`
   ADD CONSTRAINT `file_distributions_ibfk_1` FOREIGN KEY (`fileuploads_id`) REFERENCES `fileuploads` (`id`);
+
+--
+-- Constraints for table `guest_visitors`
+--
+ALTER TABLE `guest_visitors`
+  ADD CONSTRAINT `fk_guest_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `menus`
