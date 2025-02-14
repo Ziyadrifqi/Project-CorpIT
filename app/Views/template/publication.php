@@ -34,7 +34,7 @@
             <!-- Main Content -->
             <div class="col-12 col-lg-8">
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm table-hover" id="publicationTable">
+                    <table class="table table-striped table-sm table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -106,29 +106,19 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Initialize DataTable
-        let table = $('#publicationTable').DataTable({
-            responsive: true,
-            "pageLength": 10,
-            "language": {
-                "lengthMenu": "Show _MENU_ entries per page",
-                "zeroRecords": "No matching records found",
-                "info": "Showing page _PAGE_ of _PAGES_",
-                "infoEmpty": "No records available",
-                "infoFiltered": "(filtered from _MAX_ total records)"
-            }
-        });
-
-        // Function to filter by category
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fungsi untuk filter berdasarkan kategori
         window.filterSingleCategory = function(categoryClass) {
-            table.columns(1).search('').draw();
-            let categoryName = categoryClass.replace('category-', '');
-            let rows = document.querySelectorAll('.category-row');
+            let rows = document.querySelectorAll(".category-row"); // Ambil semua baris
+
             rows.forEach(row => {
-                row.style.display = row.classList.contains(categoryClass) ? '' : 'none';
+                if (row.classList.contains(categoryClass)) {
+                    row.style.display = ""; // Tampilkan baris yang sesuai
+                } else {
+                    row.style.display = "none"; // Sembunyikan baris yang tidak sesuai
+                }
             });
-        }
+        };
     });
 </script>
 

@@ -25,11 +25,12 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover" id="Guest_visitor">
+                    <table class="table table-bordered table-sm table-hover" id="Guest_visitor">
                         <thead class="table-light">
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Guest Name</th>
+                                <th>Email</th>
                                 <th>Phone</th>
                                 <th>Password</th>
                                 <th>Status</th>
@@ -43,6 +44,7 @@
                                 <tr class="text-center">
                                     <td><?= $i++ ?></td>
                                     <td><?= esc($guest['guest_name']) ?></td>
+                                    <td><?= esc($guest['email']) ?></td>
                                     <td><?= esc($guest['phone']) ?></td>
                                     <td><?= esc($guest['password']) ?></td>
                                     <td>

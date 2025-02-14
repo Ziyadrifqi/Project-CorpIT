@@ -44,12 +44,13 @@
 
                 <!-- History Table -->
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="guestHistoryTable">
+                    <table class="table table-bordered table-sm" id="guestHistoryTable">
                         <thead>
                             <tr class="text-center">
                                 <th>No</th>
                                 <th>Guest Name</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Created By</th>
                                 <th>Created Date</th>
                                 <th>Valid Until</th>
@@ -63,6 +64,7 @@
                                     <td><?= $i++ ?></td>
                                     <td><?= esc($guest['guest_name']) ?></td>
                                     <td><?= esc($guest['email']) ?></td>
+                                    <td><?= esc($guest['phone']) ?></td>
                                     <td><?= esc($guest['created_by']) ?></td>
                                     <td><?= date('Y-m-d H:i', strtotime($guest['created_at'])) ?></td>
                                     <td><?= date('Y-m-d H:i', strtotime($guest['valid_until'])) ?></td>

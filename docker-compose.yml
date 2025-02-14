@@ -20,7 +20,7 @@ services:
     container_name: itcorporate_db
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: komik
+      MYSQL_DATABASE: corpIT
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
