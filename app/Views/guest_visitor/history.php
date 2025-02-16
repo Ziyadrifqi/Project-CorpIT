@@ -52,9 +52,9 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Created By</th>
+                                <th>Status</th>
                                 <th>Created Date</th>
                                 <th>Valid Until</th>
-                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,8 +66,6 @@
                                     <td><?= esc($guest['email']) ?></td>
                                     <td><?= esc($guest['phone']) ?></td>
                                     <td><?= esc($guest['created_by']) ?></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($guest['created_at'])) ?></td>
-                                    <td><?= date('Y-m-d H:i', strtotime($guest['valid_until'])) ?></td>
                                     <td>
                                         <?php if (strtotime($guest['valid_until']) > time()): ?>
                                             <span class="badge badge-success">Active</span>
@@ -75,6 +73,8 @@
                                             <span class="badge badge-danger">Expired</span>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?= date('Y-m-d H:i', strtotime($guest['created_at'])) ?></td>
+                                    <td><?= date('Y-m-d H:i', strtotime($guest['valid_until'])) ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

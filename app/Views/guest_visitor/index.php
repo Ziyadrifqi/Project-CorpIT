@@ -3,7 +3,7 @@
 
 <div class="container mt-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title">Guest Visitor Management</h3>
+        <h3 class="card-title"> <?= esc($title); ?></h3>
     </div>
     <div class="card-body">
         <?php if (session()->has('success')): ?>
@@ -20,7 +20,7 @@
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                <?= esc($title); ?>
+                Guest Visitor List
                 <a href="<?= base_url('guest-visitor/create'); ?>" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Create New Visitor</a>
             </div>
             <div class="card-body">
@@ -41,6 +41,12 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($guests as $guest): ?>
+                                <?php
+                                // Check if current time is past valid_until
+                                $isExpired = strtotime($guest['valid_until']) < time();
+                                $statusClass = $isExpired ? 'bg-danger' : ($guest['status'] ? 'bg-success' : 'bg-danger');
+                                $statusText = $isExpired ? 'Inactive' : ($guest['status'] ? 'Active' : 'Inactive');
+                                ?>
                                 <tr class="text-center">
                                     <td><?= $i++ ?></td>
                                     <td><?= esc($guest['guest_name']) ?></td>
@@ -48,8 +54,8 @@
                                     <td><?= esc($guest['phone']) ?></td>
                                     <td><?= esc($guest['password']) ?></td>
                                     <td>
-                                        <span class="badge <?= $guest['status'] ? 'bg-success' : 'bg-danger' ?>">
-                                            <?= $guest['status'] ? 'Active' : 'Inactive' ?>
+                                        <span class="badge <?= $statusClass ?>">
+                                            <?= $statusText ?>
                                         </span>
                                     </td>
                                     <td><?= esc($guest['created_at']) ?></td>
