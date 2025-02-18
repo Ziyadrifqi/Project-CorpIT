@@ -66,8 +66,17 @@ class GuestVisitorController extends Controller
         try {
             // Generate guest name with microseconds for better uniqueness
             $currentDate = date('dmY');
-            $lastGuest = $this->guestVisitorModel->orderBy('id', 'DESC')->first();
-            $counter = $lastGuest ? (intval(substr($lastGuest['guest_name'], -3)) + 1) : 1;
+
+            // Cari guest terakhir yang dibuat di hari yang sama
+            $lastGuestToday = $this->guestVisitorModel
+                ->where('guest_name LIKE', "GUEST{$currentDate}_%")
+                ->orderBy('id', 'DESC')
+                ->first();
+
+            // Tentukan nomor urut
+            $counter = $lastGuestToday ? (intval(substr($lastGuestToday['guest_name'], -3)) + 1) : 1;
+
+            // Buat guest name dengan format "GUESTddmmyyyy_XXX"
             $guestName = sprintf("GUEST%s_%03d", $currentDate, $counter);
 
             // Get valid token

@@ -32,7 +32,6 @@
                                 <th>Guest Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Password</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Valid_until</th>
@@ -52,7 +51,6 @@
                                     <td><?= esc($guest['guest_name']) ?></td>
                                     <td><?= esc($guest['email']) ?></td>
                                     <td><?= esc($guest['phone']) ?></td>
-                                    <td><?= esc($guest['password']) ?></td>
                                     <td>
                                         <span class="badge <?= $statusClass ?>">
                                             <?= $statusText ?>

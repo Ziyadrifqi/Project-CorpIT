@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2025 at 07:05 AM
+-- Generation Time: Feb 18, 2025 at 08:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -715,7 +715,16 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (417, '::1', 'Rassya@gmail.com', 2, '2025-02-13 09:23:58', 1),
 (418, '::1', 'ziyad@gmail.com', 1, '2025-02-13 12:08:19', 1),
 (419, '::1', 'ziyad@gmail.com', 1, '2025-02-14 01:28:16', 1),
-(420, '::1', 'syakira02@gmail.com', 5, '2025-02-14 02:01:20', 1);
+(420, '::1', 'syakira02@gmail.com', 5, '2025-02-14 02:01:20', 1),
+(421, '::1', 'ziyad@gmail.com', 1, '2025-02-14 06:13:16', 1),
+(422, '::1', 'syakira02@gmail.com', 5, '2025-02-14 06:31:24', 1),
+(423, '::1', 'Rassya@gmail.com', 2, '2025-02-14 06:41:50', 1),
+(424, '::1', 'ziyad@gmail.com', 1, '2025-02-15 01:48:48', 1),
+(425, '::1', 'ziyad@gmail.com', 1, '2025-02-16 01:28:30', 1),
+(426, '::1', 'syakira02@gmail.com', 5, '2025-02-16 02:29:25', 1),
+(427, '::1', 'ziyad@gmail.com', 1, '2025-02-17 03:36:28', 1),
+(428, '::1', 'ziyad@gmail.com', 1, '2025-02-18 07:21:08', 1),
+(429, '::1', 'syakira02@gmail.com', 5, '2025-02-18 07:22:30', 1);
 
 -- --------------------------------------------------------
 
@@ -991,7 +1000,11 @@ CREATE TABLE `guest_visitors` (
 INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_at`, `updated_at`, `email`, `phone`, `valid_until`, `password`) VALUES
 (1, 'GUEST14022025362_001', 1, 1, '2025-02-14 01:46:05', '2025-02-14 01:46:05', 'ziyadrpe@gmail.com', '088280807652', '2025-02-19 01:46:05', 'zizi123'),
 (2, 'GUEST14022025_002', 1, 1, '2025-02-14 09:39:35', '2025-02-14 09:39:35', 'Rassya@gmail.com', '088282907652', '2025-02-20 09:39:35', 'ayss123'),
-(3, 'GUEST14022025_003', 1, 1, '2025-02-14 10:30:12', '2025-02-14 10:30:12', 'annindita@gmail.com', '088280197652', '2025-02-18 10:30:12', 'ditt123');
+(3, 'GUEST14022025_003', 1, 1, '2025-02-14 10:30:12', '2025-02-14 10:30:12', 'annindita@gmail.com', '088280197652', '2025-02-18 10:30:12', 'ditt123'),
+(4, 'GUEST14022025_004', 1, 1, '2025-02-14 16:47:09', '2025-02-14 16:47:09', 'ziyad@gmail.com', '082678394443', '2025-02-17 16:47:09', 'zizz23'),
+(5, 'GUEST15022025_005', 1, 1, '2025-02-15 08:49:52', '2025-02-15 08:49:52', 'aangsaiful@gmail.com', '088264908349', '2025-02-16 08:49:52', 'nggaa02'),
+(6, 'GUEST17022025_006', 1, 1, '2025-02-17 10:38:16', '2025-02-17 10:38:16', 'ziyad@gmail.com', '088280764865', '2025-02-19 10:38:16', 'zizi0232'),
+(7, 'GUEST18022025_001', 1, 1, '2025-02-18 14:23:44', '2025-02-18 14:23:44', 'syakira@gmail.com', '082676372443', '2025-02-19 14:23:44', 'arik123');
 
 -- --------------------------------------------------------
 
@@ -1197,7 +1210,11 @@ INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `crea
 (10, 'fjWztQ1LNhmVWLfkj9A6GnIJXghHies8', 'ZdxT80ItIEYv9SiggIOgoKOovz3X6byJ', 7061, '2025-02-13 15:25:39', '2025-02-13 15:25:39'),
 (11, 'TSJKT0VH7FtUwcQEACh8hrECQ67YFXw9', 'IuQsDV3d1P6dmYF16oNc0JEHBSBuKNbA', 7200, '2025-02-13 15:28:08', '2025-02-13 19:14:15'),
 (12, 'jIq3OwhNfu5InbZujCpf7QWoN1aMLH4d', 'N2fT92rPK8cZzktf5kFWYINQZ7PihZMA', 7200, '2025-02-14 01:28:35', '2025-02-14 01:28:35'),
-(13, '8CeWXEeuxbXtGFGTmmdvSVPVLlLmFzgi', 'elpj7PL1G8ao0Qc6m9e8K8YKZEpbZoBY', 7200, '2025-02-14 09:39:33', '2025-02-14 09:39:33');
+(13, '8CeWXEeuxbXtGFGTmmdvSVPVLlLmFzgi', 'elpj7PL1G8ao0Qc6m9e8K8YKZEpbZoBY', 7200, '2025-02-14 09:39:33', '2025-02-14 09:39:33'),
+(14, '225uCCE5fAgFkCT67isvQMA4Y9zARZ0a', 'h64NqlgMwHoljLUMDkx11w5UZOOkEvit', 7200, '2025-02-14 16:47:06', '2025-02-14 16:47:06'),
+(15, '77x4C5s6a5la5r41Nr1k6czH69xBBw9l', 'wFmAqBXs145LUz50PNnlLNjQ7M9Cmaby', 7200, '2025-02-15 08:49:49', '2025-02-15 08:49:49'),
+(16, 'GSXeOtmKIDJbr9orC4vE2qX23gtmDUNI', '2Ima4EuJ3hHahuLmslA97Fd6neTUZh0S', 7200, '2025-02-17 10:38:12', '2025-02-17 10:38:12'),
+(17, 'xjc3Z0DRykHaSf62zFmudWNmmTU4rdJe', 'BVDaYBiNAZn1Bundki6cyLMpTPl1NvUk', 7200, '2025-02-18 14:23:40', '2025-02-18 14:23:40');
 
 -- --------------------------------------------------------
 
@@ -1521,7 +1538,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=421;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=430;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1593,7 +1610,7 @@ ALTER TABLE `file_distributions`
 -- AUTO_INCREMENT for table `guest_visitors`
 --
 ALTER TABLE `guest_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -1629,7 +1646,7 @@ ALTER TABLE `sub_departments`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
