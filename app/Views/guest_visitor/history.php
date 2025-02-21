@@ -94,10 +94,11 @@
             "order": [
                 [4, "desc"]
             ], // Sort by created date by default
-            "pageLength": 25
+            "pageLength": 10
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Select2 for category selection
+
+        // Initialize Select2
+        if (window.jQuery && $.fn.select2) {
             $('#select2-history').select2({
                 theme: 'bootstrap',
                 width: '100%',
@@ -105,7 +106,7 @@
                 allowClear: true,
                 closeOnSelect: false
             });
-        });
+        }
     });
 </script>
 <?= $this->endSection() ?>

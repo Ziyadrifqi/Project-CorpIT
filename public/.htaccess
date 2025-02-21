@@ -37,6 +37,11 @@ Options -Indexes
 	# Ensure Authorization header is passed along
 	RewriteCond %{HTTP:Authorization} .
 	RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	 # Rewrite URLs of the form "index.php/example" to "example"
+	 RewriteCond %{REQUEST_FILENAME} !-f
+	 RewriteCond %{REQUEST_FILENAME} !-d
+	 RewriteRule ^(.*)$ index.php/$1 [L]
 	
 </IfModule>
 

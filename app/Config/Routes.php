@@ -56,6 +56,8 @@ $routes->get('/Absensi/categories/edit/(:num)', 'Absensi\AbsenCategory::edit/$1'
 $routes->post('/Absensi/categories/update/(:num)', 'Absensi\AbsenCategory::update/$1');
 $routes->post('/Absensi/categories/delete/(:num)', 'Absensi\AbsenCategory::delete/$1');
 
+$routes->get('/overtime', 'Absensi\OvertimeMonitoringController::index');
+
 //halaman untuk user list
 $routes->get('/admin', 'Admin::index',);
 $routes->get('/admin/index', 'Admin::index',);
@@ -141,10 +143,15 @@ $routes->group('admin', function ($routes) {
         $routes->post('update/(:num)', 'Activity\AdminActivity::update/$1');
         $routes->post('delete/(:num)', 'Activity\AdminActivity::delete/$1');
         $routes->get('export/(:alpha)', 'Activity\AdminActivity::export/$1');
+        $routes->get('previewHistoryPdf', 'Activity\AdminActivity::previewHistoryPdf');
+        $routes->get('downloadHistoryPdf', 'Activity\AdminActivity::downloadHistoryPdf');
         $routes->get('bulk-upload', 'Activity\AdminActivity::bulkUpload');
         $routes->get('lembur.xlsx', 'Activity\AdminActivity::downloadTemplate');
         $routes->post('process-bulk-upload', 'Activity\AdminActivity::processBulkUpload');
-        $routes->get('exportsuper/(:alpha)', 'Activity\AdminActivity::exportsuper/$1'); // eksport untuk superadmin
+        $routes->get('history', 'Activity\AdminActivity::history');
+        $routes->get('exportsuper/(:any)', 'Activity\AdminActivity::exportsuper/$1');
+        $routes->post('sign', 'Activity\AdminActivity::sign');
+        $routes->get('signed/(:num)/(:num)/(:num)', 'Activity\AdminActivity::viewSignedDocument/$1/$2/$3');
     });
 });
 

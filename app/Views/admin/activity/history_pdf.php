@@ -108,7 +108,20 @@
         }
 
         .signature-space {
-            height: 60px;
+            height: 40px;
+        }
+
+        .signature-img {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signature-img img {
+            max-width: 100px;
+            max-height: 50px;
+            object-fit: contain;
         }
 
         .title {
@@ -147,11 +160,11 @@
             <table>
                 <tr>
                     <td>NAMA</td>
-                    <td>: <?= user()->username ?></td>
+                    <td>: <?= $userData['username'] ?></td>
                 </tr>
                 <tr>
                     <td>JABATAN</td>
-                    <td>: <?= user()->position ?? '-' ?></td>
+                    <td>: <?= $userData['position'] ?? '-' ?></td>
                 </tr>
                 <tr>
                     <td>DEPT</td>
@@ -171,14 +184,14 @@
                 </tr>
             </table>
         </div>
+
         <?php if (empty($activities)): ?>
             <p>No activities found for the selected period.</p>
         <?php else: ?>
-            <table class="overtime-table table-sm">
+            <table class="overtime-table">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>User</th>
                         <th>Date</th>
                         <th>Day</th>
                         <th>Start Time</th>
@@ -198,7 +211,6 @@
                         ?>
                         <tr>
                             <td><?= $index + 1 ?></td>
-                            <td><?= esc($activity['username']) ?></td>
                             <td><?= date('d/m/Y', strtotime($activity['activity_date'])) ?></td>
                             <td><?= $hari[date('l', strtotime($activity['activity_date']))] ?></td>
                             <td><?= date('H:i', strtotime($activity['start_time'])) ?></td>
@@ -215,13 +227,25 @@
         <div class="signature-section">
             <div class="signature-box-left">
                 <p>Menyetujui,</p>
-                <div class="signature-space"></div>
-                <p><u>RAHARDIKA NUR PERMANA</u><br>NIK: 92161515</p>
+                <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
+                    <div class="signature-img">
+                        <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
+                <p><u><?= $currentUser->username ?></u><br>NIK: 92161515</p>
             </div>
             <div class="signature-box-right">
                 <p>Dibuat Oleh,</p>
-                <div class="signature-space"></div>
-                <p><u><?= user()->username ?></u><br>NIK: <?= user()->nik ?? '-' ?></p>
+                <?php if (isset($userData['signature']) && $userData['signature']): ?>
+                    <div class="signature-img">
+                        <img src="<?= FCPATH . 'img/ttd/' . $userData['signature'] ?>" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
+                <p><u><?= esc($userData['username']) ?></u><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
             </div>
         </div>
     </div>
@@ -241,11 +265,11 @@
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
                                 <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($item['username']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['username']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= esc($item['nik']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['nik']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Bagian/Divisi</td>
@@ -257,7 +281,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= esc($item['pbr_tugas']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
                             </tr>
                         </table>
 
@@ -279,22 +303,27 @@
                         </p>
 
                         <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
-                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                            <div class="signature-box-left">
                                 <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 60px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
-                            </div>
-                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
-                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['activity_date'])) ?></div>
-                                <p>Yang di beri tugas,</p>
-                                <?php if (isset($signature_path) && $signature_path): ?>
+                                <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
                                     <div class="signature-img">
-                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                        <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
                                     </div>
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u> <?= esc($item['username']) ?></u><br><br>NIK: <?= esc($item['nik']) ?? '-'  ?></p>
+                                <p><u><?= $currentUser->username ?></u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right">
+                                <p>Dibuat Oleh,</p>
+                                <?php if (isset($userData['signature']) && $userData['signature']): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= FCPATH . 'img/ttd/' . $userData['signature'] ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= esc($userData['username']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
                             </div>
                         </div>
                     </div>
@@ -306,11 +335,11 @@
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
                                 <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($item['username']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['username']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= esc($item['nik']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['nik']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Bagian/Divisi</td>
@@ -322,7 +351,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= esc($item['pbr_tugas']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
                             </tr>
                         </table>
 
@@ -344,22 +373,27 @@
                         </p>
 
                         <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
-                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
+                            <div class="signature-box-left">
                                 <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 60px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
-                            </div>
-                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
-                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['activity_date'])) ?></div>
-                                <p>Yang di beri tugas,</p>
-                                <?php if (isset($signature_path) && $signature_path): ?>
+                                <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
                                     <div class="signature-img">
-                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
+                                        <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
                                     </div>
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u> <?= esc($item['username']) ?></u><br><br>NIK: <?= esc($item['nik']) ?? '-' ?></p>
+                                <p><u><?= $currentUser->username ?></u><br><br>NIK: 92161515</p>
+                            </div>
+                            <div class="signature-box-right">
+                                <p>Dibuat Oleh,</p>
+                                <?php if (isset($userData['signature']) && $userData['signature']): ?>
+                                    <div class="signature-img">
+                                        <img src="<?= FCPATH . 'img/ttd/' . $userData['signature'] ?>" style="max-width: 100px; max-height: 50px;">
+                                    </div>
+                                <?php else: ?>
+                                    <div class="signature-space" style="height: 30px;"></div>
+                                <?php endif; ?>
+                                <p><u><?= esc($userData['username']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
                             </div>
                         </div>
                     </div>
@@ -369,6 +403,7 @@
         endif;
     endforeach;
     ?>
+
 </body>
 
 </html>

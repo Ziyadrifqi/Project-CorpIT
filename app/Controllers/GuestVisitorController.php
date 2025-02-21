@@ -25,11 +25,17 @@ class GuestVisitorController extends Controller
 
     public function index()
     {
-        // Tambahkan debugging
-        $guests = $this->guestVisitorModel->getGuestsWithUserInfo();
+        if (!logged_in()) {
+            return redirect()->to('/login');
+        }
+
+        $userId = user_id(); // Get current logged in user's ID
+
+        // Modified to only get guests for current user
+        $guests = $this->guestVisitorModel->getGuestsByUserId($userId);
 
         $data = [
-            'title' => 'Guest Visitor Management',
+            'title' => 'My Guest Visitors',
             'guests' => $guests
         ];
 
@@ -66,21 +72,20 @@ class GuestVisitorController extends Controller
         try {
             // Generate guest name with microseconds for better uniqueness
             $currentDate = date('dmY');
-
-            // Cari guest terakhir yang dibuat di hari yang sama
-            $lastGuestToday = $this->guestVisitorModel
-                ->where('guest_name LIKE', "GUEST{$currentDate}_%")
-                ->orderBy('id', 'DESC')
-                ->first();
-
-            // Tentukan nomor urut
-            $counter = $lastGuestToday ? (intval(substr($lastGuestToday['guest_name'], -3)) + 1) : 1;
-
-            // Buat guest name dengan format "GUESTddmmyyyy_XXX"
+            $lastGuest = $this->guestVisitorModel->orderBy('id', 'DESC')->first();
+            $counter = $lastGuest ? (intval(substr($lastGuest['guest_name'], -3)) + 1) : 1;
             $guestName = sprintf("GUEST%s_%03d", $currentDate, $counter);
 
             // Get valid token
-            $token = $this->ensureValidToken();
+            $token = $this->ensureValidToken(); // Token will be refreshed here if needed
+
+            // Save the refresh token, regardless of the outcome of the user creation
+            $this->tokenModel->saveNewToken([
+                'access_token' => $token['access_token'],
+                'refresh_token' => $token['refresh_token'],
+                'expires_in' => $token['expires_in'],
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
 
             // Create guest via API
             $postData = $this->request->getPost();
@@ -121,6 +126,7 @@ class GuestVisitorController extends Controller
             return redirect()->back()->withInput()->with('error', 'Failed to create guest visitor: ' . $e->getMessage());
         }
     }
+
 
     private function refreshToken()
     {
@@ -193,7 +199,6 @@ class GuestVisitorController extends Controller
 
         // Make sure name is explicitly included in both places
         $payload = [
-            'id' => $id,
             'name' => $data['name'], // Add name at root level
             'visitor' => [
                 'name' => $data['name'], // Add name in visitor object

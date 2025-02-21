@@ -49,18 +49,16 @@ class AdminActivityModel extends Model
     public function getAllAdminActivities($startDate = null, $endDate = null, $selectedUser = null)
     {
         $builder = $this->db->table('admin_activities a')
-            ->select('a.*, u.username')
+            ->select('a.*, u.username, u.signature')
             ->join('users u', 'u.id = a.user_id')
             ->join('auth_groups_users agu', 'agu.user_id = u.id')
             ->where('agu.group_id', 1);
 
-        // Apply date range filter if provided
         if ($startDate && $endDate) {
             $builder->where('a.activity_date >=', $startDate)
                 ->where('a.activity_date <=', $endDate);
         }
 
-        // Apply user filter if provided and not 'all'
         if ($selectedUser && $selectedUser !== 'all') {
             if (is_array($selectedUser)) {
                 $builder->whereIn('a.user_id', $selectedUser);

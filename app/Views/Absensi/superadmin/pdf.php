@@ -390,6 +390,6 @@
         endif;
     endforeach;
     ?>
-</body>
+</body>0
 
 </html>

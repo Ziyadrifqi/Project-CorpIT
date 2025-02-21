@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2025 at 08:24 AM
+-- Generation Time: Feb 21, 2025 at 05:04 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -114,7 +114,7 @@ CREATE TABLE `admin_activities` (
 
 INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`) VALUES
 (1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-03 06:08:17', 1, '35647891', 'Rio Facrudin', '637484'),
-(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-03 09:24:13', 3, '', 'Randi Salam', '728392'),
+(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-21 08:49:29', 3, '35279302', 'Randi Salam', '728392'),
 (5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718');
 
 -- --------------------------------------------------------
@@ -724,7 +724,21 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (426, '::1', 'syakira02@gmail.com', 5, '2025-02-16 02:29:25', 1),
 (427, '::1', 'ziyad@gmail.com', 1, '2025-02-17 03:36:28', 1),
 (428, '::1', 'ziyad@gmail.com', 1, '2025-02-18 07:21:08', 1),
-(429, '::1', 'syakira02@gmail.com', 5, '2025-02-18 07:22:30', 1);
+(429, '::1', 'syakira02@gmail.com', 5, '2025-02-18 07:22:30', 1),
+(430, '::1', 'ziyad@gmail.com', 1, '2025-02-19 01:39:50', 1),
+(431, '::1', 'syakira02@gmail.com', 5, '2025-02-19 01:40:28', 1),
+(432, '::1', 'syakira02@gmail.com', 5, '2025-02-19 03:41:04', 1),
+(433, '::1', 'ziyad@gmail.com', 1, '2025-02-19 07:15:41', 1),
+(434, '::1', 'syakira02@gmail.com', 5, '2025-02-20 01:42:08', 1),
+(435, '::1', 'ziyad@gmail.com', 1, '2025-02-20 02:13:55', 1),
+(436, '::1', 'raihan@gmail.com', 3, '2025-02-20 02:16:45', 1),
+(437, '::1', 'ziyad@gmail.com', 1, '2025-02-20 02:22:02', 1),
+(438, '::1', 'ziyad@gmail.com', 1, '2025-02-20 02:25:44', 1),
+(439, '::1', 'ziyad@gmail.com', 1, '2025-02-20 06:43:05', 1),
+(440, '::1', 'syakira02@gmail.com', 5, '2025-02-20 07:54:47', 1),
+(441, '::1', 'syakira02@gmail.com', 5, '2025-02-20 12:57:27', 1),
+(442, '::1', 'syakira02@gmail.com', 5, '2025-02-21 01:37:46', 1),
+(443, '::1', 'ziyad@gmail.com', 1, '2025-02-21 03:29:14', 1);
 
 -- --------------------------------------------------------
 
@@ -920,8 +934,7 @@ CREATE TABLE `fileuploads` (
 INSERT INTO `fileuploads` (`id`, `title`, `description`, `author`, `file_path`, `created_at`, `updated_at`, `status`, `type`) VALUES
 (1, 'Pengumuman Indosat Run', 'saat ini', 'ZiyadRifqi', 'public/fileupload/1731239156_9185c19da18efa4ab3c4.pdf', '2024-11-10 11:45:56', '2025-01-30 14:45:49', 'published', 'internal'),
 (6, 'Agenda Bulan Pertengahan November 2024', 'Edaran', 'Ziyad', 'public/fileupload/1732799064_1d5c42a3dcdf46531c48.pdf', '2024-11-15 08:08:35', '2025-01-30 14:45:57', 'published', 'internal'),
-(11, 'Pentingnya Transformasi Bisnis Digital​​ perusahaan', 'Melakukan kegiatan yang sangat penting untuk perusahaan ', 'minji', 'public/fileupload/1733819087_f403560aa78066b3a9f7.pdf', '2024-12-10 08:24:47', '2025-02-04 02:54:49', 'published', 'public'),
-(13, 'pendaftaran', 'Melakukan kegiatan', 'ziyadr', 'public/fileupload/1738639839_c25b0142129bce0247d0.pdf', '2025-02-04 03:30:39', '2025-02-04 05:23:13', 'published', 'public');
+(11, 'Pentingnya Transformasi Bisnis Digital​​ perusahaan', 'Melakukan kegiatan yang sangat penting untuk perusahaan ', 'minji', 'public/fileupload/1733819087_f403560aa78066b3a9f7.pdf', '2024-12-10 08:24:47', '2025-02-04 02:54:49', 'published', 'public');
 
 -- --------------------------------------------------------
 
@@ -943,8 +956,7 @@ INSERT INTO `file_categories` (`id`, `fileuploads_id`, `category_id`) VALUES
 (24, 6, 3),
 (25, 1, 3),
 (32, 11, 3),
-(33, 11, 4),
-(41, 13, 4);
+(33, 11, 4);
 
 -- --------------------------------------------------------
 
@@ -971,8 +983,7 @@ INSERT INTO `file_distributions` (`id`, `target_id`, `target_type`, `created_at`
 (59, 2, 'department', '2025-02-04 02:54:34', 11),
 (60, 2, 'sub_department', '2025-02-04 02:54:34', 11),
 (61, 2, 'directorate', '2025-02-03 20:30:39', NULL),
-(62, 4, 'sub_department', '2025-02-03 20:30:39', NULL),
-(66, 5, 'sub_department', '2025-02-04 05:23:01', 13);
+(62, 4, 'sub_department', '2025-02-03 20:30:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -1004,7 +1015,12 @@ INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_
 (4, 'GUEST14022025_004', 1, 1, '2025-02-14 16:47:09', '2025-02-14 16:47:09', 'ziyad@gmail.com', '082678394443', '2025-02-17 16:47:09', 'zizz23'),
 (5, 'GUEST15022025_005', 1, 1, '2025-02-15 08:49:52', '2025-02-15 08:49:52', 'aangsaiful@gmail.com', '088264908349', '2025-02-16 08:49:52', 'nggaa02'),
 (6, 'GUEST17022025_006', 1, 1, '2025-02-17 10:38:16', '2025-02-17 10:38:16', 'ziyad@gmail.com', '088280764865', '2025-02-19 10:38:16', 'zizi0232'),
-(7, 'GUEST18022025_001', 1, 1, '2025-02-18 14:23:44', '2025-02-18 14:23:44', 'syakira@gmail.com', '082676372443', '2025-02-19 14:23:44', 'arik123');
+(7, 'GUEST18022025_001', 1, 1, '2025-02-18 14:23:44', '2025-02-18 14:23:44', 'syakira@gmail.com', '082676372443', '2025-02-19 14:23:44', 'arik123'),
+(8, 'GUEST19022025_001', 1, 1, '2025-02-19 09:34:12', '2025-02-19 09:34:12', 'annindita@gmail.com', '088280197652', '2025-02-21 09:34:12', 'didit19'),
+(9, 'GUEST19022025_002', 3, 1, '2025-02-19 16:30:21', '2025-02-19 16:30:48', 'annindita@gmail.com', '088280197652', '2025-02-24 16:30:58', 'didit20'),
+(10, 'GUEST19022025_003', 3, 1, '2025-02-19 12:27:22', '2025-02-19 12:27:31', 'annindita@gmail.com', '088280197652', '2025-02-21 12:27:47', 'didit19'),
+(11, 'GUEST19022025_004', 1, 1, '2025-02-19 16:02:52', '2025-02-19 16:02:52', 'aangsaiful@gmail.com', '088280764865', '2025-02-24 16:02:52', 'angspul'),
+(12, 'GUEST20022025_005', 1, 1, '2025-02-20 09:14:33', '2025-02-20 09:14:33', 'ziyad@gmail.com', '088282907652', '2025-02-22 09:14:33', 'zizi1234');
 
 -- --------------------------------------------------------
 
@@ -1052,11 +1068,12 @@ INSERT INTO `menus` (`id`, `name`, `icon`, `url`, `parent_id`, `order_pos`, `is_
 (24, 'Category Management', 'fas fa-th-list', NULL, NULL, 1, 1, '2024-11-22 08:42:32', '2024-11-24 13:08:34'),
 (25, 'Activity', NULL, NULL, NULL, 1, 1, '2025-01-14 02:41:40', '2025-01-14 02:41:40'),
 (26, 'Overtime Activity Manual', 'fas fa-tasks', 'admin/activity', 19, 4, 1, '2025-01-14 02:44:28', '2025-02-05 01:32:01'),
-(27, 'Admin Activities History', 'fas fa-clipboard-list', 'activity/history', 19, 4, 1, '2025-01-14 09:29:34', '2025-02-01 14:17:57'),
+(27, 'Monitoring Overtime', 'fas fa-clipboard-list', 'activity/history', 19, 4, 1, '2025-01-14 09:29:34', '2025-02-20 03:02:06'),
 (28, 'HOME', 'fas fa-home', 'user/', NULL, 0, 1, '2025-02-01 14:13:25', '2025-02-01 14:14:51'),
 (29, 'Manajemen Visitor', NULL, NULL, NULL, 2, 1, '2025-02-04 08:32:06', '2025-02-04 08:35:03'),
 (31, 'Guest Visitor', 'fas fa-users', 'guest-visitor', 29, 1, 1, '2025-02-04 08:32:50', '2025-02-04 08:32:50'),
-(33, 'Guest Visitor history', 'fas fa-redo', 'guest-visitor/history', 29, 1, 1, '2025-02-12 02:51:49', '2025-02-12 02:58:47');
+(33, 'Guest Visitor history', 'fas fa-redo', 'guest-visitor/history', 29, 1, 1, '2025-02-12 02:51:49', '2025-02-12 02:58:47'),
+(34, 'Monitoring Overtime Admin', 'fas fa-history', '/overtime', 19, 4, NULL, '2025-02-19 04:16:29', '2025-02-20 03:01:18');
 
 -- --------------------------------------------------------
 
@@ -1159,7 +1176,8 @@ INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`, `created_at`) VALUES
 (35, 1, 29, '2025-02-04 08:33:24'),
 (36, 1, 31, '2025-02-04 08:33:24'),
 (38, 3, 29, '2025-02-12 02:53:20'),
-(39, 3, 33, '2025-02-12 02:53:20');
+(39, 3, 33, '2025-02-12 02:53:20'),
+(40, 3, 34, '2025-02-19 04:16:50');
 
 -- --------------------------------------------------------
 
@@ -1214,7 +1232,10 @@ INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `crea
 (14, '225uCCE5fAgFkCT67isvQMA4Y9zARZ0a', 'h64NqlgMwHoljLUMDkx11w5UZOOkEvit', 7200, '2025-02-14 16:47:06', '2025-02-14 16:47:06'),
 (15, '77x4C5s6a5la5r41Nr1k6czH69xBBw9l', 'wFmAqBXs145LUz50PNnlLNjQ7M9Cmaby', 7200, '2025-02-15 08:49:49', '2025-02-15 08:49:49'),
 (16, 'GSXeOtmKIDJbr9orC4vE2qX23gtmDUNI', '2Ima4EuJ3hHahuLmslA97Fd6neTUZh0S', 7200, '2025-02-17 10:38:12', '2025-02-17 10:38:12'),
-(17, 'xjc3Z0DRykHaSf62zFmudWNmmTU4rdJe', 'BVDaYBiNAZn1Bundki6cyLMpTPl1NvUk', 7200, '2025-02-18 14:23:40', '2025-02-18 14:23:40');
+(17, 'xjc3Z0DRykHaSf62zFmudWNmmTU4rdJe', 'BVDaYBiNAZn1Bundki6cyLMpTPl1NvUk', 7200, '2025-02-18 14:23:40', '2025-02-18 14:23:40'),
+(18, 'KjaRdoDqJ1rAJ8pa08MPXewHreJJe24v', 'Z5hEh6frD9mg4BxnHnK8mROVtNjta1eZ', 7200, '2025-02-19 09:34:09', '2025-02-19 09:34:09'),
+(19, '7t86YEeHsqrSTvkbazOWp0SdpE6FB9kw', 'KdMk2colK2WAMK2SYnqIWMJFRvt091NK', 7200, '2025-02-19 15:31:22', '2025-02-19 16:02:51'),
+(20, 'SjOyS5Iiw25ieTmoSeCtjiAlPskPzwkU', 'Oc9zsLPhwPEV1L0n9YASVbK0W6SkBmYo', 7200, '2025-02-20 09:14:31', '2025-02-20 09:14:31');
 
 -- --------------------------------------------------------
 
@@ -1257,7 +1278,7 @@ INSERT INTO `users` (`id`, `email`, `username`, `fullname`, `initial`, `position
 (1, 'ziyad@gmail.com', 'ZiyadRifqi', 'ZiyadRifqi Permana', NULL, 'Programmer', '1731054156_e3b6a61f7842719fc65b.jpg', '$2y$10$uJvfrqNeXtBFqI4jMWctqOM0C0rurnq5IylD48a5dWhTPyJoEa75O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-18 02:15:11', '2024-10-18 02:15:11', NULL, 1, 1, 1, 1, '1_20250201_144649.png'),
 (2, 'Rassya@gmail.com', 'Rassya', 'Rassya putra', 'RSY', 'Manager', 'default.png', '$2y$10$BG2KPonEID0IuaaVqTxDkO7RcVoHGIoN/bbmqS5lyVQFgMsbavUgK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-18 02:32:13', '2024-10-18 02:32:13', NULL, 1, 1, 1, 1, NULL),
 (3, 'raihan@gmail.com', 'Raihan Putra', 'Raihan Putra', 'RPA', 'Officer', 'default.png', '$2y$10$btcpZQMRF0Qh5HxR5dPf2.NI5gfDdJkd/iUPqIpI16gDu5fZKWn0O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-29 06:36:27', '2024-10-29 06:36:27', NULL, 2, 2, 3, 3, NULL),
-(5, 'syakira02@gmail.com', 'syakira', NULL, NULL, NULL, 'default.png', '$2y$10$w7jofpeiSGUtmwcb52W7Z.hAFb2htwwyutPmjzla0zEptNmPOFZXe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-11-18 03:52:45', '2024-11-18 03:52:45', NULL, NULL, NULL, NULL, NULL, NULL);
+(5, 'syakira02@gmail.com', 'syakira', NULL, NULL, NULL, 'default.png', '$2y$10$w7jofpeiSGUtmwcb52W7Z.hAFb2htwwyutPmjzla0zEptNmPOFZXe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-11-18 03:52:45', '2024-11-18 03:52:45', NULL, NULL, NULL, NULL, NULL, '5_20250221_024411.png');
 
 --
 -- Indexes for dumped tables
@@ -1538,7 +1559,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=430;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=444;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1610,13 +1631,13 @@ ALTER TABLE `file_distributions`
 -- AUTO_INCREMENT for table `guest_visitors`
 --
 ALTER TABLE `guest_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1634,7 +1655,7 @@ ALTER TABLE `monitoring_tickets`
 -- AUTO_INCREMENT for table `role_menus`
 --
 ALTER TABLE `role_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `sub_departments`
@@ -1646,7 +1667,7 @@ ALTER TABLE `sub_departments`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`

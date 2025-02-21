@@ -14,11 +14,13 @@ class AdminActivity extends BaseController
 {
     protected $activityModel;
     protected $db;
+    protected $userModel;
 
     public function __construct()
     {
         $this->activityModel = new AdminActivityModel();
         $this->db = \Config\Database::connect();
+        $this->userModel = new UserModel();
     }
 
     public function index()
@@ -481,7 +483,7 @@ class AdminActivity extends BaseController
         exit();
     }
 
-    public function exportsuper($type = 'excel')
+    public function exportsuper($type = 'pdf')
     {
         if (!logged_in()) {
             return redirect()->to('/login');
@@ -490,186 +492,167 @@ class AdminActivity extends BaseController
         $month = $this->request->getGet('month');
         $year = $this->request->getGet('year') ?? date('Y');
         $selectedUsers = $this->request->getGet('user');
+        $isSigned = $this->request->getGet('signed') === 'true';
 
-        // Calculate start and end dates for the filter
-        $startDate = null;
-        $endDate = null;
-        if ($month) {
-            $startDate = "$year-$month-01";
-            $endDate = date('Y-m-t', strtotime($startDate));
+        // Validasi input
+        if (!$month || !$year) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Month and year are required.'
+            ]);
         }
+
+        // Calculate start and end dates
+        $startDate = "$year-$month-01";
+        $endDate = date('Y-m-t', strtotime($startDate));
 
         // Get filtered activities
         $selectedUsersArray = $selectedUsers === 'all' ? null : $selectedUsers;
         $activities = $this->activityModel->getAllAdminActivities($startDate, $endDate, $selectedUsersArray);
-        // Tambahkan total lembur untuk setiap aktivitas
-        foreach ($activities as &$activity) {
-            $activity['total_lembur'] = $this->calculateTotalLembur(
-                $activity['activity_date'] . ' ' . $activity['start_time'],
-                $activity['activity_date'] . ' ' . $activity['end_time']
-            );
-        }
-        // Handle empty results
+
         if (empty($activities)) {
-            session()->setFlashdata('error', 'No data found for the selected filters.');
-            return redirect()->back();
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'No data found for the selected filters.'
+            ]);
         }
 
-        if ($type === 'excel') {
-            return $this->exportHistoryExcel($activities, $month, $year);
-        } else {
-            return $this->exportHistoryPdf($activities, $month, $year);
+        // Group activities by user
+        $groupedActivities = $this->groupActivitiesByUser($activities);
+
+        // Handle AJAX preview request
+        if ($this->request->isAJAX()) {
+            return $this->previewHistoryPdf($groupedActivities, $month, $year, $isSigned);
+        }
+
+        // For non-AJAX requests, download the PDF
+        return $this->downloadHistoryPdf($groupedActivities, $month, $year, $isSigned);
+    }
+
+    private function previewHistoryPdf($groupedActivities, $month, $year, $isSigned)
+    {
+        try {
+            // Generate PDF content
+            $mpdf = new \Mpdf\Mpdf([
+                'margin_left' => 15,
+                'margin_right' => 15,
+                'margin_top' => 20,
+                'margin_bottom' => 20,
+                'margin_header' => 10,
+                'margin_footer' => 10
+            ]);
+
+            // Generate HTML content
+            $htmlContent = $this->generatePdfContent($groupedActivities, $month, $year, $isSigned);
+
+            // Write HTML to PDF
+            $mpdf->WriteHTML($htmlContent);
+
+            // Output PDF as base64 string
+            $pdfContent = $mpdf->Output('', 'S');
+
+            return $this->response->setJSON([
+                'success' => true,
+                'pdfData' => base64_encode($pdfContent)
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error generating PDF: ' . $e->getMessage()
+            ]);
         }
     }
 
-    private function exportHistoryExcel($activities, $month, $year)
+    public function sign()
     {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Set document properties
-        $spreadsheet->getProperties()
-            ->setCreator(user()->username)
-            ->setLastModifiedBy(user()->username)
-            ->setTitle('Activity History Report')
-            ->setSubject('Activity History Report')
-            ->setDescription('Activity History Report generated on ' . date('Y-m-d H:i:s'));
-
-        // Add header
-        $sheet->setCellValue('A1', 'PT. APLINUSA LINTASARTA');
-        $sheet->setCellValue('A2', 'ACTIVITY HISTORY REPORT');
-        $sheet->setCellValue('A3', 'Period: ' . ($month ? date('F', mktime(0, 0, 0, $month, 1)) . ' ' . $year : $year));
-        $sheet->setCellValue('A4', 'Generated: ' . date('d F Y'));
-        $sheet->setCellValue('A5', 'Total Activities: ' . count($activities));
-
-        // Merge cells for header
-        $sheet->mergeCells('A1:L1');
-        $sheet->mergeCells('A2:L2');
-        $sheet->mergeCells('A3:L3');
-        $sheet->mergeCells('A4:L4');
-        $sheet->mergeCells('A5:L5');
-
-        // Style the header
-        $headerStyle = [
-            'font' => [
-                'bold' => true,
-                'size' => 14
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
-            ]
-        ];
-        $sheet->getStyle('A1:L5')->applyFromArray($headerStyle);
-
-        // Add table headers
-        $headers = ['No', 'Date', 'User', 'nik', 'pbr_tugas', 'no_ticket', 'Task', 'Description', 'Location', 'Start Time', 'End Time', 'Total Lembur'];
-        $col = 'A';
-        $row = 11;
-        foreach ($headers as $header) {
-            $sheet->setCellValue($col++ . $row, $header);
+        if (!$this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Invalid request']);
         }
 
-        // Style the table headers
-        $tableHeaderStyle = [
-            'font' => ['bold' => true],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'CCCCCC']
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
-            ]
-        ];
-        $sheet->getStyle('A7:L7')->applyFromArray($tableHeaderStyle);
+        $currentUser = user();
+        if (!$currentUser) {
+            return $this->response->setJSON(['success' => false, 'message' => 'User not found']);
+        }
 
-        // Add data or "No Data" message
-        $row = 12;
-        if (empty($activities)) {
-            $sheet->mergeCells('A' . $row . ':L' . $row);
-            $sheet->setCellValue('A' . $row, 'No activities found for the selected period and filters');
-            $sheet->getStyle('A' . $row)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-        } else {
-            $i = 1;
-            foreach ($activities as $activity) {
-                $total_lembur = $this->calculateTotalLembur(
-                    $activity['activity_date'] . ' ' . $activity['start_time'],
-                    $activity['activity_date'] . ' ' . $activity['end_time']
-                );
+        if (!$currentUser->signature || !file_exists(FCPATH . 'img/ttd/' . $currentUser->signature)) {
+            return $this->response->setJSON(['success' => false, 'message' => 'Signature not found']);
+        }
 
-                $sheet->setCellValue('A' . $row, $i++);
-                $sheet->setCellValue('B' . $row, date('d/m/Y', strtotime($activity['activity_date'])));
-                $sheet->setCellValue('C' . $row, $activity['username']);
-                $sheet->setCellValue('D' . $row, $activity['nik']);
-                $sheet->setCellValue('E' . $row, $activity['pbr_tugas']);
-                $sheet->setCellValue('F' . $row, $activity['no_tiket']);
-                $sheet->setCellValue('G' . $row, $activity['task']);
-                $sheet->setCellValue('H' . $row, $activity['description']);
-                $sheet->setCellValue('I' . $row, $activity['location']);
-                $sheet->setCellValue('J' . $row, date('H:i', strtotime($activity['start_time'])));
-                $sheet->setCellValue('K' . $row, date('H:i', strtotime($activity['end_time'])));
-                $sheet->setCellValue('L' . $row, $total_lembur);
+        try {
+            $month = $this->request->getGet('month');
+            $year = $this->request->getGet('year');
+            $selectedUser = $this->request->getGet('user');
 
-                $row++;
+            // Validate required parameters
+            if (!$month || !$year) {
+                return $this->response->setJSON(['success' => false, 'message' => 'Month and year are required']);
             }
+
+            $startDate = "$year-$month-01";
+            $endDate = date('Y-m-t', strtotime($startDate));
+
+            // Get activities
+            $activities = $this->activityModel->getAllAdminActivities($startDate, $endDate, $selectedUser);
+            if (empty($activities)) {
+                return $this->response->setJSON(['success' => false, 'message' => 'No data found']);
+            }
+
+            // Group activities
+            $groupedActivities = $this->groupActivitiesByUser($activities);
+
+            // Generate signed PDF
+            $mpdf = new \Mpdf\Mpdf([
+                'margin_left' => 15,
+                'margin_right' => 15,
+                'margin_top' => 20,
+                'margin_bottom' => 20,
+                'margin_header' => 10,
+                'margin_footer' => 10
+            ]);
+
+            $htmlContent = $this->generatePdfContent($groupedActivities, $month, $year, true);
+            $mpdf->WriteHTML($htmlContent);
+            $pdfContent = $mpdf->Output('', 'S');
+
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Document signed successfully',
+                'pdfData' => base64_encode($pdfContent)
+            ]);
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'Error signing document: ' . $e->getMessage()
+            ]);
         }
-        // Auto-size columns
-        foreach (range('A', 'L') as $col) {
-            $sheet->getColumnDimension($col)->setAutoSize(true);
-        }
-
-        // Create Excel file
-        $writer = new Xlsx($spreadsheet);
-        $filename = 'activity_history_' . date('Y-m-d_H-i-s') . '.xlsx';
-
-        // Set headers for download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
-        $writer->save('php://output');
-        exit();
     }
 
-    private function exportHistoryPdf($activities, $month, $year)
+    private function groupActivitiesByUser($activities)
     {
-        // Get user details with joined tables
-        $userModel = new \App\Models\UserModel();
-        $userData = $userModel->select('users.*, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
-            ->join('departments', 'departments.id = users.department_id', 'left')
-            ->join('divisions', 'divisions.id = users.division_id', 'left')
-            ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
-            ->where('users.id', user_id())
-            ->first();
-        // Hitung total lembur
-        $totalLemburMinutes = 0;
+        $grouped = [];
         foreach ($activities as $activity) {
-            if (isset($activity['start_time']) && isset($activity['end_time'])) {
-                $start = strtotime($activity['start_time']);
-                $end = strtotime($activity['end_time']);
-                $diffMinutes = ($end - $start) / 60;
-                $totalLemburMinutes += $diffMinutes;
-            }
-        }
+            $userId = $activity['user_id'];
+            if (!isset($grouped[$userId])) {
+                // Get user details for each unique user
+                $userDetails = $this->userModel->select('users.*, users.signature, users.position as user_position, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
+                    ->join('departments', 'departments.id = users.department_id', 'left')
+                    ->join('divisions', 'divisions.id = users.division_id', 'left')
+                    ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
+                    ->where('users.id', $userId)
+                    ->first();
 
-        // Format total lembur
-        $totalLemburFormatted = sprintf(
-            '%d jam %02d menit',
-            floor($totalLemburMinutes / 60),
-            $totalLemburMinutes % 60
-        );
-        // Prepare the data for the view
-        $data = [
-            'activities' => $activities,
-            'selectedMonth' => $month ? date('F Y', mktime(0, 0, 0, $month, 1, $year)) : $year,
-            'totalActivities' => count($activities),
-            'userData' => $userData,
-            'generatedDate' => date('d F Y'),
-            'totalLembur' => $totalLemburFormatted
-        ];
-        $data['logo_path'] = FCPATH . 'img/lintas.jpg';
-        // Retrieve user signature
-        $signaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
-        $data['signature_path'] = (file_exists($signaturePath) && $userData['signature']) ? $signaturePath : null;
+                $grouped[$userId] = [
+                    'userDetails' => $userDetails,
+                    'activities' => []
+                ];
+            }
+            $grouped[$userId]['activities'][] = $activity;
+        }
+        return $grouped;
+    }
+
+    private function downloadHistoryPdf($groupedActivities, $month, $year, $isSigned)
+    {
         // Load mPDF
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 15,
@@ -682,14 +665,14 @@ class AdminActivity extends BaseController
 
         // Set document properties
         $mpdf->SetTitle('Activity History Report');
-        $mpdf->SetAuthor(user()->username);
+        $mpdf->SetAuthor('PT. APLINUSA LINTASARTA');
         $mpdf->SetCreator('PT. APLINUSA LINTASARTA');
 
-        // Load the PDF view
-        $html = view('admin/activity/history_pdf', $data);
+        // Generate HTML content
+        $htmlContent = $this->generatePdfContent($groupedActivities, $month, $year, $isSigned);
 
         // Write HTML to PDF
-        $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML($htmlContent);
 
         // Set filename
         $filename = 'Activity_History_Report_' . ($month ? date('F_Y', mktime(0, 0, 0, $month, 1, $year)) : $year) . '_' . date('Y-m-d') . '.pdf';
@@ -698,6 +681,50 @@ class AdminActivity extends BaseController
         $mpdf->Output($filename, 'D');
         exit();
     }
+
+    private function generatePdfContent($groupedActivities, $month, $year, $isSigned)
+    {
+        $currentUser = user();
+        $monthYear = $month ? date('F Y', mktime(0, 0, 0, $month, 1, $year)) : $year;
+
+        foreach ($groupedActivities as $userId => $userData) {
+            // Calculate total overtime
+            $totalLemburMinutes = $this->calculateTotalOvertime($userData['activities']);
+            $totalLemburFormatted = sprintf(
+                '%d jam %02d menit',
+                floor($totalLemburMinutes / 60),
+                $totalLemburMinutes % 60
+            );
+
+            $data = [
+                'activities' => $userData['activities'],
+                'selectedMonth' => $monthYear,
+                'totalActivities' => count($userData['activities']),
+                'userData' => $userData['userDetails'],
+                'generatedDate' => date('d F Y'),
+                'totalLembur' => $totalLemburFormatted,
+                'isSigned' => $isSigned,
+                'currentUser' => $currentUser,
+                'logo_path' => FCPATH . 'img/lintas.jpg'
+            ];
+
+            return view('admin/activity/history_pdf', $data);
+        }
+    }
+
+    private function calculateTotalOvertime($activities)
+    {
+        $totalMinutes = 0;
+        foreach ($activities as $activity) {
+            if (isset($activity['start_time']) && isset($activity['end_time'])) {
+                $start = strtotime($activity['activity_date'] . ' ' . $activity['start_time']);
+                $end = strtotime($activity['activity_date'] . ' ' . $activity['end_time']);
+                $totalMinutes += ($end - $start) / 60;
+            }
+        }
+        return $totalMinutes;
+    }
+
     public function bulkUpload()
     {
         if (!logged_in()) {

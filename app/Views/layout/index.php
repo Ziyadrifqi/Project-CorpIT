@@ -101,6 +101,8 @@
         initializeDataTable('#historyactivity');
         // Inisialisasi DataTables untuk #Guest_visitor dengan teks bahasa Inggris
         initializeDataTable('#Guest_visitor');
+        // Inisialisasi DataTables untuk #overtimeTabledengan teks bahasa Inggris
+        initializeDataTable('#overtimeTable');
     });
 </script>
 

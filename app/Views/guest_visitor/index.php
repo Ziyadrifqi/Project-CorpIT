@@ -3,7 +3,7 @@
 
 <div class="container mt-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title"> <?= esc($title); ?></h3>
+        <h3 class="card-title"><?= esc($title); ?></h3>
     </div>
     <div class="card-body">
         <?php if (session()->has('success')): ?>
@@ -17,11 +17,14 @@
                 <i class="fas fa-exclamation-circle"><?= esc(session('error')) ?>
             </div>
         <?php endif ?>
+
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Guest Visitor List
-                <a href="<?= base_url('guest-visitor/create'); ?>" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Create New Visitor</a>
+                My Guest Visitor List
+                <a href="<?= base_url('guest-visitor/create'); ?>" class="btn btn-primary float-end">
+                    <i class="fas fa-plus"></i> Create New Visitor
+                </a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -34,14 +37,13 @@
                                 <th>Phone</th>
                                 <th>Status</th>
                                 <th>Created At</th>
-                                <th>Valid_until</th>
+                                <th>Valid Until</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($guests as $guest): ?>
                                 <?php
-                                // Check if current time is past valid_until
                                 $isExpired = strtotime($guest['valid_until']) < time();
                                 $statusClass = $isExpired ? 'bg-danger' : ($guest['status'] ? 'bg-success' : 'bg-danger');
                                 $statusText = $isExpired ? 'Inactive' : ($guest['status'] ? 'Active' : 'Inactive');
@@ -67,6 +69,7 @@
         </div>
     </div>
 </div>
+
 <script>
     // Auto-dismiss alerts after 5 seconds
     document.addEventListener('DOMContentLoaded', function() {
@@ -76,7 +79,7 @@
             setTimeout(() => {
                 const bsAlert = new bootstrap.Alert(alert);
                 bsAlert.close();
-            }, 5000); // 5 seconds
+            }, 5000);
         });
     });
 </script>
