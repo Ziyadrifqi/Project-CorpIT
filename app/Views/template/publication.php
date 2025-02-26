@@ -112,40 +112,6 @@
     </div>
 </section>
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
-
-<!-- Updated Custom CSS for DataTables controls -->
-<style>
-    /* Fix for select elements */
-    div.dataTables_length select {
-        width: 60px;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-        height: calc(1.5em + 0.5rem + 2px);
-        position: relative;
-        z-index: 1;
-        pointer-events: auto !important;
-        opacity: 1 !important;
-        display: inline-block !important;
-        visibility: visible !important;
-    }
-
-    /* Fix for search input */
-    div.dataTables_filter input {
-        width: 120px;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-        height: calc(1.5em + 0.5rem + 2px);
-    }
-
-    /* Fix pagination buttons */
-    ul.pagination li a {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-</style>
-
 <!-- Improved Script Section -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {

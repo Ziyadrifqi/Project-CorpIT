@@ -245,7 +245,7 @@
                     throw new Error(data.message || 'Failed to sign PDF');
                 }
 
-                // Show signed PDF
+                // After successful signing, show the signed PDF
                 await previewPdf(userId, month, true);
                 alert('Document signed successfully!');
 

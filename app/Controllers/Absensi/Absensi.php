@@ -814,8 +814,14 @@ class Absensi extends BaseController
                 throw new \Exception('User not found');
             }
 
-            if (!$currentUser->signature || !file_exists(FCPATH . 'img/ttd/' . $currentUser->signature)) {
-                throw new \Exception('Signature not found');
+            if (!$currentUser->signature) {
+                throw new \Exception('Signature not found in user profile');
+            }
+
+            // Check if signature file exists
+            $signaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
+            if (!file_exists($signaturePath)) {
+                throw new \Exception('Signature file not found: ' . $currentUser->signature);
             }
 
             // Update sign_pdf status to 1 for the selected month and user
@@ -824,22 +830,28 @@ class Absensi extends BaseController
             $startDate = date('Y-m-01', strtotime($month));
             $endDate = date('Y-m-t', strtotime($month));
 
-            // Update sign_pdf to 1 (signed) for all relevant records
-            $this->db->table('absensi')
+            // Use the model to update the database instead of direct DB access
+            $db = \Config\Database::connect();
+            $result = $db->table('absensi')
                 ->where('user_id', $userId)
                 ->where('tanggal >=', $startDate)
                 ->where('tanggal <=', $endDate)
                 ->set(['sign_pdf' => 1])
                 ->update();
 
-            // Set GET parameters for previewPdf
-            $_GET['userId'] = $jsonData['userId'];
-            $_GET['month'] = $jsonData['month'];
-            $_GET['signed'] = 'true';
+            if ($db->affectedRows() === 0) {
+                log_message('warning', 'No records updated when signing PDF');
+            }
 
-            return $this->previewPdf();
+            // Return success response with data needed for the frontend
+            return $this->response->setJSON([
+                'success' => true,
+                'message' => 'Document signed successfully',
+                'userId' => $userId,
+                'month' => $month
+            ]);
         } catch (\Exception $e) {
-            log_message('error', 'PDF Signing Error: ' . $e->getMessage());
+            log_message('error', 'PDF Signing Error: ' . $e->getMessage() . ' - ' . $e->getTraceAsString());
             return $this->response->setStatusCode(500)
                 ->setJSON([
                     'success' => false,

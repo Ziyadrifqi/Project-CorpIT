@@ -255,20 +255,13 @@
                     throw new Error(data.message);
                 }
 
-                // Create temporary link for auto-download
-                const downloadLink = document.createElement('a');
-                downloadLink.href = data.downloadUrl;
-                downloadLink.download = data.downloadUrl.split('/').pop();
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-
-                // Show success message immediately before closing modal
+                // Show success message before closing modal
                 alert('Document signed successfully!');
 
-                // Close modal after a short delay
+                // Close modal and refresh page after a short delay
                 setTimeout(() => {
                     $('#pdfPreviewModal').modal('hide');
+                    location.reload(); // Refresh halaman
                 }, 500);
 
             } catch (error) {
@@ -276,7 +269,6 @@
                 alert('Error: ' + error.message);
             }
         }
-
 
         // Event listeners
         if (signPdfBtn) {

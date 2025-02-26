@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 03:16 AM
+-- Generation Time: Feb 26, 2025 at 05:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -115,10 +115,10 @@ CREATE TABLE `admin_activities` (
 --
 
 INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`, `sign_pdf`) VALUES
-(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-25 10:14:17', 1, '35647891', 'Rio Facrudin', '637484', 0),
-(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-25 10:20:44', 3, '35279302', 'Randi Salam', '728392', 0),
+(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-26 09:55:41', 1, '35647891', 'Rio Facrudin', '637484', 0),
+(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-26 03:34:33', 3, '35279302', 'Randi Salam', '728392', 1),
 (5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718', 0),
-(24, 'monitoring', 'jakarta pusat', '17:00:00', '20:00:00', '2025-01-24', 'Melakukan monitoring', '2025-02-24 06:43:29', '2025-02-25 10:14:21', 1, '35647891', 'Randi Salam', '627382', 0);
+(24, 'monitoring', 'jakarta pusat', '17:00:00', '20:00:00', '2025-01-24', 'Melakukan monitoring', '2025-02-24 06:43:29', '2025-02-26 09:55:45', 1, '35647891', 'Randi Salam', '627382', 0);
 
 -- --------------------------------------------------------
 
@@ -764,7 +764,8 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (463, '::1', 'Rassya@gmail.com', 2, '2025-02-25 09:55:24', 1),
 (464, '::1', 'syakira02@gmail.com', 5, '2025-02-25 10:09:54', 1),
 (465, '::1', 'syakira02@gmail.com', 5, '2025-02-26 01:33:18', 1),
-(466, '::1', 'ziyad@gmail.com', 1, '2025-02-26 01:42:10', 1);
+(466, '::1', 'ziyad@gmail.com', 1, '2025-02-26 01:42:10', 1),
+(467, '::1', 'syakira02@gmail.com', 5, '2025-02-26 02:26:40', 1);
 
 -- --------------------------------------------------------
 
@@ -1049,7 +1050,8 @@ INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_
 (12, 'GUEST20022025_005', 1, 1, '2025-02-20 09:14:33', '2025-02-20 09:14:33', 'ziyad@gmail.com', '088282907652', '2025-02-22 09:14:33', 'zizi1234'),
 (13, 'GUEST21022025_001\n', 1, 1, '2025-02-21 11:07:37', '2025-02-21 11:07:37', 'Rassya@gmail.com', '082627372743', '2025-02-23 11:07:37', 'syaa21'),
 (14, 'GUEST21022025_002', 1, 1, '2025-02-21 11:12:33', '2025-02-21 11:12:33', 'annindita@gmail.com', '088280197652', '2025-02-22 11:12:33', 'ditdit21'),
-(15, 'GUEST23022025_001', 1, 1, '2025-02-23 16:29:59', '2025-02-23 16:29:59', 'ziyadrpe@gmail.com', '082678394443', '2025-02-24 16:29:59', 'zizi23');
+(15, 'GUEST23022025_001', 1, 1, '2025-02-23 16:29:59', '2025-02-23 16:29:59', 'ziyadrpe@gmail.com', '082678394443', '2025-02-24 16:29:59', 'zizi23'),
+(16, 'GUEST26022025_001', 1, 1, '2025-02-26 09:34:28', '2025-02-26 09:34:28', 'ziyadrpe@gmail.com', '088280764865', '2025-02-27 09:34:28', 'zizi1234');
 
 -- --------------------------------------------------------
 
@@ -1226,6 +1228,13 @@ CREATE TABLE `sign_pdf` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `sign_pdf`
+--
+
+INSERT INTO `sign_pdf` (`id`, `user_id`, `periode`, `name_pdf`, `created_at`, `updated_at`) VALUES
+(1, 3, 'January_2025', 'Raihan Putra_January_2025.pdf', '2025-02-25 20:34:34', '2025-02-26 03:34:34');
+
 -- --------------------------------------------------------
 
 --
@@ -1284,7 +1293,8 @@ INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `crea
 (19, '7t86YEeHsqrSTvkbazOWp0SdpE6FB9kw', 'KdMk2colK2WAMK2SYnqIWMJFRvt091NK', 7200, '2025-02-19 15:31:22', '2025-02-19 16:02:51'),
 (20, 'SjOyS5Iiw25ieTmoSeCtjiAlPskPzwkU', 'Oc9zsLPhwPEV1L0n9YASVbK0W6SkBmYo', 7200, '2025-02-20 09:14:31', '2025-02-20 09:14:31'),
 (21, '1NXrJz384NpcD3zj7pWmye25vWhU59ID', 'CcaCydRfqdEG7MbPHu3K4m82gauNpKlG', 7200, '2025-02-21 11:07:33', '2025-02-21 11:12:28'),
-(22, 'uVexHdRmz6yNv23pfsYtmVUhKA9kLY3Z', '750x5MfIeuLYrAOUmXrqitznq9HkQ0ZQ', 7200, '2025-02-23 16:29:55', '2025-02-23 16:29:55');
+(22, 'uVexHdRmz6yNv23pfsYtmVUhKA9kLY3Z', '750x5MfIeuLYrAOUmXrqitznq9HkQ0ZQ', 7200, '2025-02-23 16:29:55', '2025-02-23 16:29:55'),
+(23, '63w6NckAn38rA2qR64tVjo0R0WDGdbL6', '5mZauh6SkK6ncaTp7DTgNh6xkSmlSflp', 7200, '2025-02-26 09:34:23', '2025-02-26 09:34:23');
 
 -- --------------------------------------------------------
 
@@ -1615,7 +1625,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=467;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1687,7 +1697,7 @@ ALTER TABLE `file_distributions`
 -- AUTO_INCREMENT for table `guest_visitors`
 --
 ALTER TABLE `guest_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -1717,7 +1727,7 @@ ALTER TABLE `role_menus`
 -- AUTO_INCREMENT for table `sign_pdf`
 --
 ALTER TABLE `sign_pdf`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sub_departments`
@@ -1729,7 +1739,7 @@ ALTER TABLE `sub_departments`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
