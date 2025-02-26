@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 05:04 AM
+-- Generation Time: Feb 26, 2025 at 03:16 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,28 +42,29 @@ CREATE TABLE `absensi` (
   `kegiatan_harian` text DEFAULT NULL,
   `no_tiket` varchar(50) DEFAULT NULL,
   `nik` varchar(20) NOT NULL,
-  `pbr_tugas` varchar(100) NOT NULL
+  `pbr_tugas` varchar(100) NOT NULL,
+  `sign_pdf` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `absensi`
 --
 
-INSERT INTO `absensi` (`id`, `user_id`, `tanggal`, `jam_masuk`, `jam_keluar`, `tanggal_keluar`, `status`, `created_at`, `updated_at`, `category_id`, `judul_kegiatan`, `kegiatan_harian`, `no_tiket`, `nik`, `pbr_tugas`) VALUES
-(21, 1, '2024-11-19', '12:22:27', '16:07:21', '2024-11-19', 'pulang', '2024-11-19 12:22:27', '2024-11-19 16:07:21', 2, 'lembur', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '020202', '', ''),
-(38, 1, '2024-11-20', '16:40:00', '02:00:00', '2024-11-21', 'pulang', '2024-11-21 09:25:22', '2024-11-21 09:32:21', 2, 'Lembur Kegiatan ', 'Hari ini melakukan monitoring', '123456', '', ''),
-(44, 1, '2024-11-21', '16:35:59', '19:41:14', '2024-11-21', 'pulang', '2024-11-21 16:35:22', '2024-11-21 19:41:14', 1, 'Lembur Kegiatan', 'Monitoring website', '124567', '', ''),
-(45, 1, '2024-11-21', '19:46:48', '01:00:00', '2024-11-22', 'pulang', '2024-11-21 19:42:11', '2024-11-22 07:53:40', 1, 'Monitoring', 'Melakukan Kegiatan Monitoring website', '162726', '', ''),
-(48, 1, '2024-11-22', '10:56:49', '10:58:40', '2024-11-22', 'pulang', '2024-11-22 10:56:39', '2024-11-22 10:58:40', 2, 'Monitoring Website', 'Melakukan monitoring', '172728', '', ''),
-(49, 1, '2024-11-24', '20:03:19', '22:00:00', '2024-11-24', 'pulang', '2024-11-24 20:03:12', '2024-11-26 10:49:13', 2, 'Monitoring Website 3', 'Hari ini melakukan monitoring', '826382', '', ''),
-(50, 1, '2024-11-26', '22:41:50', '01:00:00', '2024-11-27', 'pulang', '2024-11-26 22:41:43', '2024-11-28 08:22:09', 2, 'Monitoring Website 2', 'Melakukan monitoring', '737793', '', ''),
-(53, 1, '2024-12-06', '10:14:56', '22:00:00', '2024-12-06', 'pulang', '2024-12-06 10:14:48', '2024-12-09 13:36:28', 2, 'Monitoring aktivitas website', 'melakukan monitoring ', '263729', '', ''),
-(54, 1, '2024-12-09', '13:40:21', '15:00:00', '2024-12-09', 'pulang', '2024-12-09 13:40:09', '2024-12-10 10:15:39', 1, 'Monitoring aktivitas website', 'melakukan monitoring', '393648', '', ''),
-(55, 1, '2024-12-10', '15:16:37', '16:30:00', '2024-12-10', 'pulang', '2024-12-10 15:16:29', '2024-12-11 08:57:06', 1, 'Review website', 'melakukan kegiatan review', '736384', '', ''),
-(56, 1, '2024-12-13', '09:11:19', '19:00:00', '2024-12-13', 'pulang', '2024-12-13 09:10:50', '2024-12-18 16:29:01', 1, 'Review website', 'Melakukan kegiatan monitoring pada website', '726382', '', ''),
-(57, 1, '2025-01-23', '09:37:27', '10:47:49', '2025-01-23', 'pulang', '2025-01-23 09:36:44', '2025-01-23 10:47:49', 2, 'Melakukan proses billing', 'Melakukan proses billing', '739249', '', ''),
-(58, 1, '2025-02-03', '13:32:24', '13:55:21', '2025-02-03', 'pulang', '2025-02-03 13:32:14', '2025-02-03 13:55:21', 2, 'Monitoring aktivitas website', 'Melakukan Proses billing', '202718', '35647891', 'Randi Salam'),
-(59, 3, '2025-02-03', '14:37:09', '14:39:43', '2025-02-03', 'pulang', '2025-02-03 14:37:01', '2025-02-03 14:39:43', 2, 'Billing', 'Melakukan Billing', '262739', '72839929', 'Rio Facrudin');
+INSERT INTO `absensi` (`id`, `user_id`, `tanggal`, `jam_masuk`, `jam_keluar`, `tanggal_keluar`, `status`, `created_at`, `updated_at`, `category_id`, `judul_kegiatan`, `kegiatan_harian`, `no_tiket`, `nik`, `pbr_tugas`, `sign_pdf`) VALUES
+(21, 1, '2024-11-19', '12:22:27', '16:07:21', '2024-11-19', 'pulang', '2024-11-19 12:22:27', '2024-11-19 16:07:21', 2, 'lembur', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '020202', '', '', 0),
+(38, 1, '2024-11-20', '16:40:00', '02:00:00', '2024-11-21', 'pulang', '2024-11-21 09:25:22', '2024-11-21 09:32:21', 2, 'Lembur Kegiatan ', 'Hari ini melakukan monitoring', '123456', '', '', 0),
+(44, 1, '2024-11-21', '16:35:59', '19:41:14', '2024-11-21', 'pulang', '2024-11-21 16:35:22', '2024-11-21 19:41:14', 1, 'Lembur Kegiatan', 'Monitoring website', '124567', '', '', 0),
+(45, 1, '2024-11-21', '19:46:48', '01:00:00', '2024-11-22', 'pulang', '2024-11-21 19:42:11', '2024-11-22 07:53:40', 1, 'Monitoring', 'Melakukan Kegiatan Monitoring website', '162726', '', '', 0),
+(48, 1, '2024-11-22', '10:56:49', '10:58:40', '2024-11-22', 'pulang', '2024-11-22 10:56:39', '2024-11-22 10:58:40', 2, 'Monitoring Website', 'Melakukan monitoring', '172728', '', '', 0),
+(49, 1, '2024-11-24', '20:03:19', '22:00:00', '2024-11-24', 'pulang', '2024-11-24 20:03:12', '2024-11-26 10:49:13', 2, 'Monitoring Website 3', 'Hari ini melakukan monitoring', '826382', '', '', 0),
+(50, 1, '2024-11-26', '22:41:50', '01:00:00', '2024-11-27', 'pulang', '2024-11-26 22:41:43', '2024-11-28 08:22:09', 2, 'Monitoring Website 2', 'Melakukan monitoring', '737793', '', '', 0),
+(53, 1, '2024-12-06', '10:14:56', '22:00:00', '2024-12-06', 'pulang', '2024-12-06 10:14:48', '2024-12-09 13:36:28', 2, 'Monitoring aktivitas website', 'melakukan monitoring ', '263729', '', '', 0),
+(54, 1, '2024-12-09', '13:40:21', '15:00:00', '2024-12-09', 'pulang', '2024-12-09 13:40:09', '2024-12-10 10:15:39', 1, 'Monitoring aktivitas website', 'melakukan monitoring', '393648', '', '', 0),
+(55, 1, '2024-12-10', '15:16:37', '16:30:00', '2024-12-10', 'pulang', '2024-12-10 15:16:29', '2024-12-11 08:57:06', 1, 'Review website', 'melakukan kegiatan review', '736384', '', '', 0),
+(56, 1, '2024-12-13', '09:11:19', '19:00:00', '2024-12-13', 'pulang', '2024-12-13 09:10:50', '2024-12-18 16:29:01', 1, 'Review website', 'Melakukan kegiatan monitoring pada website', '726382', '', '', 0),
+(57, 1, '2025-01-23', '09:37:27', '10:47:49', '2025-01-23', 'pulang', '2025-01-23 09:36:44', '2025-01-23 10:47:49', 2, 'Melakukan proses billing', 'Melakukan proses billing', '739249', '', '', 0),
+(58, 1, '2025-02-03', '13:32:24', '13:55:21', '2025-02-03', 'pulang', '2025-02-03 13:32:14', '2025-02-03 13:55:21', 2, 'Monitoring aktivitas website', 'Melakukan Proses billing', '202718', '35647891', 'Randi Salam', 0),
+(59, 3, '2025-02-03', '14:37:09', '14:39:43', '2025-02-03', 'pulang', '2025-02-03 14:37:01', '2025-02-03 14:39:43', 2, 'Billing', 'Melakukan Billing', '262739', '72839929', 'Rio Facrudin', 0);
 
 -- --------------------------------------------------------
 
@@ -105,17 +106,19 @@ CREATE TABLE `admin_activities` (
   `user_id` int(10) UNSIGNED NOT NULL,
   `nik` varchar(8) NOT NULL,
   `pbr_tugas` text NOT NULL,
-  `no_tiket` varchar(50) NOT NULL
+  `no_tiket` varchar(50) NOT NULL,
+  `sign_pdf` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin_activities`
 --
 
-INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`) VALUES
-(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-03 06:08:17', 1, '35647891', 'Rio Facrudin', '637484'),
-(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-21 08:49:29', 3, '35279302', 'Randi Salam', '728392'),
-(5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718');
+INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`, `sign_pdf`) VALUES
+(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-25 10:14:17', 1, '35647891', 'Rio Facrudin', '637484', 0),
+(3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-25 10:20:44', 3, '35279302', 'Randi Salam', '728392', 0),
+(5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-03 06:13:18', 1, '35647891', 'Randi Salam', '202718', 0),
+(24, 'monitoring', 'jakarta pusat', '17:00:00', '20:00:00', '2025-01-24', 'Melakukan monitoring', '2025-02-24 06:43:29', '2025-02-25 10:14:21', 1, '35647891', 'Randi Salam', '627382', 0);
 
 -- --------------------------------------------------------
 
@@ -738,7 +741,30 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (440, '::1', 'syakira02@gmail.com', 5, '2025-02-20 07:54:47', 1),
 (441, '::1', 'syakira02@gmail.com', 5, '2025-02-20 12:57:27', 1),
 (442, '::1', 'syakira02@gmail.com', 5, '2025-02-21 01:37:46', 1),
-(443, '::1', 'ziyad@gmail.com', 1, '2025-02-21 03:29:14', 1);
+(443, '::1', 'ziyad@gmail.com', 1, '2025-02-21 03:29:14', 1),
+(444, '::1', 'syakira02@gmail.com', 5, '2025-02-21 06:20:46', 1),
+(445, '::1', 'ziyad@gmail.com', 1, '2025-02-21 08:02:34', 1),
+(446, '::1', 'ziyad@gmail.com', 1, '2025-02-21 08:03:08', 1),
+(447, '::1', 'syakira02@gmail.com', 5, '2025-02-21 08:03:44', 1),
+(448, '::1', 'syakira02@gmail.com', 5, '2025-02-21 08:05:39', 1),
+(449, '::1', 'syakira02@gmail.com', 5, '2025-02-21 08:14:21', 1),
+(450, '::1', 'syakira02@gmail.com', 5, '2025-02-21 08:14:50', 1),
+(451, '::1', 'ziyad@gmail.com', 1, '2025-02-21 08:43:33', 1),
+(452, '::1', 'ziyad@gmail.com', 1, '2025-02-23 09:29:04', 1),
+(453, '::1', 'syakira02@gmail.com', 5, '2025-02-23 09:30:43', 1),
+(454, '::1', 'syakira02@gmail.com', 5, '2025-02-23 12:42:48', 1),
+(455, '::1', 'syakira02@gmail.com', 5, '2025-02-24 03:25:40', 1),
+(456, '::1', 'syakira02@gmail.com', 5, '2025-02-24 06:26:30', 1),
+(457, '::1', 'ziyad@gmail.com', 1, '2025-02-24 06:41:49', 1),
+(458, '::1', 'syakira02@gmail.com', 5, '2025-02-24 09:16:31', 1),
+(459, '::1', 'raihan@gmail.com', 3, '2025-02-24 10:14:08', 1),
+(460, '::1', 'syakira02@gmail.com', 5, '2025-02-25 02:27:18', 1),
+(461, '::1', 'syakira02@gmail.com', 5, '2025-02-25 07:07:44', 1),
+(462, '::1', 'ziyad@gmail.com', 1, '2025-02-25 07:42:54', 1),
+(463, '::1', 'Rassya@gmail.com', 2, '2025-02-25 09:55:24', 1),
+(464, '::1', 'syakira02@gmail.com', 5, '2025-02-25 10:09:54', 1),
+(465, '::1', 'syakira02@gmail.com', 5, '2025-02-26 01:33:18', 1),
+(466, '::1', 'ziyad@gmail.com', 1, '2025-02-26 01:42:10', 1);
 
 -- --------------------------------------------------------
 
@@ -1000,7 +1026,7 @@ CREATE TABLE `guest_visitors` (
   `updated_at` datetime DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
-  `valid_until` datetime DEFAULT NULL,
+  `valid_until` datetime DEFAULT (current_timestamp() + interval 1 day),
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -1020,7 +1046,10 @@ INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_
 (9, 'GUEST19022025_002', 3, 1, '2025-02-19 16:30:21', '2025-02-19 16:30:48', 'annindita@gmail.com', '088280197652', '2025-02-24 16:30:58', 'didit20'),
 (10, 'GUEST19022025_003', 3, 1, '2025-02-19 12:27:22', '2025-02-19 12:27:31', 'annindita@gmail.com', '088280197652', '2025-02-21 12:27:47', 'didit19'),
 (11, 'GUEST19022025_004', 1, 1, '2025-02-19 16:02:52', '2025-02-19 16:02:52', 'aangsaiful@gmail.com', '088280764865', '2025-02-24 16:02:52', 'angspul'),
-(12, 'GUEST20022025_005', 1, 1, '2025-02-20 09:14:33', '2025-02-20 09:14:33', 'ziyad@gmail.com', '088282907652', '2025-02-22 09:14:33', 'zizi1234');
+(12, 'GUEST20022025_005', 1, 1, '2025-02-20 09:14:33', '2025-02-20 09:14:33', 'ziyad@gmail.com', '088282907652', '2025-02-22 09:14:33', 'zizi1234'),
+(13, 'GUEST21022025_001\n', 1, 1, '2025-02-21 11:07:37', '2025-02-21 11:07:37', 'Rassya@gmail.com', '082627372743', '2025-02-23 11:07:37', 'syaa21'),
+(14, 'GUEST21022025_002', 1, 1, '2025-02-21 11:12:33', '2025-02-21 11:12:33', 'annindita@gmail.com', '088280197652', '2025-02-22 11:12:33', 'ditdit21'),
+(15, 'GUEST23022025_001', 1, 1, '2025-02-23 16:29:59', '2025-02-23 16:29:59', 'ziyadrpe@gmail.com', '082678394443', '2025-02-24 16:29:59', 'zizi23');
 
 -- --------------------------------------------------------
 
@@ -1073,7 +1102,9 @@ INSERT INTO `menus` (`id`, `name`, `icon`, `url`, `parent_id`, `order_pos`, `is_
 (29, 'Manajemen Visitor', NULL, NULL, NULL, 2, 1, '2025-02-04 08:32:06', '2025-02-04 08:35:03'),
 (31, 'Guest Visitor', 'fas fa-users', 'guest-visitor', 29, 1, 1, '2025-02-04 08:32:50', '2025-02-04 08:32:50'),
 (33, 'Guest Visitor history', 'fas fa-redo', 'guest-visitor/history', 29, 1, 1, '2025-02-12 02:51:49', '2025-02-12 02:58:47'),
-(34, 'Monitoring Overtime Admin', 'fas fa-history', '/overtime', 19, 4, NULL, '2025-02-19 04:16:29', '2025-02-20 03:01:18');
+(34, 'Monitoring Overtime Admin', 'fas fa-history', '/overtime', 19, 4, NULL, '2025-02-19 04:16:29', '2025-02-20 03:01:18'),
+(35, '', NULL, NULL, NULL, 0, 1, '2025-02-24 12:28:12', '2025-02-24 12:28:12'),
+(36, 'Signed Overtime Documents', 'fas fa-signature', 'admin/activity/sign', 19, 5, 1, '2025-02-24 12:28:12', '2025-02-24 12:29:27');
 
 -- --------------------------------------------------------
 
@@ -1177,7 +1208,23 @@ INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`, `created_at`) VALUES
 (36, 1, 31, '2025-02-04 08:33:24'),
 (38, 3, 29, '2025-02-12 02:53:20'),
 (39, 3, 33, '2025-02-12 02:53:20'),
-(40, 3, 34, '2025-02-19 04:16:50');
+(40, 3, 34, '2025-02-19 04:16:50'),
+(41, 3, 36, '2025-02-24 12:28:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sign_pdf`
+--
+
+CREATE TABLE `sign_pdf` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `periode` varchar(20) NOT NULL,
+  `name_pdf` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1235,7 +1282,9 @@ INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `crea
 (17, 'xjc3Z0DRykHaSf62zFmudWNmmTU4rdJe', 'BVDaYBiNAZn1Bundki6cyLMpTPl1NvUk', 7200, '2025-02-18 14:23:40', '2025-02-18 14:23:40'),
 (18, 'KjaRdoDqJ1rAJ8pa08MPXewHreJJe24v', 'Z5hEh6frD9mg4BxnHnK8mROVtNjta1eZ', 7200, '2025-02-19 09:34:09', '2025-02-19 09:34:09'),
 (19, '7t86YEeHsqrSTvkbazOWp0SdpE6FB9kw', 'KdMk2colK2WAMK2SYnqIWMJFRvt091NK', 7200, '2025-02-19 15:31:22', '2025-02-19 16:02:51'),
-(20, 'SjOyS5Iiw25ieTmoSeCtjiAlPskPzwkU', 'Oc9zsLPhwPEV1L0n9YASVbK0W6SkBmYo', 7200, '2025-02-20 09:14:31', '2025-02-20 09:14:31');
+(20, 'SjOyS5Iiw25ieTmoSeCtjiAlPskPzwkU', 'Oc9zsLPhwPEV1L0n9YASVbK0W6SkBmYo', 7200, '2025-02-20 09:14:31', '2025-02-20 09:14:31'),
+(21, '1NXrJz384NpcD3zj7pWmye25vWhU59ID', 'CcaCydRfqdEG7MbPHu3K4m82gauNpKlG', 7200, '2025-02-21 11:07:33', '2025-02-21 11:12:28'),
+(22, 'uVexHdRmz6yNv23pfsYtmVUhKA9kLY3Z', '750x5MfIeuLYrAOUmXrqitznq9HkQ0ZQ', 7200, '2025-02-23 16:29:55', '2025-02-23 16:29:55');
 
 -- --------------------------------------------------------
 
@@ -1275,10 +1324,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `fullname`, `initial`, `position`, `user_image`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`, `directorate_id`, `division_id`, `department_id`, `sub_department_id`, `signature`) VALUES
-(1, 'ziyad@gmail.com', 'ZiyadRifqi', 'ZiyadRifqi Permana', NULL, 'Programmer', '1731054156_e3b6a61f7842719fc65b.jpg', '$2y$10$uJvfrqNeXtBFqI4jMWctqOM0C0rurnq5IylD48a5dWhTPyJoEa75O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-18 02:15:11', '2024-10-18 02:15:11', NULL, 1, 1, 1, 1, '1_20250201_144649.png'),
+(1, 'ziyad@gmail.com', 'ZiyadRifqi', 'ZiyadRifqi Permana', NULL, 'Programmer', '1731054156_e3b6a61f7842719fc65b.jpg', '$2y$10$uJvfrqNeXtBFqI4jMWctqOM0C0rurnq5IylD48a5dWhTPyJoEa75O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-18 02:15:11', '2024-10-18 02:15:11', NULL, 1, 1, 1, 1, '1_20250226_014308.png'),
 (2, 'Rassya@gmail.com', 'Rassya', 'Rassya putra', 'RSY', 'Manager', 'default.png', '$2y$10$BG2KPonEID0IuaaVqTxDkO7RcVoHGIoN/bbmqS5lyVQFgMsbavUgK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-18 02:32:13', '2024-10-18 02:32:13', NULL, 1, 1, 1, 1, NULL),
-(3, 'raihan@gmail.com', 'Raihan Putra', 'Raihan Putra', 'RPA', 'Officer', 'default.png', '$2y$10$btcpZQMRF0Qh5HxR5dPf2.NI5gfDdJkd/iUPqIpI16gDu5fZKWn0O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-29 06:36:27', '2024-10-29 06:36:27', NULL, 2, 2, 3, 3, NULL),
-(5, 'syakira02@gmail.com', 'syakira', NULL, NULL, NULL, 'default.png', '$2y$10$w7jofpeiSGUtmwcb52W7Z.hAFb2htwwyutPmjzla0zEptNmPOFZXe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-11-18 03:52:45', '2024-11-18 03:52:45', NULL, NULL, NULL, NULL, NULL, '5_20250221_024411.png');
+(3, 'raihan@gmail.com', 'Raihan Putra', 'Raihan Putra', 'RPA', 'Officer', 'default.png', '$2y$10$btcpZQMRF0Qh5HxR5dPf2.NI5gfDdJkd/iUPqIpI16gDu5fZKWn0O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-29 06:36:27', '2024-10-29 06:36:27', NULL, 2, 2, 3, 3, '3_20250224_101927.png'),
+(5, 'syakira02@gmail.com', 'syakira', '', NULL, NULL, 'default.png', '$2y$10$w7jofpeiSGUtmwcb52W7Z.hAFb2htwwyutPmjzla0zEptNmPOFZXe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-11-18 03:52:45', '2024-11-18 03:52:45', NULL, NULL, NULL, NULL, NULL, '5_20250226_014251.png');
 
 --
 -- Indexes for dumped tables
@@ -1479,6 +1528,13 @@ ALTER TABLE `role_menus`
   ADD KEY `role_id` (`role_id`);
 
 --
+-- Indexes for table `sign_pdf`
+--
+ALTER TABLE `sign_pdf`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `sub_departments`
 --
 ALTER TABLE `sub_departments`
@@ -1523,7 +1579,7 @@ ALTER TABLE `absen_category`
 -- AUTO_INCREMENT for table `admin_activities`
 --
 ALTER TABLE `admin_activities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `articles`
@@ -1559,7 +1615,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=444;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=467;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1631,13 +1687,13 @@ ALTER TABLE `file_distributions`
 -- AUTO_INCREMENT for table `guest_visitors`
 --
 ALTER TABLE `guest_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1655,7 +1711,13 @@ ALTER TABLE `monitoring_tickets`
 -- AUTO_INCREMENT for table `role_menus`
 --
 ALTER TABLE `role_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `sign_pdf`
+--
+ALTER TABLE `sign_pdf`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sub_departments`
@@ -1667,7 +1729,7 @@ ALTER TABLE `sub_departments`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1788,6 +1850,12 @@ ALTER TABLE `monitoring_tickets`
 ALTER TABLE `role_menus`
   ADD CONSTRAINT `role_menus_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `role_menus_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `auth_groups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sign_pdf`
+--
+ALTER TABLE `sign_pdf`
+  ADD CONSTRAINT `sign_pdf_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `sub_departments`
