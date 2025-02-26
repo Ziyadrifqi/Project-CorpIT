@@ -64,15 +64,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="valid_days" class="form-label">Valid Days</label>
-                        <input type="number" class="form-control <?= session('errors.valid_days') ? 'is-invalid' : '' ?>"
-                            id="valid_days" name="valid_days" value="<?= old('valid_days') ?>" required min="1" max="30">
-                        <?php if (session('errors.valid_days')): ?>
-                            <div class="invalid-feedback"><?= session('errors.valid_days') ?></div>
-                        <?php endif ?>
-                        <small class="text-muted">Enter a number between 1 and 30 days</small>
-                    </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save"></i> Create Guest

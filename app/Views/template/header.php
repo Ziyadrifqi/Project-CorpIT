@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="<?php echo base_url('template/img/logo.png') ?>">
     <!--<< Bootstrap min.css >>-->
     <link rel="stylesheet" href="<?php echo base_url('template/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <!--<< All Min Css >>-->
     <link rel="stylesheet" href="<?php echo base_url('template/css/all.min.css') ?>">
     <!--<< Animate.css >>-->

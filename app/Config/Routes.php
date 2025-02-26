@@ -47,6 +47,9 @@ $routes->get('/absensi/exportExcel', 'Absensi\Absensi::exportExcel');
 $routes->get('/absensi/superadminExportExcel', 'Absensi\Absensi::superadminExportExcel');
 $routes->get('/absensi/exportPdf', 'Absensi\Absensi::exportPdf');
 $routes->get('/absensi/exportPdfsuper', 'Absensi\Absensi::exportPdfsuper');
+$routes->get('/absensi/previewPdf', 'Absensi\Absensi::previewPdf');
+$routes->post('/absensi/signPdf', 'Absensi\Absensi::signPdf');
+$routes->get('/absensi/superadmin/history', 'Absensi\Absensi::superadminHistory');
 
 //categories absensi yang dicontrol dari superadmin
 $routes->get('/Absensi/categories', 'Absensi\AbsenCategory::index');
@@ -56,7 +59,6 @@ $routes->get('/Absensi/categories/edit/(:num)', 'Absensi\AbsenCategory::edit/$1'
 $routes->post('/Absensi/categories/update/(:num)', 'Absensi\AbsenCategory::update/$1');
 $routes->post('/Absensi/categories/delete/(:num)', 'Absensi\AbsenCategory::delete/$1');
 
-$routes->get('/overtime', 'Absensi\OvertimeMonitoringController::index');
 
 //halaman untuk user list
 $routes->get('/admin', 'Admin::index',);
@@ -153,6 +155,8 @@ $routes->group('admin', function ($routes) {
         $routes->post('sign', 'Activity\AdminActivity::sign');
         $routes->get('signed/(:num)/(:num)/(:num)', 'Activity\AdminActivity::viewSignedDocument/$1/$2/$3');
     });
+
+    $routes->get('activity/sign', 'SignPdfController::index');
 });
 
 $routes->get('activity/history', 'Activity\AdminActivity::history'); //halaman history tracking activity di superadmin

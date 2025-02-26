@@ -33,8 +33,9 @@
         <div class="row g-4">
             <!-- Main Content -->
             <div class="col-12 col-lg-8">
+                <!-- Removed card wrapper as requested -->
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm table-hover">
+                    <table id="publicationTable" class="table table-sm table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -86,9 +87,17 @@
                         </div>
                         <div class="news-widget-categories">
                             <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <a href="javascript:void(0)" onclick="filterByCategory('all')" class="d-flex justify-content-between align-items-center">
+                                        <span>All Categories</span>
+                                        <span id="count-all">(<?= array_sum(array_map(function ($cat) {
+                                                                    return count($cat);
+                                                                }, $filesByCategory)) ?>)</span>
+                                    </a>
+                                </li>
                                 <?php foreach ($categories as $category): ?>
                                     <li class="mb-2">
-                                        <a href="#" onclick="filterSingleCategory('category-<?= $category['id'] ?>')" class="d-flex justify-content-between align-items-center">
+                                        <a href="javascript:void(0)" onclick="filterByCategory('<?= $category['id'] ?>')" class="d-flex justify-content-between align-items-center">
                                             <span><?= esc($category['name']) ?></span>
                                             <span>(<?= count($filesByCategory[$category['id']] ?? []) ?>)</span>
                                         </a>
@@ -102,25 +111,128 @@
         </div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+
+<!-- Updated Custom CSS for DataTables controls -->
+<style>
+    /* Fix for select elements */
+    div.dataTables_length select {
+        width: 60px;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        height: calc(1.5em + 0.5rem + 2px);
+        position: relative;
+        z-index: 1;
+        pointer-events: auto !important;
+        opacity: 1 !important;
+        display: inline-block !important;
+        visibility: visible !important;
+    }
+
+    /* Fix for search input */
+    div.dataTables_filter input {
+        width: 120px;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        height: calc(1.5em + 0.5rem + 2px);
+    }
+
+    /* Fix pagination buttons */
+    ul.pagination li a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+</style>
+
+<!-- Improved Script Section -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Fungsi untuk filter berdasarkan kategori
-        window.filterSingleCategory = function(categoryClass) {
-            let rows = document.querySelectorAll(".category-row"); // Ambil semua baris
-
-            rows.forEach(row => {
-                if (row.classList.contains(categoryClass)) {
-                    row.style.display = ""; // Tampilkan baris yang sesuai
-                } else {
-                    row.style.display = "none"; // Sembunyikan baris yang tidak sesuai
-                }
-            });
-        };
+    document.addEventListener('DOMContentLoaded', function() {
+        // Try to load scripts in sequence with better error handling
+        loadScriptsSequentially([
+            'https://code.jquery.com/jquery-3.6.0.min.js',
+            'https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js',
+            'https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js'
+        ], initializeDataTable);
     });
-</script>
 
+    function loadScriptsSequentially(urls, callback, index = 0) {
+        if (index >= urls.length) {
+            callback();
+            return;
+        }
+
+        var script = document.createElement('script');
+        script.src = urls[index];
+
+        script.onload = function() {
+            loadScriptsSequentially(urls, callback, index + 1);
+        };
+
+        script.onerror = function() {
+            console.error('Failed to load script:', urls[index]);
+            // Continue with next script even if one fails
+            loadScriptsSequentially(urls, callback, index + 1);
+        };
+
+        document.head.appendChild(script);
+    }
+
+    function initializeDataTable() {
+        try {
+            if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+                var table = jQuery('#publicationTable').DataTable({
+                    responsive: true,
+                    ordering: true,
+                    searching: true,
+                    paging: true,
+                    lengthMenu: [
+                        [5, 10, 25, -1],
+                        [5, 10, 25, "All"]
+                    ],
+                    language: {
+                        lengthMenu: "Show _MENU_",
+                        search: "Search:",
+                        searchPlaceholder: "Keywords..."
+                    },
+                    dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>"
+                });
+
+                // Force DataTables to redraw & recalculate column widths
+                setTimeout(function() {
+                    table.columns.adjust().draw();
+
+                    // Additional fix for select elements
+                    jQuery('div.dataTables_length select').css({
+                        'visibility': 'visible',
+                        'opacity': '1',
+                        'display': 'inline-block',
+                        'pointer-events': 'auto'
+                    });
+                }, 500);
+
+                // Setup category filter function
+                window.filterByCategory = function(categoryId) {
+                    if (categoryId === 'all') {
+                        jQuery('.category-row').show();
+                    } else {
+                        jQuery('.category-row').hide();
+                        jQuery('.category-' + categoryId).show();
+                    }
+
+                    // Redraw the DataTable
+                    table.draw();
+                };
+            } else {
+                console.error('DataTables not loaded properly');
+            }
+        } catch (e) {
+            console.error('DataTable initialization error:', e);
+        }
+    }
+</script>
 
 <?php echo view('template/footer'); ?>

@@ -247,19 +247,28 @@ class AdminActivity extends BaseController
         $year = $this->request->getGet('year') ?? date('Y');
         $selectedUser = $this->request->getGet('user');
 
+        // Check if we're coming back from a successful signing
+        $justSigned = $this->request->getGet('signed') === 'true';
+        $showSigned = false;
+
+        // If just signed, set flag to show signed documents
+        if ($justSigned) {
+            $showSigned = true;
+            session()->setFlashdata('success', 'Document signed successfully!');
+        }
+
         $userModel = new UserModel();
         $users = $userModel->getAllhistoryUsers();
 
         $startDate = "$year-$month-01";
         $endDate = date('Y-m-t', strtotime($startDate));
 
-        $selectedUser = $this->request->getGet('user');
         if ($selectedUser === "all") {
             $selectedUser = null;
         }
 
-        // Ambil aktivitas
-        $activities = $this->activityModel->getAllAdminActivities($startDate, $endDate, $selectedUser);
+        // Pass showSigned parameter to the model
+        $activities = $this->activityModel->getAllAdminActivities($startDate, $endDate, $selectedUser, $showSigned);
 
         // Tambahkan total lembur untuk setiap aktivitas
         foreach ($activities as &$activity) {
@@ -597,10 +606,20 @@ class AdminActivity extends BaseController
                 return $this->response->setJSON(['success' => false, 'message' => 'No data found']);
             }
 
-            // Group activities
-            $groupedActivities = $this->groupActivitiesByUser($activities);
+            // Get username from users table
+            $userModel = new \App\Models\UserModel();
+            $userData = $userModel->select('username')->find($selectedUser);
+            if (!$userData) {
+                return $this->response->setJSON(['success' => false, 'message' => 'User data not found']);
+            }
+
+            // Update sign_pdf status for all activities
+            foreach ($activities as $activity) {
+                $this->activityModel->update($activity['id'], ['sign_pdf' => 1]);
+            }
 
             // Generate signed PDF
+            $groupedActivities = $this->groupActivitiesByUser($activities);
             $mpdf = new \Mpdf\Mpdf([
                 'margin_left' => 15,
                 'margin_right' => 15,
@@ -612,12 +631,36 @@ class AdminActivity extends BaseController
 
             $htmlContent = $this->generatePdfContent($groupedActivities, $month, $year, true);
             $mpdf->WriteHTML($htmlContent);
-            $pdfContent = $mpdf->Output('', 'S');
 
+            // Create directory if it doesn't exist
+            $uploadDir = FCPATH . 'public/sign/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            // Generate custom filename: username_periode
+            $periode = date('F_Y', mktime(0, 0, 0, $month, 1, $year));
+            $username = $userData['username']; // Changed from $userData->username to $userData['username']
+            $filename = $username . '_' . $periode . '.pdf';
+            $filepath = $uploadDir . $filename;
+
+            // Save PDF to file
+            $mpdf->Output($filepath, 'F');
+
+            // Save record to sign_pdf table
+            $signPdfModel = new \App\Models\SignPdfModel();
+            $signPdfModel->savePdfRecord(
+                $selectedUser,
+                $periode,
+                $filename
+            );
+
+            // Return success response with download URL
             return $this->response->setJSON([
                 'success' => true,
                 'message' => 'Document signed successfully',
-                'pdfData' => base64_encode($pdfContent)
+                'pdfData' => base64_encode(file_get_contents($filepath)),
+                'downloadUrl' => base_url('public/sign/' . $filename)
             ]);
         } catch (\Exception $e) {
             return $this->response->setJSON([

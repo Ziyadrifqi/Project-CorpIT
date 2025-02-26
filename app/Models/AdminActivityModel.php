@@ -19,6 +19,7 @@ class AdminActivityModel extends Model
         'nik',
         'pbr_tugas',
         'no_tiket',
+        'sign_pdf'
     ];
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
@@ -46,13 +47,18 @@ class AdminActivityModel extends Model
     }
 
     // Get all admin activities (for superadmin)
-    public function getAllAdminActivities($startDate = null, $endDate = null, $selectedUser = null)
+    public function getAllAdminActivities($startDate = null, $endDate = null, $selectedUser = null, $showSigned = false)
     {
         $builder = $this->db->table('admin_activities a')
             ->select('a.*, u.username, u.signature')
             ->join('users u', 'u.id = a.user_id')
             ->join('auth_groups_users agu', 'agu.user_id = u.id')
             ->where('agu.group_id', 1);
+
+        // Only filter for unsigned documents if showSigned is false
+        if (!$showSigned) {
+            $builder->where('a.sign_pdf', 0);
+        }
 
         if ($startDate && $endDate) {
             $builder->where('a.activity_date >=', $startDate)

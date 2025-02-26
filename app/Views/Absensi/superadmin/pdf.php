@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -112,6 +111,19 @@
             height: 40px;
         }
 
+        .signature-img {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signature-img img {
+            max-width: 100px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+
         .title {
             font-size: 14pt;
             font-weight: bold;
@@ -135,10 +147,9 @@
 </head>
 
 <body>
-    <!-- Recap Page -->
     <div class="container">
         <div class="header">
-            <img src="<?= FCPATH . 'img/lintas.jpg' ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+            <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
             <div class="header-text">
                 <strong>APLIKANUSA LINTASARTA</strong><br>
                 REKAPITULASI LEMBUR (NON SHIFT)
@@ -149,19 +160,19 @@
             <table>
                 <tr>
                     <td>NAMA</td>
-                    <td>: <?= user()->username ?></td>
+                    <td>: <?= $userData['username'] ?? 'N/A' ?></td>
                 </tr>
                 <tr>
                     <td>JABATAN</td>
-                    <td>: <?= user()->position ?? '-' ?></td>
+                    <td>: <?= $userData['position'] ?? 'N/A' ?></td>
                 </tr>
                 <tr>
                     <td>DEPT</td>
-                    <td>: <?= $userData['department_name'] ?? '-' ?></td>
+                    <td>: <?= $userData['department_name'] ?? 'N/A' ?></td>
                 </tr>
                 <tr>
                     <td>SUB DEPT</td>
-                    <td>: <?= $userData['sub_department_name'] ?? '-' ?></td>
+                    <td>: <?= $userData['sub_department_name'] ?? 'N/A' ?></td>
                 </tr>
                 <tr>
                     <td>LOKASI</td>
@@ -169,227 +180,302 @@
                 </tr>
                 <tr>
                     <td>PERIODE</td>
-                    <td>: <?= $selectedMonth ?></td>
+                    <td>: <?= $selectedMonth ?? date('Y-m') ?></td>
                 </tr>
             </table>
         </div>
 
-        <table class="overtime-table">
-            <thead>
-                <tr>
-                    <th style="width: 5%;">No</th>
-                    <th style="width: 15%;">User</th>
-                    <th style="width: 10%;">Tanggal</th>
-                    <th style="width: 10%;">Kategori</th>
-                    <th style="width: 10%;">Jam Masuk</th>
-                    <th style="width: 10%;">Jam Keluar</th>
-                    <th style="width: 10%;">Total Lembur</th>
-                    <th style="width: 20%;">Deskripsi Lembur</th>
-                    <th style="width: 10%;">No. Tiket</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $totalHours = 0;
-                foreach ($absensi as $index => $item):
-                    if ($item['jam_masuk'] && $item['jam_keluar']) {
-                        $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
-                        $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
-                        $keluar = strtotime($tanggal_keluar . ' ' . $item['jam_keluar']);
-                        $diffMinutes = ($keluar - $masuk) / 60;
-                        $hours = floor($diffMinutes / 60);
-                        $minutes = $diffMinutes % 60;
-                        $totalHoursItem = sprintf('%d jam %02d menit', $hours, $minutes);
-                        $totalHours += $diffMinutes / 60;
-                    } else {
-                        $totalHoursItem = '-';
-                    }
-                ?>
+        <?php if (empty($absensi)): ?>
+            <div class="no-data">
+                <p>Tidak ada data lembur ditemukan untuk periode yang dipilih.</p>
+            </div>
+        <?php else: ?>
+            <table class="overtime-table table-sm">
+                <thead>
                     <tr>
-                        <td><?= $index + 1 ?></td>
-                        <td><?= esc($item['user_name']) ?></td>
-                        <td><?= date('d/m/Y', strtotime($item['tanggal'])) ?></td>
-                        <td><?= esc($item['category_name']) ?></td>
-                        <td><?= $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-' ?></td>
-                        <td><?= $item['jam_keluar'] ? date('H:i', strtotime($item['jam_keluar'])) : '-' ?></td>
-                        <td><?= $totalHoursItem ?></td>
-                        <td class="description"><?= $item['kegiatan_harian'] ?? '-' ?></td>
-                        <td><?= $item['no_tiket'] ?? '-' ?></td>
+                        <th style="width: 5%;">No</th>
+                        <th style="width: 10%;">Tanggal</th>
+                        <th style="width: 10%;">Hari</th>
+                        <th style="width: 10%;">Jam Masuk</th>
+                        <th style="width: 10%;">Jam Keluar</th>
+                        <th style="width: 10%;">Total Lembur</th>
+                        <th style="width: 45%;">Deskripsi Lembur</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="6" style="text-align: right;"><strong>Total Jam Lembur</strong></td>
-                    <td colspan="3"><strong><?= sprintf('%.2f jam', $totalHours) ?></strong></td>
-                </tr>
-            </tfoot>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    $totalHours = 0;
+                    $totalMinutes = 0;
+
+                    foreach ($absensi as $index => $item):
+                        $totalHoursItem = '-';
+
+                        if (!empty($item['jam_masuk']) && !empty($item['jam_keluar'])) {
+                            try {
+                                $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
+                                $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
+                                $keluar = strtotime($tanggal_keluar . ' ' . $item['jam_keluar']);
+
+                                if ($masuk && $keluar && $keluar >= $masuk) {
+                                    $diffMinutes = ($keluar - $masuk) / 60;
+                                    $hours = floor($diffMinutes / 60);
+                                    $minutes = $diffMinutes % 60;
+
+                                    $totalHoursItem = sprintf('%d jam %02d menit', $hours, $minutes);
+                                    $totalMinutes += $diffMinutes;
+                                }
+                            } catch (Exception $e) {
+                                $totalHoursItem = 'Error';
+                            }
+                        }
+                    ?>
+                        <tr>
+                            <td><?= $index + 1 ?></td>
+                            <td><?= !empty($item['tanggal']) ? date('d/m/Y', strtotime($item['tanggal'])) : 'N/A' ?></td>
+                            <td><?= !empty($item['tanggal']) ? date('l', strtotime($item['tanggal'])) : 'N/A' ?></td>
+                            <td><?= !empty($item['jam_masuk']) ? date('H:i', strtotime($item['jam_masuk'])) : '-' ?></td>
+                            <td><?= !empty($item['jam_keluar']) ? date('H:i', strtotime($item['jam_keluar'])) : '-' ?></td>
+                            <td><?= $totalHoursItem ?></td>
+                            <td class="description"><?= htmlspecialchars($item['kegiatan_harian'] ?? '-') ?> (#<?= htmlspecialchars($item['no_tiket'] ?? 'N/A') ?>)</td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
 
         <div class="signature-section">
             <div class="signature-box-left">
                 <p>Menyetujui,</p>
-                <div class="signature-space"></div>
-                <p><u>RAHARDIKA NUR PERMANA</u><br>
-                    NIK: 92161515</p>
+                <?php
+                if ($isSigned && isset($currentUser) && isset($currentUser->signature)) {
+                    $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
+                    if (file_exists($currentUserSignaturePath)):
+                ?>
+                        <div class="signature-img">
+                            <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                        </div>
+                    <?php else: ?>
+                        <div class="signature-space"></div>
+                    <?php
+                    endif;
+                } else {
+                    ?>
+                    <div class="signature-space"></div>
+                <?php } ?>
+                <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br>
+                    NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
             </div>
             <div class="signature-box-right">
                 <p>Dibuat Oleh,</p>
-                <?php if (isset($signature_path) && $signature_path): ?>
-                    <div class="signature-img">
-                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
-                    </div>
-                <?php else: ?>
-                    <div class="signature-space" style="height: 30px;"></div>
-                <?php endif; ?>
-                <p><u><?= user()->username ?></u><br>
-                    NIK: <?= user()->nik ?? '-' ?></p>
+                <?php
+                if (isset($userData['signature']) && $userData['signature']) {
+                    $userSignaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
+                    if (file_exists($userSignaturePath)):
+                ?>
+                        <div class="signature-img">
+                            <img src="<?= $userSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                        </div>
+                    <?php else: ?>
+                        <div class="signature-space"></div>
+                    <?php
+                    endif;
+                } else {
+                    ?>
+                    <div class="signature-space"></div>
+                <?php } ?>
+                <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br>
+                    NIK: <?= isset($userData['nik']) ? htmlspecialchars($userData['nik']) : 'N/A' ?></p>
             </div>
         </div>
     </div>
 
-    <!-- Individual Forms for Each Entry -->
-    <?php foreach ($absensi as $index => $item):
-        if ($item['jam_masuk'] && $item['jam_keluar']):
+    <!-- Individual Overtime Forms -->
+    <?php
+    if (!empty($absensi)):
+        foreach ($absensi as $index => $item):
+            if (!empty($item['jam_masuk']) && !empty($item['jam_keluar'])):
     ?>
-            <div class="page-break" style="margin: 0; padding: 0;">
-                <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 0.7;">
-                    <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
-                        <div class="form-section" style="font-size: 12px;">Form lembur karyawan Non shift</div>
-                        <img src="<?= FCPATH . 'img/lintas.jpg' ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
-                        <div class="header-text" style="font-size: 16px;">SURAT TUGAS LEMBUR</div>
-                    </div>
-                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
-                        <p style="margin: 0;">Di instruksikan kepada :</p>
-                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
-                            <tr>
-                                <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($item['user_name']) ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= $item['nik'] ?? '-' ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Bagian/Divisi</td>
-                                <td style="padding: 2px;">: <?= $userData['department_name'] ?? '-' ?> / <?= $userData['division_name'] ?? '-' ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Lokasi Kerja</td>
-                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? '-' ?></td>
-                            </tr>
-                        </table>
+                <div class="page-break" style="margin: 0; padding: 0;">
+                    <div class="container" style="max-width: 100%; padding: 5px; font-size: 12px; line-height: 0.7;">
+                        <div class="header" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
+                            <div class="form-section" style="font-size: 12px;">Form lembur karyawan Non shift</div>
+                            <img src="<?= $logo_path ?>" alt="Logo Lintas" class="logo" style="width: 70px; height: 40px; object-fit: cover;">
+                            <div class="header-text" style="font-size: 16px;"><u>SURAT TUGAS LEMBUR</u></div>
+                        </div>
+                        <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                            <p style="margin: 0;">Di instruksikan kepada :</p>
+                            <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 2px;">Nama</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['username'] ?? $userData['username'] ?? 'N/A') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">NIK</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Bagian/Divisi</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($userData['department_name'] ?? '-') ?> / <?= htmlspecialchars($userData['division_name'] ?? '-') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Lokasi Kerja</td>
+                                    <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Pemberi Tugas</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['pbr_tugas'] ?? 'N/A') ?></td>
+                                </tr>
+                            </table>
 
-                        <!-- Overtime Details -->
-                        <p>Untuk melaksanakan lembur pada :</p>
-                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
-                            <tr>
-                                <td style="padding: 2px;">Hari/Tanggal</td>
-                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['tanggal'])) ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Jam</td>
-                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['jam_masuk'])) ?> s.d <?= date('H:i', strtotime($item['jam_keluar'])) ?></td>
-                            </tr>
-                        </table>
+                            <p>Untuk melaksanakan lembur pada :</p>
+                            <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 2px;">Hari/Tanggal</td>
+                                    <td style="padding: 2px;">: <?= !empty($item['tanggal']) ? date('l / d F Y', strtotime($item['tanggal'])) : 'N/A' ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Jam</td>
+                                    <td style="padding: 2px;">: <?= !empty($item['jam_masuk']) ? date('H:i', strtotime($item['jam_masuk'])) : 'N/A' ?> s.d <?= !empty($item['jam_keluar']) ? date('H:i', strtotime($item['jam_keluar'])) : 'N/A' ?></td>
+                                </tr>
+                            </table>
 
-                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
-                        <p style="margin: 5px 0;">
-                            <strong><?= $item['kegiatan_harian'] ?></strong>
-                            <?php if (!empty($item['no_tiket'])): ?>
-                                (<strong>#<?= $item['no_tiket'] ?></strong>)
-                            <?php endif; ?>
-                        </p>
+                            <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                            <p style="margin: 5px 0;">
+                                <strong><?= htmlspecialchars($item['kegiatan_harian'] ?? 'N/A') ?></strong>
+                                (<strong>#<?= htmlspecialchars($item['no_tiket'] ?? 'N/A') ?></strong>)
+                            </p>
 
-                        <!-- Signatures -->
-                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
-                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
-                                <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 60px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
-                            </div>
-                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
-                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
-                                <p>Yang di beri tugas,</p>
-                                <div class="signature-space" style="height: 30px;"></div>
-                                <p><u><?= esc($item['user_name']) ?></u><br><br>NIK: <?= $item['nik'] ?? '-' ?></p>
+                            <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                <div class="signature-box-left">
+                                    <p>Menyetujui,</p>
+                                    <?php if ($isSigned && isset($currentUser) && isset($currentUser->signature)):
+                                        $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
+                                        if (file_exists($currentUserSignaturePath)):
+                                    ?>
+                                            <div class="signature-img">
+                                                <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="signature-space"></div>
+                                        <?php endif;
+                                    else: ?>
+                                        <div class="signature-space"></div>
+                                    <?php endif; ?>
+                                    <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br><br>
+                                        NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
+                                </div>
+                                <div class="signature-box-right">
+                                    <p>Dibuat Oleh,</p>
+                                    <?php if (isset($userData['signature']) && $userData['signature']):
+                                        $userSignaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
+                                        if (file_exists($userSignaturePath)):
+                                    ?>
+                                            <div class="signature-img">
+                                                <img src="<?= $userSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="signature-space"></div>
+                                        <?php endif;
+                                    else: ?>
+                                        <div class="signature-space"></div>
+                                    <?php endif; ?>
+                                    <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br><br>
+                                        NIK: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;">LAPORAN PELAKSANAAN LEMBUR</div>
 
-                    <div class="form-section" style="font-size: 12px; line-height: 0.7;">
-                        <p>Berdasarkan Surat Tugas Lembur No : ................................ yang bertanda tangan di bawah ini :</p>
-                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
-                            <tr>
-                                <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($item['user_name']) ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">NIK</td>
-                                <td style="padding: 2px;">: <?= $item['nik'] ?? '-' ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Bagian/Divisi</td>
-                                <td style="padding: 2px;">: <?= $item['department_name'] ?? '-' ?> / <?= $item['division_name'] ?? '-' ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Lokasi Kerja</td>
-                                <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? '-' ?></td>
-                            </tr>
-                        </table>
+                        <div class="title" style="font-size: 16px; margin-top: 40px; margin-bottom: 10px;"><u>LAPORAN PELAKSANAAN LEMBUR</u></div>
 
-                        <p>Telah melaksanakan lembur pada :</p>
-                        <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
-                            <tr>
-                                <td style="padding: 2px;">Hari/Tanggal</td>
-                                <td style="padding: 2px;">: <?= date('l / d F Y', strtotime($item['tanggal'])) ?></td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 2px;">Jam</td>
-                                <td style="padding: 2px;">: <?= date('H:i', strtotime($item['jam_masuk'])) ?> s.d <?= date('H:i', strtotime($item['jam_keluar'])) ?></td>
-                            </tr>
-                        </table>
+                        <div class="form-section" style="font-size: 12px; line-height: 0.7;">
+                            <p>Berdasarkan Surat Tugas Lembur No : ................................ yang bertanda tangan di bawah ini :</p>
+                            <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 2px;">Nama</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['username'] ?? $userData['username'] ?? 'N/A') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">NIK</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Bagian/Divisi</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($userData['department_name'] ?? '-') ?> / <?= htmlspecialchars($userData['division_name'] ?? '-') ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Lokasi Kerja</td>
+                                    <td style="padding: 2px;">: Menara Thamrin, Jakarta Pusat</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Pemberi Tugas</td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['pbr_tugas'] ?? 'N/A') ?></td>
+                                </tr>
+                            </table>
 
-                        <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
-                        <p style="margin: 5px 0;">
-                            <strong><?= $item['kegiatan_harian'] ?></strong> (<strong>#<?= $item['no_tiket'] ?></strong>)
-                        </p>
+                            <p>Telah melaksanakan lembur pada :</p>
+                            <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 2px;">Hari/Tanggal</td>
+                                    <td style="padding: 2px;">: <?= !empty($item['tanggal']) ? date('l / d F Y', strtotime($item['tanggal'])) : 'N/A' ?></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 2px;">Jam</td>
+                                    <td style="padding: 2px;">: <?= !empty($item['jam_masuk']) ? date('H:i', strtotime($item['jam_masuk'])) : 'N/A' ?> s.d <?= !empty($item['jam_keluar']) ? date('H:i', strtotime($item['jam_keluar'])) : 'N/A' ?></td>
+                                </tr>
+                            </table>
 
-                        <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
-                            <div class="signature-box-left" style="width: 45%; font-size: 12px;">
-                                <p>Menyetujui,</p>
-                                <div class="signature-space" style="height: 60px;"></div>
-                                <p><u>RAHARDIKA NUR PERMANA</u><br><br>NIK: 92161515</p>
-                            </div>
-                            <div class="signature-box-right" style="width: 45%; font-size: 12px;">
-                                <div class="date">Jakarta, <?= date('d F Y', strtotime($item['tanggal'])) ?></div>
-                                <p>Yang di beri tugas,</p>
-                                <?php if (isset($signature_path) && $signature_path): ?>
-                                    <div class="signature-img">
-                                        <img src="<?= $signature_path ?>" style="max-width: 100px; max-height: 50px;">
-                                    </div>
-                                <?php else: ?>
-                                    <div class="signature-space" style="height: 30px;"></div>
-                                <?php endif; ?>
-                                <p><u><?= esc($item['user_name']) ?></u><br><br>NIK: <?= $item['nik'] ?? '-' ?></p>
+                            <p>Pelaksanaan Lembur tersebut di perlukan untuk menyelesaikan tugas sebagai berikut :</p>
+                            <p style="margin: 5px 0;">
+                                <strong><?= htmlspecialchars($item['kegiatan_harian'] ?? 'N/A') ?></strong>
+                                (<strong>#<?= htmlspecialchars($item['no_tiket'] ?? 'N/A') ?></strong>)
+                            </p>
+
+                            <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
+                                <div class="signature-box-left">
+                                    <p>Menyetujui,</p>
+                                    <?php if ($isSigned && isset($currentUser) && isset($currentUser->signature)):
+                                        $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
+                                        if (file_exists($currentUserSignaturePath)):
+                                    ?>
+                                            <div class="signature-img">
+                                                <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="signature-space"></div>
+                                        <?php endif;
+                                    else: ?>
+                                        <div class="signature-space"></div>
+                                    <?php endif; ?>
+                                    <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br><br>
+                                        NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
+                                </div>
+                                <div class="signature-box-right">
+                                    <p>Dibuat Oleh,</p>
+                                    <?php if (isset($userData['signature']) && $userData['signature']):
+                                        $userSignaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
+                                        if (file_exists($userSignaturePath)):
+                                    ?>
+                                            <div class="signature-img">
+                                                <img src="<?= $userSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="signature-space"></div>
+                                        <?php endif;
+                                    else: ?>
+                                        <div class="signature-space"></div>
+                                    <?php endif; ?>
+                                    <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br><br>
+                                        NIK: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
     <?php
-        endif;
-    endforeach;
+            endif;
+        endforeach;
+    endif;
     ?>
-</body>0
+</body>
 
 </html>

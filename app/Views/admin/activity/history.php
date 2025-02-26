@@ -127,19 +127,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Preview PDF</h5>
-                <button type="button" class="close" data-dismiss="modal">
+                <h5 class="modal-title">PDF Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="embed-responsive embed-responsive-1by1">
-                    <iframe id="pdfViewer" class="embed-responsive-item"></iframe>
-                </div>
+                <div id="pdfPreviewContent"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="signPdfBtn">
-                    <i class="fas fa-signature"></i> Sign
+                    <i class="fas fa-signature"></i> Sign PDF
                 </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
@@ -147,61 +145,46 @@
     </div>
 </div>
 <?= $this->endSection() ?>
-<?= $this->section('scripts'); ?>
-<!-- Include Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<?= $this->section('scripts') ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize Select2 if jQuery and Select2 are available
-        if (window.jQuery && $.fn.select2) {
-            $('#select2-activity').select2({
-                theme: 'bootstrap',
-                width: '100%',
-                placeholder: 'Select User',
-                allowClear: true,
-                closeOnSelect: false
-            });
-        }
+        // Initialize Select2
+        $('#select2-activity').select2({
+            theme: 'bootstrap',
+            width: '100%',
+            placeholder: 'Select User',
+            allowClear: true,
+            closeOnSelect: false
+        });
 
-        const previewPdfBtn = document.getElementById('previewPdfBtn');
         const pdfPreviewModal = document.getElementById('pdfPreviewModal');
-        const pdfViewer = document.getElementById('pdfViewer');
+        const pdfViewer = document.getElementById('pdfPreviewContent');
         const signPdfBtn = document.getElementById('signPdfBtn');
-        let modalInstance = null;
 
-        // Function untuk menampilkan loading
+        // Function to show loading indicator
         function showLoading() {
             if (pdfViewer) {
-                pdfViewer.style.display = 'none';
-            }
-            const loadingDiv = document.createElement('div');
-            loadingDiv.id = 'loadingIndicator';
-            loadingDiv.className = 'text-center p-4';
-            loadingDiv.innerHTML = `
-            <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-            <div class="mt-2">Processing...</div>
-        `;
-            pdfViewer.parentNode.insertBefore(loadingDiv, pdfViewer);
-        }
-
-        // Function untuk menyembunyikan loading
-        function hideLoading() {
-            const loadingDiv = document.getElementById('loadingIndicator');
-            if (loadingDiv) {
-                loadingDiv.remove();
-            }
-            if (pdfViewer) {
-                pdfViewer.style.display = 'block';
+                pdfViewer.innerHTML = `
+                    <div class="text-center p-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="mt-2">Processing...</div>
+                    </div>
+                `;
             }
         }
 
-        // Function untuk load preview PDF
+        // Function to preview PDF
         async function loadPdfPreview(signed = false) {
             try {
                 showLoading();
+                $(pdfPreviewModal).modal('show');
 
                 const month = document.querySelector('select[name="month"]').value;
                 const year = document.querySelector('select[name="year"]').value;
@@ -226,40 +209,25 @@
                     throw new Error(data.message || 'Failed to generate PDF');
                 }
 
-                // Convert base64 to blob and create URL
-                const blobData = atob(data.pdfData);
-                const arrayBuffer = new ArrayBuffer(blobData.length);
-                const uint8Array = new Uint8Array(arrayBuffer);
+                // Create PDF viewer iframe
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '600px';
+                iframe.src = `data:application/pdf;base64,${data.pdfData}`;
 
-                for (let i = 0; i < blobData.length; i++) {
-                    uint8Array[i] = blobData.charCodeAt(i);
-                }
-
-                const blob = new Blob([uint8Array], {
-                    type: 'application/pdf'
-                });
-                const blobUrl = URL.createObjectURL(blob);
-
-                // Update iframe source
+                // Update modal content
                 if (pdfViewer) {
-                    pdfViewer.src = blobUrl;
+                    pdfViewer.innerHTML = '';
+                    pdfViewer.appendChild(iframe);
                 }
-
-                // Show modal if not already shown
-                if (!modalInstance) {
-                    modalInstance = new bootstrap.Modal(pdfPreviewModal);
-                }
-                modalInstance.show();
 
             } catch (error) {
                 console.error('Preview error:', error);
                 alert('Error: ' + error.message);
-            } finally {
-                hideLoading();
+                $(pdfPreviewModal).modal('hide');
             }
         }
 
-        // Function untuk sign PDF
         async function signPdf() {
             try {
                 showLoading();
@@ -287,42 +255,49 @@
                     throw new Error(data.message);
                 }
 
-                // Disable sign button
-                if (signPdfBtn) {
-                    signPdfBtn.disabled = true;
-                }
+                // Create temporary link for auto-download
+                const downloadLink = document.createElement('a');
+                downloadLink.href = data.downloadUrl;
+                downloadLink.download = data.downloadUrl.split('/').pop();
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
 
-                // Reload preview with signed PDF
-                await loadPdfPreview(true);
-
+                // Show success message immediately before closing modal
                 alert('Document signed successfully!');
+
+                // Close modal after a short delay
+                setTimeout(() => {
+                    $('#pdfPreviewModal').modal('hide');
+                }, 500);
 
             } catch (error) {
                 console.error('Signing error:', error);
                 alert('Error: ' + error.message);
-            } finally {
-                hideLoading();
             }
         }
 
-        // Event listeners
-        if (previewPdfBtn) {
-            previewPdfBtn.addEventListener('click', () => loadPdfPreview(false));
-        }
 
+        // Event listeners
         if (signPdfBtn) {
             signPdfBtn.addEventListener('click', signPdf);
         }
 
-        // Cleanup when modal is closed
-        if (pdfPreviewModal) {
-            pdfPreviewModal.addEventListener('hidden.bs.modal', function() {
-                if (pdfViewer && pdfViewer.src) {
-                    URL.revokeObjectURL(pdfViewer.src);
-                    pdfViewer.src = '';
-                }
-            });
+        // Event listener for preview button (if exists)
+        const previewPdfBtn = document.getElementById('previewPdfBtn');
+        if (previewPdfBtn) {
+            previewPdfBtn.addEventListener('click', () => loadPdfPreview(false));
         }
+
+        // Cleanup when modal is closed
+        $(pdfPreviewModal).on('hidden.bs.modal', function() {
+            if (pdfViewer) {
+                pdfViewer.innerHTML = '';
+            }
+        });
+
+        // Make preview function available globally
+        window.loadPdfPreview = loadPdfPreview;
     });
 </script>
-<?= $this->endSection(); ?>
+<?= $this->endSection() ?>

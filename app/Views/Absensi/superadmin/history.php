@@ -60,30 +60,17 @@
                 </form>
 
                 <!-- Export Buttons -->
-                <div class="mb-3 d-flex justify-content-end gap-2">
-                    <a href="<?= base_url('absensi/exportPdfsuper') . '?' . http_build_query([
-                                    'month' => $selectedMonth,
-                                    'category' => $selectedCategory,
-                                    'user' => $selectedUser
-                                ]) ?>"
-                        class="btn btn-danger"
-                        title="<?= empty($data) ? 'No data available to export' : 'Export to PDF' ?>">
-                        <i class="fas fa-file-pdf"></i> Export PDF
-                    </a>
-                    <a href="<?= base_url('absensi/superadminExportExcel') . '?' . http_build_query([
-                                    'month' => $selectedMonth,
-                                    'category' => $selectedCategory,
-                                    'user' => $selectedUser
-                                ]) ?>"
-                        class="btn btn-success"
-                        title="<?= empty($data) ? 'No data available to export' : 'Export to Excel' ?>">
-                        <i class="fas fa-file-excel"></i> Export Excel
-                    </a>
+                <div class="mb-3 d-flex justify-content-end">
+                    <?php if (!empty($absensi) && $selectedUser !== 'all' && $selectedUser !== null): ?>
+                        <button type="button" class="btn btn-primary" onclick="previewPdf('<?= $selectedUser ?>', '<?= $selectedMonth ?>')">
+                            <i class="fas fa-eye"></i> Preview PDF
+                        </button>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Data Table -->
                 <div class="table-responsive">
-                    <table class="table table-sm table-bordered" id="superadminHistoryAbsen">
+                    <table class="table table-sm table-bordered" id="superadminHistory">
                         <thead class="thead-light">
                             <tr class="text-center">
                                 <th>No</th>
@@ -129,15 +116,40 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="pdfPreviewModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PDF Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="pdfPreviewContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="signPdfBtn"
+                    data-user-id="<?= user_id() ?>"
+                    data-signature="<?= $userDetails->signature ?? '' ?>">
+                    <i class="fas fa-signature"></i> Sign PDF
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection() ?>
+<!-- Di bagian scripts -->
 
 <?= $this->section('scripts'); ?>
-<!-- Include Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Initialize Select2 for category selection
+        // Initialize Select2
         $('#select2-absen').select2({
             theme: 'bootstrap',
             width: '100%',
@@ -145,6 +157,126 @@
             allowClear: true,
             closeOnSelect: false
         });
+
+        const pdfPreviewModal = document.getElementById('pdfPreviewModal');
+        const pdfViewer = document.getElementById('pdfPreviewContent');
+
+        // Function to show loading indicator
+        function showLoading() {
+            if (pdfViewer) {
+                pdfViewer.innerHTML = `
+                <div class="text-center p-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="mt-2">Processing...</div>
+                </div>
+            `;
+            }
+        }
+
+        // Modify your previewPdf function
+        async function previewPdf(userId, month, signed = false) {
+            try {
+                showLoading();
+                $(pdfPreviewModal).modal('show');
+
+                const response = await fetch(
+                    `${window.location.origin}/absensi/previewPdf?userId=${userId}&month=${month}&signed=${signed}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(data.message || 'Failed to generate PDF');
+                }
+
+                // Create PDF viewer iframe
+                const iframe = document.createElement('iframe');
+                iframe.style.width = '100%';
+                iframe.style.height = '600px';
+                iframe.src = `data:application/pdf;base64,${data.pdfData}`;
+
+                // Update modal content
+                if (pdfViewer) {
+                    pdfViewer.innerHTML = '';
+                    pdfViewer.appendChild(iframe);
+                }
+
+            } catch (error) {
+                console.error('Preview error:', error);
+                alert('Error: ' + error.message);
+                $(pdfPreviewModal).modal('hide');
+            }
+        }
+
+        // Function to sign PDF
+        async function signPdf(userId, month) {
+            try {
+                showLoading();
+
+                const response = await fetch(`${window.location.origin}/absensi/signPdf`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        month: month
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Failed to sign PDF');
+                }
+
+                // Show signed PDF
+                await previewPdf(userId, month, true);
+                alert('Document signed successfully!');
+
+            } catch (error) {
+                console.error('Signing error:', error);
+                alert('Error: ' + error.message);
+            }
+        }
+
+        // Event listener for sign button
+        document.getElementById('signPdfBtn')?.addEventListener('click', function() {
+            const userId = this.getAttribute('data-user-id');
+            const month = document.querySelector('input[name="month"]').value;
+
+            if (!userId || !month) {
+                alert('Missing required parameters');
+                return;
+            }
+
+            signPdf(userId, month);
+        });
+
+        // Event listener for modal close
+        $(pdfPreviewModal).on('hidden.bs.modal', function() {
+            if (pdfViewer) {
+                pdfViewer.innerHTML = '';
+            }
+        });
+
+        // Make previewPdf function available globally
+        window.previewPdf = previewPdf;
     });
 </script>
-<?= $this->endSection(); ?>
+<?= $this->endSection() ?>

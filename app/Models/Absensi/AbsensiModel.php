@@ -11,7 +11,21 @@ class AbsensiModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['user_id', 'tanggal', 'jam_masuk', 'jam_keluar', 'tanggal_keluar', 'status', 'category_id', 'judul_kegiatan', 'kegiatan_harian', 'no_tiket', 'pbr_tugas', 'nik'];
+    protected $allowedFields = [
+        'user_id',
+        'tanggal',
+        'jam_masuk',
+        'jam_keluar',
+        'tanggal_keluar',
+        'status',
+        'category_id',
+        'judul_kegiatan',
+        'kegiatan_harian',
+        'no_tiket',
+        'pbr_tugas',
+        'nik',
+        'sign_pdf'
+    ];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
@@ -105,7 +119,8 @@ class AbsensiModel extends Model
             ->join('absen_category', 'absen_category.id = absensi.category_id')
             ->where('auth_groups_users.group_id', 1)
             ->where('absensi.tanggal >=', $startDate)
-            ->where('absensi.tanggal <=', $endDate);
+            ->where('absensi.tanggal <=', $endDate)
+            ->where('absensi.sign_pdf', 0);  // Only show unsigned documents
 
         // Optional filter by category
         if (!empty($categoryId)) {

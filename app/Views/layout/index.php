@@ -21,6 +21,7 @@
 
 <!-- jQuery, DataTables, dan Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -66,43 +67,47 @@
             });
         }
 
-        // Inisialisasi DataTables untuk #userTable dengan teks bahasa Indonesia
+        // Inisialisasi DataTables untuk #userTable
         initializeDataTable('#userTable');
 
-        // Inisialisasi DataTables untuk #userRoleTable dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #userRoleTable 
         initializeDataTable('#userRoleTable');
 
-        // Inisialisasi DataTables untuk #userArticles dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #userArticles 
         initializeDataTable('#userArticle');
 
-        // Inisialisasi DataTables untuk #categories dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #categories 
         initializeDataTable('#categories');
-        // Inisialisasi DataTables untuk #fileupload dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #fileupload 
         initializeDataTable('#fileupload');
-        // Inisialisasi DataTables untuk #departement dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #departement 
         initializeDataTable('#departements ');
 
-        // Inisialisasi DataTables untuk #subdepartement dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #subdepartement 
         initializeDataTable('#subdepart ');
 
-        // Inisialisasi DataTables untuk #histroyabsen dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #histroyabsen 
         initializeDataTable('#historyabsen');
 
-        // Inisialisasi DataTables untuk #superadminHistoryAbsen dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #superadminHistoryAbsen 
         initializeDataTable('#superadminHistoryAbsen');
 
-        // Inisialisasi DataTables untuk #categoryabsen dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #categoryabsen 
         initializeDataTable('#categoryabsen');
 
-        // Inisialisasi DataTables untuk #adminactivity dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #adminactivity 
         initializeDataTable('#adminactivity');
 
-        // Inisialisasi DataTables untuk #historyactivity dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #historyactivity 
         initializeDataTable('#historyactivity');
-        // Inisialisasi DataTables untuk #Guest_visitor dengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #Guest_visitor 
         initializeDataTable('#Guest_visitor');
-        // Inisialisasi DataTables untuk #overtimeTabledengan teks bahasa Inggris
+        // Inisialisasi DataTables untuk #overtimeTable
         initializeDataTable('#overtimeTable');
+        // Inisialisasi DataTables untuk #pdfTable 
+        initializeDataTable('#pdfTable');
+        // Inisialisasi DataTables untuk #superadminHistoryAbsen
+        initializeDataTable('#superadminHistory');
     });
 </script>
 

@@ -60,7 +60,6 @@ class GuestVisitorController extends Controller
         // Validation rules
         $rules = [
             'password' => 'required|min_length[6]',
-            'valid_days' => 'required|integer|greater_than[0]|less_than_equal_to[30]',
             'phone' => 'required|min_length[10]|max_length[15]',
             'email' => 'required|valid_email|min_length[10]|max_length[35]'
         ];
@@ -70,16 +69,29 @@ class GuestVisitorController extends Controller
         }
 
         try {
-            // Generate guest name with microseconds for better uniqueness
+            // Generate guest name with daily counter reset
             $currentDate = date('dmY');
             $lastGuest = $this->guestVisitorModel->orderBy('id', 'DESC')->first();
-            $counter = $lastGuest ? (intval(substr($lastGuest['guest_name'], -3)) + 1) : 1;
+
+            // Initialize counter
+            $counter = 1;
+
+            // Check if there's a last guest and if it's from today
+            if ($lastGuest) {
+                $lastGuestDate = substr($lastGuest['guest_name'], 5, 8); // Extract date from GUEST{date}_{counter}
+                if ($lastGuestDate === $currentDate) {
+                    // If it's the same day, increment the counter
+                    $counter = (intval(substr($lastGuest['guest_name'], -3)) + 1);
+                }
+                // If it's a different day, counter remains 1
+            }
+
             $guestName = sprintf("GUEST%s_%03d", $currentDate, $counter);
 
             // Get valid token
             $token = $this->ensureValidToken(); // Token will be refreshed here if needed
 
-            // Save the refresh token, regardless of the outcome of the user creation
+            // Save the refresh token
             $this->tokenModel->saveNewToken([
                 'access_token' => $token['access_token'],
                 'refresh_token' => $token['refresh_token'],
@@ -93,8 +105,7 @@ class GuestVisitorController extends Controller
                 'name' => $guestName,
                 'phone' => $postData['phone'],
                 'email' => $postData['email'],
-                'password' => $postData['password'],
-                'valid_days' => $postData['valid_days']
+                'password' => $postData['password']
             ]);
 
             if (!$apiResponse) {
@@ -103,19 +114,17 @@ class GuestVisitorController extends Controller
 
             $userId = user_id();
 
-            // Save to database
+            // Save to database (valid_until default 1 hari sudah diatur dalam database)
             $inserted = $this->guestVisitorModel->insert([
                 'guest_name' => $guestName,
                 'user_id' => $userId,
                 'status' => 1,
                 'phone' => $postData['phone'],
                 'password' => $postData['password'],
-                'email' => $postData['email'],
-                'valid_until' => date('Y-m-d H:i:s', strtotime("+{$postData['valid_days']} days"))
+                'email' => $postData['email']
             ]);
 
             if ($inserted) {
-                // Add debugging
                 log_message('debug', 'Berhasil insert guest dengan ID: ' . $inserted);
                 return redirect()->to('/guest-visitor')->with('success', 'Guest visitor created successfully');
             } else {
@@ -126,7 +135,6 @@ class GuestVisitorController extends Controller
             return redirect()->back()->withInput()->with('error', 'Failed to create guest visitor: ' . $e->getMessage());
         }
     }
-
 
     private function refreshToken()
     {
@@ -205,7 +213,6 @@ class GuestVisitorController extends Controller
                 'password' => $data['password'],
                 'email' => $data['email'],
                 'phone' => $data['phone'],
-                'valid_till_days' => intval($data['valid_days']),
                 'is_enabled' => true,
                 'valid_till_no_limit' => false,
                 'notify' => true,

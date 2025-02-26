@@ -16,6 +16,8 @@ class Absensi extends BaseController
     protected $absensiModel;
     protected $groupUserModel;
     protected $categoryModel;
+    protected $userModel;
+    protected $db;
 
     public function __construct()
     {
@@ -23,6 +25,8 @@ class Absensi extends BaseController
         $this->absensiModel = new AbsensiModel();
         $this->groupUserModel = new GroupUserModel();
         $this->categoryModel = new AbsenCategoryModel();
+        $this->userModel = new UserModel();
+        $this->db = \Config\Database::connect();
     }
 
     public function index()
@@ -631,20 +635,25 @@ class Absensi extends BaseController
             return redirect()->to('/login');
         }
 
-        // Get selected month or default to current month
         $selectedMonth = $this->request->getGet('month') ?? date('Y-m');
         $selectedCategory = $this->request->getGet('category');
         $selectedUser = $this->request->getGet('user');
 
-        // Calculate start and end dates for the selected month
         $startDate = date('Y-m-01', strtotime($selectedMonth));
         $endDate = date('Y-m-t', strtotime($selectedMonth));
 
-        // Get all users for filter dropdown
         $userModel = new UserModel();
         $users = $userModel->getAllhistoryUsers();
 
-        // Get attendance data with category and user filter
+        // Get current user details for signature
+        $userId = user_id();
+        $userDetails = $userModel->select('users.*, users.signature, users.position as user_position, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
+            ->join('departments', 'departments.id = users.department_id', 'left')
+            ->join('divisions', 'divisions.id = users.division_id', 'left')
+            ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
+            ->where('users.id', $userId)
+            ->first();
+
         $absensiData = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, $selectedCategory, $selectedUser);
 
         // Calculate total hours
@@ -652,15 +661,11 @@ class Absensi extends BaseController
         foreach ($absensiData as &$item) {
             if ($item['jam_masuk'] && $item['jam_keluar']) {
                 $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
-
                 $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
                 $keluar = strtotime($tanggal_keluar . ' ' . $item['jam_keluar']);
-
                 $diffMinutes = ($keluar - $masuk) / 60;
-
                 $hours = floor($diffMinutes / 60);
                 $minutes = $diffMinutes % 60;
-
                 $item['total_jam'] = sprintf('%d jam %02d menit', $hours, $minutes);
                 $totalHours += $diffMinutes / 60;
             } else {
@@ -668,7 +673,6 @@ class Absensi extends BaseController
             }
         }
 
-        // Load categories for dropdown
         $categoryModel = new \App\Models\Absensi\AbsenCategoryModel();
         $categories = $categoryModel->findAll();
 
@@ -678,10 +682,170 @@ class Absensi extends BaseController
             'totalHours' => number_format($totalHours, 2),
             'categories' => $categories,
             'users' => $users,
-            'selectedUser' => $selectedUser
+            'selectedUser' => $selectedUser,
+            'selectedMonth' => $selectedMonth,
+            'userDetails' => $userDetails,
+            'currentUser' => user()
         ];
 
         return view('absensi/superadmin/history', $data);
+    }
+
+    public function previewPdf()
+    {
+        // Validate AJAX request
+        if (!$this->request->isAJAX()) {
+            return $this->response->setStatusCode(400)
+                ->setJSON(['success' => false, 'message' => 'Invalid request']);
+        }
+
+        try {
+            // Get and validate parameters
+            $userId = $this->request->getGet('userId');
+            $selectedMonth = $this->request->getGet('month');
+            $isSigned = $this->request->getGet('signed') === 'true';
+
+            if (!$userId || !$selectedMonth) {
+                throw new \Exception('Missing required parameters');
+            }
+
+            // Get user details with proper error handling
+            $userModel = new UserModel();
+            $userDetails = $userModel->select('users.*, users.signature, users.position as user_position, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
+                ->join('departments', 'departments.id = users.department_id', 'left')
+                ->join('divisions', 'divisions.id = users.division_id', 'left')
+                ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
+                ->where('users.id', $userId)
+                ->first();
+
+            if (!$userDetails) {
+                throw new \Exception('User not found');
+            }
+
+            // Get attendance data
+            $startDate = date('Y-m-01', strtotime($selectedMonth));
+            $endDate = date('Y-m-t', strtotime($selectedMonth));
+            $absensi = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, null, $userId);
+
+            // Add a default NIK value to each item in absensi array if not present
+            foreach ($absensi as &$item) {
+                if (!isset($item['nik']) || empty($item['nik'])) {
+                    $item['nik'] = $userDetails['nik'] ?? 'N/A';
+                }
+                // Add default pbr_tugas if not set
+                if (!isset($item['pbr_tugas']) || empty($item['pbr_tugas'])) {
+                    $item['pbr_tugas'] = 'Manager';
+                }
+            }
+            unset($item); // Break the reference
+
+            // Check logo path exists
+            $logo_path = FCPATH . 'img/lintas.jpg';
+            if (!file_exists($logo_path)) {
+                $logo_path = ''; // Set empty if file doesn't exist
+                log_message('warning', 'Logo file not found: ' . $logo_path);
+            }
+
+            // Sort absensi by date
+            usort($absensi, function ($a, $b) {
+                return strtotime($a['tanggal']) - strtotime($b['tanggal']);
+            });
+
+            // Prepare data for PDF
+            $data = [
+                'userData' => $userDetails,
+                'absensi' => $absensi,
+                'selectedMonth' => $selectedMonth,
+                'currentUser' => user(),
+                'isSigned' => $isSigned,
+                'logo_path' => $logo_path
+            ];
+
+            // Generate PDF
+            $mpdf = new \Mpdf\Mpdf([
+                'margin_left' => 15,
+                'margin_right' => 15,
+                'margin_top' => 20,
+                'margin_bottom' => 20,
+                'margin_header' => 10,
+                'margin_footer' => 10
+            ]);
+
+            // Ensure proper content type and encoding
+            $this->response->setHeader('Content-Type', 'application/json');
+
+            // Generate PDF content
+            $html = view('absensi/superadmin/pdf', $data);
+            $mpdf->WriteHTML($html);
+            $pdfContent = $mpdf->Output('', 'S');
+
+            return $this->response->setJSON([
+                'success' => true,
+                'pdfData' => base64_encode($pdfContent)
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'PDF Generation Error: ' . $e->getMessage() . ' - ' . $e->getTraceAsString());
+            return $this->response->setStatusCode(500)
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'Error generating PDF: ' . $e->getMessage()
+                ]);
+        }
+    }
+
+    public function signPdf()
+    {
+        // Validate AJAX request
+        if (!$this->request->isAJAX()) {
+            return $this->response->setStatusCode(400)
+                ->setJSON(['success' => false, 'message' => 'Invalid request']);
+        }
+
+        try {
+            // Get JSON body data
+            $jsonData = $this->request->getJSON(true);
+
+            if (!isset($jsonData['userId']) || !isset($jsonData['month'])) {
+                throw new \Exception('Missing required parameters');
+            }
+
+            $currentUser = user();
+            if (!$currentUser) {
+                throw new \Exception('User not found');
+            }
+
+            if (!$currentUser->signature || !file_exists(FCPATH . 'img/ttd/' . $currentUser->signature)) {
+                throw new \Exception('Signature not found');
+            }
+
+            // Update sign_pdf status to 1 for the selected month and user
+            $userId = $jsonData['userId'];
+            $month = $jsonData['month'];
+            $startDate = date('Y-m-01', strtotime($month));
+            $endDate = date('Y-m-t', strtotime($month));
+
+            // Update sign_pdf to 1 (signed) for all relevant records
+            $this->db->table('absensi')
+                ->where('user_id', $userId)
+                ->where('tanggal >=', $startDate)
+                ->where('tanggal <=', $endDate)
+                ->set(['sign_pdf' => 1])
+                ->update();
+
+            // Set GET parameters for previewPdf
+            $_GET['userId'] = $jsonData['userId'];
+            $_GET['month'] = $jsonData['month'];
+            $_GET['signed'] = 'true';
+
+            return $this->previewPdf();
+        } catch (\Exception $e) {
+            log_message('error', 'PDF Signing Error: ' . $e->getMessage());
+            return $this->response->setStatusCode(500)
+                ->setJSON([
+                    'success' => false,
+                    'message' => 'Error signing document: ' . $e->getMessage()
+                ]);
+        }
     }
 
     public function superadminExportExcel()
