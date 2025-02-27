@@ -44,7 +44,7 @@
                                     <option value="all" <?= ($selectedUser === null || $selectedUser === 'all') ? 'selected' : '' ?>>All Users</option>
                                     <?php foreach ($users as $user): ?>
                                         <option value="<?= $user['id'] ?>" <?= ($selectedUser == $user['id']) ? 'selected' : '' ?>>
-                                            <?= esc($user['username']) ?>
+                                            <?= esc($user['fullname']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -129,11 +129,6 @@
                 <div id="pdfPreviewContent"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="signPdfBtn"
-                    data-user-id="<?= user_id() ?>"
-                    data-signature="<?= $userDetails->signature ?? '' ?>">
-                    <i class="fas fa-signature"></i> Sign PDF
-                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -175,7 +170,6 @@
             }
         }
 
-        // Modify your previewPdf function
         async function previewPdf(userId, month, signed = false) {
             try {
                 showLoading();
@@ -245,8 +239,8 @@
                     throw new Error(data.message || 'Failed to sign PDF');
                 }
 
-                // After successful signing, show the signed PDF
-                await previewPdf(userId, month, true);
+                // After successful signing, show the signed PDF with same parameters
+                await previewPdf(data.userId, data.month, true);
                 alert('Document signed successfully!');
 
             } catch (error) {

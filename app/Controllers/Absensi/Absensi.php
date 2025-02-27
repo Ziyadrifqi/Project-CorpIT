@@ -419,174 +419,15 @@ class Absensi extends BaseController
         return view('absensi/history', $data);
     }
 
-
-    public function exportExcel()
+    public function preview()
     {
         if (!logged_in()) {
-            return redirect()->to('/login');
-        }
-
-        // Cek apakah user memiliki akses
-        $userGroup = $this->groupUserModel->where('user_id', user_id())->first();
-        if ($userGroup['group_id'] != 1) {  // Sesuaikan dengan ID group admin
-            return redirect()->to('/absensi')->with('error', 'Akses ditolak!');
+            return $this->response->setJSON(['success' => false, 'message' => 'Please login first']);
         }
 
         // Get filter parameters
         $selectedMonth = $this->request->getGet('month') ?? date('Y-m');
-        $selectedCategory = $this->request->getGet('category');
-        $startDate = date('Y-m-01', strtotime($selectedMonth));
-        $endDate = date('Y-m-t', strtotime($selectedMonth));
-
-        // Ambil data absensi dengan filter
-        $absensiData = $this->absensiModel->getHistory(user_id(), $startDate, $endDate, $selectedCategory);
-
-        // Buat spreadsheet baru
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Set page title
-        $sheet->setTitle('Attendance Report');
-
-        // Set document properties
-        $spreadsheet->getProperties()
-            ->setCreator(user()->username)
-            ->setTitle('Attendance Report ' . date('F Y', strtotime($selectedMonth)))
-            ->setSubject('Monthly Attendance')
-            ->setDescription('Attendance report generated on ' . date('Y-m-d'));
-
-        // Styling untuk header
-        $headerStyle = [
-            'font' => [
-                'bold' => true,
-                'color' => ['rgb' => 'FFFFFF']
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '4472C4']
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['rgb' => '000000']
-                ]
-            ]
-        ];
-
-        // Set header
-        $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'Start Date');
-        $sheet->setCellValue('C1', 'Category');
-        $sheet->setCellValue('D1', 'Activity Title');
-        $sheet->setCellValue('E1', 'Start Time');
-        $sheet->setCellValue('F1', 'End Time');
-        $sheet->setCellValue('G1', 'End Date');
-        $sheet->setCellValue('H1', 'Total Hours');
-        $sheet->setCellValue('I1', 'Assignor');
-        $sheet->setCellValue('J1', 'Daily Activities');
-        $sheet->setCellValue('K1', 'Ticket Number');
-
-        // Apply header style
-        $sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
-
-        // Set column widths
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(12);
-        $sheet->getColumnDimension('C')->setWidth(15);
-        $sheet->getColumnDimension('D')->setWidth(25);
-        $sheet->getColumnDimension('E')->setWidth(10);
-        $sheet->getColumnDimension('F')->setWidth(10);
-        $sheet->getColumnDimension('G')->setWidth(15);
-        $sheet->getColumnDimension('H')->setWidth(15);
-        $sheet->getColumnDimension('I')->setWidth(15);
-        $sheet->getColumnDimension('J')->setWidth(30);
-        $sheet->getColumnDimension('K')->setWidth(15);
-
-        // Set data
-        $row = 2;
-        $totalHours = 0;
-        foreach ($absensiData as $index => $item) {
-            $sheet->setCellValue('A' . $row, $index + 1);
-            $sheet->setCellValue('B' . $row, date('d/m/Y', strtotime($item['tanggal'])));
-            $sheet->setCellValue('C' . $row, $item['category_name']);
-            $sheet->setCellValue('D' . $row, $item['judul_kegiatan']);
-            $sheet->setCellValue('E' . $row, $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-');
-            $sheet->setCellValue('F' . $row, $item['jam_keluar'] ? date('H:i', strtotime($item['jam_keluar'])) : '-');
-            $sheet->setCellValue('G' . $row, $item['tanggal_keluar'] ? date('d/m/Y', strtotime($item['tanggal_keluar'])) : '-');
-
-            // Calculate total hours
-            if ($item['jam_masuk'] && $item['jam_keluar']) {
-                $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
-                $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
-                $keluar = strtotime($tanggal_keluar . ' ' . $item['jam_keluar']);
-                $diffMinutes = ($keluar - $masuk) / 60;
-                $hours = floor($diffMinutes / 60);
-                $minutes = $diffMinutes % 60;
-                $totalHoursItem = sprintf('%d jam %02d menit', $hours, $minutes);
-                $totalHoursDecimal = $diffMinutes / 60;
-            } else {
-                $totalHoursItem = '-';
-                $totalHoursDecimal = 0;
-            }
-
-            $sheet->setCellValue('H' . $row, $totalHoursItem);
-            $sheet->setCellValue('I' . $row, $item['pbr_tugas'] ?? '-');
-            $sheet->setCellValue('J' . $row, $item['kegiatan_harian'] ?? '-');
-            $sheet->setCellValue('K' . $row, $item['no_tiket'] ?? '-');
-
-            // Style for data rows
-            $sheet->getStyle('A' . $row . ':K' . $row)->applyFromArray([
-                'alignment' => [
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-                ],
-                'borders' => [
-                    'allBorders' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                        'color' => ['rgb' => '000000']
-                    ]
-                ]
-            ]);
-
-            $totalHours += $totalHoursDecimal;
-            $row++;
-        }
-
-        // Add total hours summary
-        $sheet->setCellValue('G' . $row, 'Total Hours:');
-        $sheet->setCellValue('H' . $row, sprintf('%.2f jam', $totalHours));
-        $sheet->getStyle('G' . $row . ':H' . $row)->applyFromArray([
-            'font' => ['bold' => true],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'E6E6E6']
-            ]
-        ]);
-
-        // Filename with month and year
-        $filename = 'Attendance_Report_' . date('F_Y', strtotime($selectedMonth)) . '_' . date('Y-m-d') . '.xlsx';
-
-        // Set header untuk download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
-        exit;
-    }
-    public function exportPdf()
-    {
-        if (!logged_in()) {
-            return redirect()->to('/login');
-        }
-
-        // Get filter parameters
-        $selectedMonth = $this->request->getGet('month') ?? date('Y-m');
-        $selectedCategory = $this->request->getGet('category');
+        $selectedCategory = $this->request->getGet('category') ?? '';
         $startDate = date('Y-m-01', strtotime($selectedMonth));
         $endDate = date('Y-m-t', strtotime($selectedMonth));
 
@@ -602,11 +443,20 @@ class Absensi extends BaseController
         // Get attendance data with filter
         $absensiData = $this->absensiModel->getHistory(user_id(), $startDate, $endDate, $selectedCategory);
 
+        // If no data found
+        if (empty($absensiData)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'No attendance data found for the selected period and category'
+            ]);
+        }
+
         // Data untuk view
         $data = [
             'absensi' => $absensiData,
             'selectedMonth' => date('F Y', strtotime($selectedMonth)),
-            'userData' => $userData
+            'userData' => $userData,
+            'selectedCategory' => $selectedCategory
         ];
 
         $data['logo_path'] = FCPATH . 'img/lintas.jpg';
@@ -623,12 +473,20 @@ class Absensi extends BaseController
         // Write HTML to PDF
         $mpdf->WriteHTML($html);
 
-        // Output PDF
-        $filename = 'Laporan_Absensi_' . date('F_Y', strtotime($selectedMonth)) . '_' . date('Y-m-d') . '.pdf';
-        $mpdf->Output($filename, 'D');
-        exit;
-    }
+        // Generate filename with category if selected
+        $categorySegment = $selectedCategory ? '_Category_' . str_replace(' ', '_', $selectedCategory) : '';
+        $filename = 'Laporan_Absensi_' . date('F_Y', strtotime($selectedMonth)) . $categorySegment . '.pdf';
 
+        // Output PDF as string
+        $pdfContent = $mpdf->Output('', 'S');
+
+        // Return as JSON response with Base64 encoded PDF
+        return $this->response->setJSON([
+            'success' => true,
+            'pdf' => base64_encode($pdfContent),
+            'filename' => $filename
+        ]);
+    }
     public function superadminHistory()
     {
         if (!logged_in()) {
@@ -739,6 +597,15 @@ class Absensi extends BaseController
             }
             unset($item); // Break the reference
 
+            // Check if user has signature file
+            if ($isSigned && isset($currentUser) && isset($currentUser->signature)) {
+                $signaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
+                if (!file_exists($signaturePath)) {
+                    log_message('warning', 'Signature file not found: ' . $signaturePath);
+                    // Don't throw exception, continue without signature
+                }
+            }
+
             // Check logo path exists
             $logo_path = FCPATH . 'img/lintas.jpg';
             if (!file_exists($logo_path)) {
@@ -746,7 +613,7 @@ class Absensi extends BaseController
                 log_message('warning', 'Logo file not found: ' . $logo_path);
             }
 
-            // Sort absensi by date
+            // Sort absensi by date consistently
             usort($absensi, function ($a, $b) {
                 return strtotime($a['tanggal']) - strtotime($b['tanggal']);
             });
@@ -761,7 +628,7 @@ class Absensi extends BaseController
                 'logo_path' => $logo_path
             ];
 
-            // Generate PDF
+            // Generate PDF with consistent settings
             $mpdf = new \Mpdf\Mpdf([
                 'margin_left' => 15,
                 'margin_right' => 15,
@@ -858,213 +725,5 @@ class Absensi extends BaseController
                     'message' => 'Error signing document: ' . $e->getMessage()
                 ]);
         }
-    }
-
-    public function superadminExportExcel()
-    {
-        if (!logged_in()) {
-            return redirect()->to('/login');
-        }
-
-        // Get filter parameters
-        $selectedMonth = $this->request->getGet('month') ?? date('Y-m');
-        $selectedCategory = $this->request->getGet('category');
-        $selectedUser = $this->request->getGet('user');
-        $startDate = date('Y-m-01', strtotime($selectedMonth));
-        $endDate = date('Y-m-t', strtotime($selectedMonth));
-
-        // Ambil data absensi dengan filter
-        $absensiData = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, $selectedCategory, $selectedUser);
-
-        if (empty($absensiData)) {
-            session()->setFlashdata('error', 'No data available for the selected period');
-            return redirect()->back();
-        }
-
-        // Buat spreadsheet baru
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Set page title
-        $sheet->setTitle('User Attendance Report');
-
-        // Set document properties
-        $spreadsheet->getProperties()
-            ->setCreator(user()->username)
-            ->setTitle('User Attendance Report ' . date('F Y', strtotime($selectedMonth)))
-            ->setSubject('Monthly User Attendance')
-            ->setDescription('User attendance report generated on ' . date('Y-m-d'));
-
-        // Styling untuk header
-        $headerStyle = [
-            'font' => [
-                'bold' => true,
-                'color' => ['rgb' => 'FFFFFF']
-            ],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '4472C4']
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-            ],
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                    'color' => ['rgb' => '000000']
-                ]
-            ]
-        ];
-
-        // Set header
-        $sheet->setCellValue('A1', 'No');
-        $sheet->setCellValue('B1', 'User');
-        $sheet->setCellValue('C1', 'Start Date');
-        $sheet->setCellValue('D1', 'Category');
-        $sheet->setCellValue('E1', 'Activity Title');
-        $sheet->setCellValue('F1', 'Start Time');
-        $sheet->setCellValue('G1', 'End Time');
-        $sheet->setCellValue('H1', 'End Date');
-        $sheet->setCellValue('I1', 'Total Hours');
-        $sheet->setCellValue('J1', 'Daily Activities');
-        $sheet->setCellValue('K1', 'Ticket Number');
-
-        // Apply header style
-        $sheet->getStyle('A1:K1')->applyFromArray($headerStyle);
-
-        // Set column widths
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(15);
-        $sheet->getColumnDimension('C')->setWidth(12);
-        $sheet->getColumnDimension('D')->setWidth(15);
-        $sheet->getColumnDimension('E')->setWidth(25);
-        $sheet->getColumnDimension('F')->setWidth(10);
-        $sheet->getColumnDimension('G')->setWidth(10);
-        $sheet->getColumnDimension('H')->setWidth(15);
-        $sheet->getColumnDimension('I')->setWidth(15);
-        $sheet->getColumnDimension('J')->setWidth(30);
-        $sheet->getColumnDimension('K')->setWidth(15);
-
-        // Set data
-        $row = 2;
-        $totalHours = 0;
-        foreach ($absensiData as $index => $item) {
-            $sheet->setCellValue('A' . $row, $index + 1);
-            $sheet->setCellValue('B' . $row, $item['user_name']);
-            $sheet->setCellValue('C' . $row, date('d/m/Y', strtotime($item['tanggal'])));
-            $sheet->setCellValue('D' . $row, $item['category_name']);
-            $sheet->setCellValue('E' . $row, $item['judul_kegiatan']);
-            $sheet->setCellValue('F' . $row, $item['jam_masuk'] ? date('H:i', strtotime($item['jam_masuk'])) : '-');
-            $sheet->setCellValue('G' . $row, $item['jam_keluar'] ? date('H:i', strtotime($item['jam_keluar'])) : '-');
-            $sheet->setCellValue('H' . $row, $item['tanggal_keluar'] ? date('d/m/Y', strtotime($item['tanggal_keluar'])) : '-');
-
-            // Calculate total hours
-            if ($item['jam_masuk'] && $item['jam_keluar']) {
-                $tanggal_keluar = !empty($item['tanggal_keluar']) ? $item['tanggal_keluar'] : $item['tanggal'];
-                $masuk = strtotime($item['tanggal'] . ' ' . $item['jam_masuk']);
-                $keluar = strtotime($tanggal_keluar . ' ' . $item['jam_keluar']);
-                $diffMinutes = ($keluar - $masuk) / 60;
-                $hours = floor($diffMinutes / 60);
-                $minutes = $diffMinutes % 60;
-                $totalHoursItem = sprintf('%d jam %02d menit', $hours, $minutes);
-                $totalHoursDecimal = $diffMinutes / 60;
-            } else {
-                $totalHoursItem = '-';
-                $totalHoursDecimal = 0;
-            }
-
-            $sheet->setCellValue('I' . $row, $totalHoursItem);
-            $sheet->setCellValue('J' . $row, $item['kegiatan_harian'] ?? '-');
-            $sheet->setCellValue('K' . $row, $item['no_tiket'] ?? '-');
-
-            // Style for data rows
-            $sheet->getStyle('A' . $row . ':K' . $row)->applyFromArray([
-                'alignment' => [
-                    'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER
-                ],
-                'borders' => [
-                    'allBorders' => [
-                        'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                        'color' => ['rgb' => '000000']
-                    ]
-                ]
-            ]);
-
-            $totalHours += $totalHoursDecimal;
-            $row++;
-        }
-
-        // Add total hours summary
-        $sheet->setCellValue('H' . $row, 'Total Hours:');
-        $sheet->setCellValue('I' . $row, sprintf('%.2f jam', $totalHours));
-        $sheet->getStyle('H' . $row . ':I' . $row)->applyFromArray([
-            'font' => ['bold' => true],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'E6E6E6']
-            ]
-        ]);
-
-        // Filename with month and year
-        $filename = 'User_Attendance_Report_' . date('F_Y', strtotime($selectedMonth)) . '_' . date('Y-m-d') . '.xlsx';
-
-        // Set header untuk download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
-        exit;
-    }
-    public function exportPdfsuper()
-    {
-        if (!logged_in()) {
-            return redirect()->to('/login');
-        }
-
-        // Get filter parameters
-        $selectedMonth = $this->request->getGet('month') ?? date('Y-m');
-        $selectedCategory = $this->request->getGet('category');
-        $selectedUser = $this->request->getGet('user');
-        $startDate = date('Y-m-01', strtotime($selectedMonth));
-        $endDate = date('Y-m-t', strtotime($selectedMonth));
-        // Get user details with joined tables
-        $userModel = new \App\Models\UserModel();
-        $userData = $userModel->select('users.*, divisions.name as division_name, departments.name as department_name, sub_departments.name as sub_department_name')
-            ->join('departments', 'departments.id = users.department_id', 'left')
-            ->join('divisions', 'divisions.id = users.division_id', 'left')
-            ->join('sub_departments', 'sub_departments.id = users.sub_department_id', 'left')
-            ->where('users.id', user_id())
-            ->first();
-        // Ambil data absensi dengan filter
-        $absensiData = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, $selectedCategory, $selectedUser);
-
-        // Handle empty results
-        if (empty($absensiData)) {
-            session()->setFlashdata('error', 'No data available for the selected period');
-            return redirect()->back();
-        }
-        // Data untuk view
-        $data = [
-            'absensi' => $absensiData,
-            'selectedMonth' => date('F Y', strtotime($selectedMonth)),
-            'userData' => $userData
-        ];
-
-        // Load mPDF
-        $mpdf = new \Mpdf\Mpdf();
-
-        // Render view to HTML
-        $html = view('absensi/superadmin/pdf', $data);
-
-        // Write HTML to PDF
-        $mpdf->WriteHTML($html);
-
-        // Output PDF
-        $filename = 'Laporan_Absensi_' . date('F_Y', strtotime($selectedMonth)) . '_' . date('Y-m-d') . '.pdf';
-        $mpdf->Output($filename, 'D');
-        exit;
     }
 }

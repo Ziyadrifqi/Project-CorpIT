@@ -106,6 +106,8 @@
         initializeDataTable('#overtimeTable');
         // Inisialisasi DataTables untuk #pdfTable 
         initializeDataTable('#pdfTable');
+        // Inisialisasi DataTables untuk #sign 
+        initializeDataTable('#sign');
         // Inisialisasi DataTables untuk #superadminHistoryAbsen
         initializeDataTable('#superadminHistory');
     });

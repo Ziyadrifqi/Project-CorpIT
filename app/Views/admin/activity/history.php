@@ -57,7 +57,7 @@
                                     <option value="all" <?= ($selectedUser === null) ? 'selected' : '' ?>>All Users</option>
                                     <?php foreach ($users as $user): ?>
                                         <option value="<?= $user['id'] ?>" <?= ($selectedUser == $user['id']) ? 'selected' : '' ?>>
-                                            <?= esc($user['username']) ?>
+                                            <?= esc($user['fullname']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -89,7 +89,6 @@
                                 <th>User</th>
                                 <th>Task</th>
                                 <th>Description</th>
-                                <th>Location</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>No Ticket</th>
@@ -103,13 +102,12 @@
                             <?php else: ?>
                                 <?php $i = 1; ?>
                                 <?php foreach ($activities as $activity): ?>
-                                    <tr>
+                                    <tr class="text-center">
                                         <td class="text-center"><?= $i++ ?></td>
                                         <td><?= date('d/m/Y', strtotime($activity['activity_date'])) ?></td>
-                                        <td><?= esc($activity['username']) ?></td>
+                                        <td><?= esc($activity['fullname']) ?></td>
                                         <td><?= esc($activity['task']) ?></td>
                                         <td><?= esc($activity['description']) ?></td>
-                                        <td><?= esc($activity['location']) ?></td>
                                         <td><?= esc($activity['start_time']) ?></td>
                                         <td><?= esc($activity['end_time']) ?></td>
                                         <td><?= esc($activity['no_tiket']) ?></td>

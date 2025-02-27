@@ -160,7 +160,7 @@
             <table>
                 <tr>
                     <td>NAMA</td>
-                    <td>: <?= $userData['username'] ?></td>
+                    <td>: <?= $userData['fullname'] ?></td>
                 </tr>
                 <tr>
                     <td>JABATAN</td>
@@ -234,7 +234,7 @@
                 <?php else: ?>
                     <div class="signature-space" style="height: 30px;"></div>
                 <?php endif; ?>
-                <p><u><?= $currentUser->username ?></u><br>NIK: 92161515</p>
+                <p><u><?= $currentUser->fullname ?></u><br>NIK: 92161515</p>
             </div>
             <div class="signature-box-right">
                 <p>Dibuat Oleh,</p>
@@ -245,7 +245,7 @@
                 <?php else: ?>
                     <div class="signature-space" style="height: 30px;"></div>
                 <?php endif; ?>
-                <p><u><?= esc($userData['username']) ?></u><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
+                <p><u><?= esc($userData['fullname']) ?></u><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
             </div>
         </div>
     </div>
@@ -265,7 +265,7 @@
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
                                 <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($activity['username']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['fullname']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
@@ -312,7 +312,7 @@
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u><?= $currentUser->username ?></u><br><br>NIK: 92161515</p>
+                                <p><u><?= $currentUser->fullname ?></u><br><br>NIK: 92161515</p>
                             </div>
                             <div class="signature-box-right">
                                 <p>Dibuat Oleh,</p>
@@ -323,7 +323,7 @@
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u><?= esc($userData['username']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
+                                <p><u><?= esc($userData['fullname']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
                             </div>
                         </div>
                     </div>
@@ -335,7 +335,7 @@
                         <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                             <tr>
                                 <td style="padding: 2px;">Nama</td>
-                                <td style="padding: 2px;">: <?= esc($activity['username']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($activity['fullname']) ?></td>
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">NIK</td>
@@ -382,7 +382,7 @@
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u><?= $currentUser->username ?></u><br><br>NIK: 92161515</p>
+                                <p><u><?= $currentUser->fullname ?></u><br><br>NIK: 92161515</p>
                             </div>
                             <div class="signature-box-right">
                                 <p>Dibuat Oleh,</p>
@@ -393,7 +393,7 @@
                                 <?php else: ?>
                                     <div class="signature-space" style="height: 30px;"></div>
                                 <?php endif; ?>
-                                <p><u><?= esc($userData['username']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
+                                <p><u><?= esc($userData['fullname']) ?></u><br><br>NIK: <?= esc($activity['nik']) ?? '-' ?></p>
                             </div>
                         </div>
                     </div>

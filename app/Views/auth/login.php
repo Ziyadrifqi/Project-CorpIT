@@ -15,7 +15,14 @@ $config = new AuthConfig(); // Inisialisasi konfigurasi Auth
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg">
+                        <div class="col-lg position-relative">
+                            <!-- Adjusted position for the close button -->
+                            <div class="position-absolute" style="top: 10px; right: 10px; z-index: 100;">
+                                <a href="<?= base_url('/') ?>" class="btn btn-sm btn-outline-secondary rounded-circle" style="width: 30px; height: 30px; padding: 4px 0;">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
+
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><?= lang('Auth.loginTitle') ?></h1>
@@ -50,7 +57,7 @@ $config = new AuthConfig(); // Inisialisasi konfigurasi Auth
                                     <?php if ($config->allowRemembering): ?>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" name="remembering" class="custom-control-input" <?php if (old('remember')) : ?> checked <?php endif ?>>
+                                                <input type="checkbox" name="remembering" class="custom-control-input" id="customCheck" <?php if (old('remember')) : ?> checked <?php endif ?>>
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>

@@ -59,16 +59,14 @@
             </div>
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-end gap-2">
-                    <a href="<?= base_url('admin/activity/export/pdf') . '?' . http_build_query(['month' => $selectedMonth, 'year' => $selectedYear]) ?>"
-                        class="btn btn-danger"
-                        title="<?= empty($activities) ? 'No data available to export' : 'Export to PDF' ?>">
-                        <i class="fas fa-file-pdf"></i> Export to PDF
-                    </a>
-                    <a href="<?= base_url('admin/activity/export/excel') . '?' . http_build_query(['month' => $selectedMonth, 'year' => $selectedYear]) ?>"
-                        class="btn btn-success"
-                        title="<?= empty($activities) ? 'No data available to export' : 'Export to Excel' ?>">
-                        <i class="fas fa-file-excel"></i> Export to Excel
-                    </a>
+                    <!-- Changed Export PDF to Preview PDF button -->
+                    <button id="previewPdfBtn" class="btn btn-danger"
+                        data-month="<?= $selectedMonth ?>"
+                        data-year="<?= $selectedYear ?>"
+                        <?= empty($activities) ? 'disabled' : '' ?>
+                        title="<?= empty($activities) ? 'No data available to preview' : 'Preview PDF' ?>">
+                        <i class="fas fa-file-pdf"></i> Preview PDF
+                    </button>
                 </div>
 
                 <div class="table-responsive">
@@ -79,7 +77,6 @@
                                 <th>Date</th>
                                 <th>Task</th>
                                 <th>Description</th>
-                                <th>Location</th>
                                 <th>Pemberi Tugas</th>
                                 <th>No. Ticket</th>
                                 <th>Start Time</th>
@@ -96,7 +93,6 @@
                                     <td><?= date('d/m/Y', strtotime($activity['activity_date'])) ?></td>
                                     <td><?= esc($activity['task']) ?></td>
                                     <td><?= esc($activity['description']) ?></td>
-                                    <td><?= esc($activity['location']) ?></td>
                                     <td><?= esc($activity['pbr_tugas']) ?></td>
                                     <td><?= esc($activity['no_tiket']) ?></td>
                                     <td><?= date('H:i', strtotime($activity['start_time'])) ?></td>
@@ -127,4 +123,110 @@
         </div>
     </div>
 </div>
+
+<!-- PDF Preview Modal -->
+<div class="modal fade" id="pdfPreviewModal" tabindex="-1" aria-labelledby="pdfPreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pdfPreviewModalLabel">PDF Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="ratio ratio-16x9">
+                    <iframe id="pdfPreviewFrame" style="width:100%; height:75vh;" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="#" id="downloadPdfBtn" class="btn btn-primary" download> <i class="fas fa-download"></i> Download PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- JavaScript for PDF Preview -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the PDF preview button
+        const previewPdfBtn = document.getElementById('previewPdfBtn');
+
+        if (previewPdfBtn) {
+            previewPdfBtn.addEventListener('click', function() {
+                // Get the month and year from data attributes
+                const month = this.getAttribute('data-month');
+                const year = this.getAttribute('data-year');
+
+                // Show loading
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+                this.disabled = true;
+
+                // Make the AJAX request
+                fetch(`<?= base_url('admin/activity/previewPdf') ?>?month=${month}&year=${year}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Reset button
+                        previewPdfBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Preview PDF';
+                        previewPdfBtn.disabled = false;
+
+                        if (!data.success) {
+                            alert(data.message || 'No data available for the selected period');
+                            return;
+                        }
+
+                        // Set up the PDF viewer
+                        const pdfData = data.pdf;
+                        const pdfBlob = base64ToBlob(pdfData, 'application/pdf');
+                        const pdfUrl = URL.createObjectURL(pdfBlob);
+
+                        // Set the iframe source
+                        document.getElementById('pdfPreviewFrame').src = pdfUrl;
+
+                        // Set up the download button
+                        const downloadBtn = document.getElementById('downloadPdfBtn');
+                        downloadBtn.href = pdfUrl;
+                        downloadBtn.download = data.filename;
+
+                        // Show the modal - Make sure you're using the Bootstrap 5 way to initialize modals
+                        var myModal = new bootstrap.Modal(document.getElementById('pdfPreviewModal'));
+                        myModal.show();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching PDF:', error);
+                        previewPdfBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Preview PDF';
+                        previewPdfBtn.disabled = false;
+                        alert('Failed to load PDF preview. Please try again.');
+                    });
+            });
+        }
+
+        // Helper function to convert base64 to Blob
+        function base64ToBlob(base64, contentType) {
+            contentType = contentType || '';
+            const sliceSize = 1024;
+            const byteCharacters = atob(base64);
+            const byteArrays = [];
+
+            for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                const slice = byteCharacters.slice(offset, offset + sliceSize);
+                const byteNumbers = new Array(slice.length);
+
+                for (let i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                const byteArray = new Uint8Array(byteNumbers);
+                byteArrays.push(byteArray);
+            }
+
+            return new Blob(byteArrays, {
+                type: contentType
+            });
+        }
+    });
+</script>
 <?= $this->endSection() ?>

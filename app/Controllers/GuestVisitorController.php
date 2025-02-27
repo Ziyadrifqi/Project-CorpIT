@@ -304,7 +304,7 @@ class GuestVisitorController extends Controller
         $userFilter = $this->request->getGet('user') ?? 'all';
 
         // Base query
-        $query = $this->guestVisitorModel->select('guest_visitors.*, users.username as created_by')
+        $query = $this->guestVisitorModel->select('guest_visitors.*, users.fullname as created_by')
             ->join('users', 'users.id = guest_visitors.user_id');
 
         // Apply filters

@@ -5,6 +5,17 @@
         <h3 class="card-title"><?= esc($title); ?></h3>
     </div>
     <div class="card-body">
+        <?php if (session()->has('success')): ?>
+            <div class="alert alert-success" id="alert-success">
+                <i class="fas fa-check-circle"></i> <?= esc(session('success')) ?>
+            </div>
+        <?php endif ?>
+
+        <?php if (session()->has('error')): ?>
+            <div class="alert alert-danger" id="alert-error">
+                <i class="fas fa-exclamation-circle"></i> <?= esc(session('error')) ?>
+            </div>
+        <?php endif ?>
         <div class="card mb-4">
             <div class="card-header">
                 <!-- Filter Form -->
@@ -23,16 +34,21 @@
                                     <option value="all" <?= ($selectedUser === 'all') ? 'selected' : '' ?>>All Users</option>
                                     <?php foreach ($users as $user): ?>
                                         <option value="<?= $user['id'] ?>" <?= ($selectedUser == $user['id']) ? 'selected' : '' ?>>
-                                            <?= esc($user['username']) ?>
+                                            <?= esc($user['fullname']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>&nbsp;</label><br>
                                 <button type="submit" class="btn btn-primary">Filter</button>
+                                <?php if ($selectedUser === 'all'): ?>
+                                    <a href="<?= base_url('admin/signpdf/downloadPdfsZip') . '?month=' . $selectedMonth . '&user=' . $selectedUser ?>" class="btn btn-success">
+                                        <i class="fas fa-download"></i> Download Full PDF
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -46,7 +62,7 @@
                                 <th>No</th>
                                 <th>User</th>
                                 <th>Periode</th>
-                                <th>Created At</th>
+                                <th>Signed At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -55,7 +71,7 @@
                             <?php foreach ($pdfs as $pdf): ?>
                                 <tr class="text-center">
                                     <td><?= $i++ ?></td>
-                                    <td><?= esc($pdf['username']) ?></td>
+                                    <td><?= esc($pdf['fullname']) ?></td>
                                     <td><?= esc($pdf['display_periode']) ?></td>
                                     <td><?= date('d M Y', strtotime($pdf['created_at'])) ?></td>
                                     <td>

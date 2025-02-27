@@ -20,7 +20,7 @@ class SignPdfModel extends Model
     public function getSignedDocuments($selectedMonth = null, $selectedUser = null)
     {
         $builder = $this->builder();
-        $builder->select('sign_pdf.*, users.username');
+        $builder->select('sign_pdf.*, users.fullname');
         $builder->join('users', 'users.id = sign_pdf.user_id');
 
         if ($selectedMonth) {

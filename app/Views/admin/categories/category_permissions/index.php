@@ -55,7 +55,7 @@
                             foreach ($categoryPermissions as $permission): ?>
                                 <tr>
                                     <td class="text-center"><?= $no++; ?></td>
-                                    <td><?= esc($permission['username']); ?></td>
+                                    <td><?= esc($permission['fullname']); ?></td>
                                     <td><?= esc($permission['categories']); ?></td>
                                     <td class="text-center">
                                         <a href="<?= base_url("admin/category-permissions/edit/{$permission['id']}"); ?>" class="btn btn-warning btn-sm">
@@ -64,7 +64,7 @@
                                         <form action="<?= base_url("admin/category-permissions/delete/{$permission['id']}"); ?>" method="post" style="display: inline-block;">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="_method" value="DELETE">
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?');">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete all permissions for this user?');">
                                                 <i class="fas fa-trash"></i> Delete
                                             </button>
                                         </form>

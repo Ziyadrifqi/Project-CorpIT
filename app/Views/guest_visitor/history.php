@@ -27,7 +27,7 @@
                                     <?php foreach ($users as $user): ?>
                                         <option value="<?= $user['id'] ?>"
                                             <?= ($selectedUser == $user['id']) ? 'selected' : '' ?>>
-                                            <?= esc($user['username']) ?>
+                                            <?= esc($user['fullname']) ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>

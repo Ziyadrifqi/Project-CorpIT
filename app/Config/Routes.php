@@ -45,7 +45,7 @@ $routes->post('absensi/start_new_attendance', 'Absensi\Absensi::start_new_attend
 $routes->get('absensi/superadmin/history', 'Absensi\Absensi::superadminHistory');
 $routes->get('/absensi/exportExcel', 'Absensi\Absensi::exportExcel');
 $routes->get('/absensi/superadminExportExcel', 'Absensi\Absensi::superadminExportExcel');
-$routes->get('/absensi/exportPdf', 'Absensi\Absensi::exportPdf');
+$routes->get('/absensi/preview', 'Absensi\Absensi::preview');
 $routes->get('/absensi/exportPdfsuper', 'Absensi\Absensi::exportPdfsuper');
 $routes->get('/absensi/previewPdf', 'Absensi\Absensi::previewPdf');
 $routes->post('/absensi/signPdf', 'Absensi\Absensi::signPdf');
@@ -145,6 +145,7 @@ $routes->group('admin', function ($routes) {
         $routes->post('update/(:num)', 'Activity\AdminActivity::update/$1');
         $routes->post('delete/(:num)', 'Activity\AdminActivity::delete/$1');
         $routes->get('export/(:alpha)', 'Activity\AdminActivity::export/$1');
+        $routes->get('previewPdf', 'Activity\AdminActivity::previewPdf');
         $routes->get('previewHistoryPdf', 'Activity\AdminActivity::previewHistoryPdf');
         $routes->get('downloadHistoryPdf', 'Activity\AdminActivity::downloadHistoryPdf');
         $routes->get('bulk-upload', 'Activity\AdminActivity::bulkUpload');
@@ -157,6 +158,8 @@ $routes->group('admin', function ($routes) {
     });
 
     $routes->get('activity/sign', 'SignPdfController::index');
+    $routes->get('activity/sign_admin', 'SignPdfController::admin_sign');
+    $routes->get('signpdf/downloadPdfsZip', 'SignPdfController::downloadPdfsZip');
 });
 
 $routes->get('activity/history', 'Activity\AdminActivity::history'); //halaman history tracking activity di superadmin

@@ -29,7 +29,7 @@ class AdminActivityModel extends Model
     public function getAdminActivities($userId, $startDate = null, $endDate = null)
     {
         $builder = $this->db->table('admin_activities a')
-            ->select('a.*, u.username')
+            ->select('a.*, u.fullname')
             ->join('users u', 'u.id = a.user_id')
             ->join('auth_groups_users agu', 'agu.user_id = u.id')
             ->where('agu.group_id', 1)
@@ -50,7 +50,7 @@ class AdminActivityModel extends Model
     public function getAllAdminActivities($startDate = null, $endDate = null, $selectedUser = null, $showSigned = false)
     {
         $builder = $this->db->table('admin_activities a')
-            ->select('a.*, u.username, u.signature')
+            ->select('a.*, u.fullname, u.signature')
             ->join('users u', 'u.id = a.user_id')
             ->join('auth_groups_users agu', 'agu.user_id = u.id')
             ->where('agu.group_id', 1);

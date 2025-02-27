@@ -160,7 +160,7 @@
             <table>
                 <tr>
                     <td>NAMA</td>
-                    <td>: <?= $userData['username'] ?? 'N/A' ?></td>
+                    <td>: <?= $userData['fullname'] ?? 'N/A' ?></td>
                 </tr>
                 <tr>
                     <td>JABATAN</td>
@@ -246,24 +246,14 @@
         <div class="signature-section">
             <div class="signature-box-left">
                 <p>Menyetujui,</p>
-                <?php
-                if ($isSigned && isset($currentUser) && isset($currentUser->signature)) {
-                    $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
-                    if (file_exists($currentUserSignaturePath)):
-                ?>
-                        <div class="signature-img">
-                            <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
-                        </div>
-                    <?php else: ?>
-                        <div class="signature-space"></div>
-                    <?php
-                    endif;
-                } else {
-                    ?>
-                    <div class="signature-space"></div>
-                <?php } ?>
-                <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br>
-                    NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
+                <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
+                    <div class="signature-img">
+                        <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                    </div>
+                <?php else: ?>
+                    <div class="signature-space" style="height: 30px;"></div>
+                <?php endif; ?>
+                <p><u><?= $currentUser->fullname ?></u><br>NIK: <?= $currentUser->nik ?? '92161515' ?></p>
             </div>
             <div class="signature-box-right">
                 <p>Dibuat Oleh,</p>
@@ -283,7 +273,7 @@
                     ?>
                     <div class="signature-space"></div>
                 <?php } ?>
-                <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br>
+                <p><u><?= isset($userData['fullname']) ? htmlspecialchars($userData['fullname']) : 'N/A' ?></u><br>
                     NIK: <?= isset($userData['nik']) ? htmlspecialchars($userData['nik']) : 'N/A' ?></p>
             </div>
         </div>
@@ -307,7 +297,7 @@
                             <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                                 <tr>
                                     <td style="padding: 2px;">Nama</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['username'] ?? $userData['username'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['fullname'] ?? $userData['fullname'] ?? 'N/A') ?></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">NIK</td>
@@ -348,21 +338,14 @@
                             <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
                                 <div class="signature-box-left">
                                     <p>Menyetujui,</p>
-                                    <?php if ($isSigned && isset($currentUser) && isset($currentUser->signature)):
-                                        $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
-                                        if (file_exists($currentUserSignaturePath)):
-                                    ?>
-                                            <div class="signature-img">
-                                                <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
-                                            </div>
-                                        <?php else: ?>
-                                            <div class="signature-space"></div>
-                                        <?php endif;
-                                    else: ?>
-                                        <div class="signature-space"></div>
+                                    <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
+                                        <div class="signature-img">
+                                            <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="signature-space" style="height: 30px;"></div>
                                     <?php endif; ?>
-                                    <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br><br>
-                                        NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
+                                    <p><u><?= $currentUser->fullname ?></u><br><br>NIK: <?= $currentUser->nik ?? '92161515' ?></p>
                                 </div>
                                 <div class="signature-box-right">
                                     <p>Dibuat Oleh,</p>
@@ -379,7 +362,7 @@
                                     else: ?>
                                         <div class="signature-space"></div>
                                     <?php endif; ?>
-                                    <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br><br>
+                                    <p><u><?= isset($userData['fullname']) ? htmlspecialchars($userData['fullname']) : 'N/A' ?></u><br><br>
                                         NIK: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></p>
                                 </div>
                             </div>
@@ -392,7 +375,7 @@
                             <table class="employee-info" style="width: 100%; margin: 0; padding: 0; font-size: 12px; border-collapse: collapse;">
                                 <tr>
                                     <td style="padding: 2px;">Nama</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['username'] ?? $userData['username'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['fullname'] ?? $userData['fullname'] ?? 'N/A') ?></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">NIK</td>
@@ -433,21 +416,14 @@
                             <div class="signature-section" style="display: flex; justify-content: space-between; margin-top: 20px;">
                                 <div class="signature-box-left">
                                     <p>Menyetujui,</p>
-                                    <?php if ($isSigned && isset($currentUser) && isset($currentUser->signature)):
-                                        $currentUserSignaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;
-                                        if (file_exists($currentUserSignaturePath)):
-                                    ?>
-                                            <div class="signature-img">
-                                                <img src="<?= $currentUserSignaturePath ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
-                                            </div>
-                                        <?php else: ?>
-                                            <div class="signature-space"></div>
-                                        <?php endif;
-                                    else: ?>
-                                        <div class="signature-space"></div>
+                                    <?php if ($isSigned && isset($currentUser) && $currentUser->signature): ?>
+                                        <div class="signature-img">
+                                            <img src="<?= FCPATH . 'img/ttd/' . $currentUser->signature ?>" alt="Signature" style="max-width: 100px; max-height: 50px;">
+                                        </div>
+                                    <?php else: ?>
+                                        <div class="signature-space" style="height: 30px;"></div>
                                     <?php endif; ?>
-                                    <p><u><?= isset($currentUser) ? htmlspecialchars($currentUser->username) : 'N/A' ?></u><br><br>
-                                        NIK: <?= isset($currentUser) && isset($currentUser->nik) ? htmlspecialchars($currentUser->nik) : '92161515' ?></p>
+                                    <p><u><?= $currentUser->fullname ?></u><br><br>NIK: <?= $currentUser->nik ?? '92161515' ?></p>
                                 </div>
                                 <div class="signature-box-right">
                                     <p>Dibuat Oleh,</p>
@@ -464,7 +440,7 @@
                                     else: ?>
                                         <div class="signature-space"></div>
                                     <?php endif; ?>
-                                    <p><u><?= isset($userData['username']) ? htmlspecialchars($userData['username']) : 'N/A' ?></u><br><br>
+                                    <p><u><?= isset($userData['fullname']) ? htmlspecialchars($userData['fullname']) : 'N/A' ?></u><br><br>
                                         NIK: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></p>
                                 </div>
                             </div>

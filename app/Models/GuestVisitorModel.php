@@ -17,7 +17,7 @@ class GuestVisitorModel extends Model
     public function getGuestsByUserId($userId)
     {
         return $this->db->table('guest_visitors')
-            ->select('guest_visitors.*, users.username as created_by')
+            ->select('guest_visitors.*, users.fullname as created_by')
             ->join('users', 'users.id = guest_visitors.user_id', 'left')
             ->where('guest_visitors.user_id', $userId)
             ->orderBy('guest_visitors.created_at', 'DESC')

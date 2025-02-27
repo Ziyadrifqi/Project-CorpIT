@@ -33,7 +33,7 @@
                     <!-- User Information -->
                     <div class="form-group mb-4">
                         <label class="form-label">User</label>
-                        <input type="text" class="form-control" value="<?= esc($user['username']); ?>" readonly>
+                        <input type="text" class="form-control" value="<?= esc($user['fullname']); ?>" readonly>
                     </div>
 
                     <!-- Category Selection -->

@@ -113,7 +113,7 @@ class AbsensiModel extends Model
 
     public function getSuperAdminHistory($startDate, $endDate, $categoryId = null, $userId = null)
     {
-        $builder = $this->select('absensi.*, users.username as user_name, absen_category.name as category_name')
+        $builder = $this->select('absensi.*, users.fullname as user_name, absen_category.name as category_name')
             ->join('users', 'users.id = absensi.user_id')
             ->join('auth_groups_users', 'auth_groups_users.user_id = absensi.user_id')
             ->join('absen_category', 'absen_category.id = absensi.category_id')

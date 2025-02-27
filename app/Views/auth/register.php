@@ -6,9 +6,14 @@
         <div class="col-md-15">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg">
+                        <div class="col-lg position-relative">
+                            <!-- Adjusted position for the close button -->
+                            <div class="position-absolute" style="top: 10px; right: 10px; z-index: 100;">
+                                <a href="<?= base_url('/') ?>" class="btn btn-sm btn-outline-secondary rounded-circle" style="width: 30px; height: 30px; padding: 4px 0;">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </div>
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><?= lang('Auth.register') ?></h1>

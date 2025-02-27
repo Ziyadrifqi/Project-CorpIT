@@ -32,12 +32,16 @@ class CategoryPermissionModel extends Model
             ->select('user_id, GROUP_CONCAT(category_id) as category_ids')
             ->groupBy('user_id');
 
-        return $this->select('users.id, users.username, GROUP_CONCAT(categories.name SEPARATOR ", ") as categories')
+        return $this->select('users.id, users.fullname, GROUP_CONCAT(categories.name SEPARATOR ", ") as categories')
             ->join('users', 'users.id = category_permissions.user_id')
             ->join('categories', 'categories.id = category_permissions.category_id')
             ->join('auth_groups_users', 'auth_groups_users.user_id = users.id')
             ->where('auth_groups_users.group_id', 1)
-            ->groupBy('users.id, users.username')
+            ->groupBy('users.id, users.fullname')
             ->findAll();
+    }
+    public function deletePermission($id)
+    {
+        return $this->where('id', $id)->delete();
     }
 }

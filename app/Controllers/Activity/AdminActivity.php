@@ -12,12 +12,14 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AdminActivity extends BaseController
 {
+
     protected $activityModel;
     protected $db;
     protected $userModel;
 
     public function __construct()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $this->activityModel = new AdminActivityModel();
         $this->db = \Config\Database::connect();
         $this->userModel = new UserModel();
@@ -318,117 +320,39 @@ class AdminActivity extends BaseController
             return redirect()->back();
         }
 
-        if ($type === 'excel') {
-            return $this->exportExcel($activities, $month, $year);
-        } else {
-            return $this->exportPdf($activities, $month, $year);
-        }
+
+        return $this->previewPdf($activities, $month, $year);
     }
 
-    private function exportExcel($activities, $month, $year)
+    public function previewPdf()
     {
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Set document properties
-        $spreadsheet->getProperties()
-            ->setCreator(user()->username)
-            ->setLastModifiedBy(user()->username)
-            ->setTitle('Activity Report')
-            ->setSubject('Activity Report')
-            ->setDescription('Activity Report generated on ' . date('Y-m-d H:i:s'));
-
-        // Add header
-        $period = $month ? date('F', mktime(0, 0, 0, $month, 1)) . ' ' . $year : $year;
-        $sheet->setCellValue('A1', 'PT. APLINUSA LINTASARTA');
-        $sheet->setCellValue('A2', 'ACTIVITY REPORT');
-        $sheet->setCellValue('A3', 'Period: ' . $period);
-        $sheet->setCellValue('A4', 'Generated: ' . date('d F Y'));
-        $sheet->setCellValue('A5', 'Name: ' . user()->username);
-
-        // Merge cells for header
-        $sheet->mergeCells('A1:K1');
-        $sheet->mergeCells('A2:K2');
-        $sheet->mergeCells('A3:K3');
-        $sheet->mergeCells('A4:K4');
-        $sheet->mergeCells('A5:K5');
-
-        // Style the header
-        $headerStyle = [
-            'font' => [
-                'bold' => true,
-                'size' => 14
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
-            ]
-        ];
-        $sheet->getStyle('A1:K5')->applyFromArray($headerStyle);
-
-        // Add table headers
-        $headers = ['No', 'Date', 'NIK', 'Pemberi Tugas', 'No Ticket', 'Task', 'Description', 'Location', 'Start Time', 'End Time', 'Total Lembur'];
-
-        $col = 'A';
-        $row = 10;
-        foreach ($headers as $header) {
-            $sheet->setCellValue($col++ . $row, $header);
+        if (!logged_in()) {
+            return redirect()->to('/login');
         }
 
-        // Style the table headers
-        $tableHeaderStyle = [
-            'font' => ['bold' => true],
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'CCCCCC']
-            ],
-            'alignment' => [
-                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
-            ]
-        ];
-        $sheet->getStyle('A7:K7')->applyFromArray($tableHeaderStyle);
+        $userId = user()->id;
+        $month = $this->request->getGet('month');
+        $year = $this->request->getGet('year') ?? date('Y');
 
-        // Add data
-        $row = 11;
-        foreach ($activities as $i => $activity) {
-            $total_lembur = $this->calculateTotalLembur(
-                $activity['activity_date'] . ' ' . $activity['start_time'],
-                $activity['activity_date'] . ' ' . $activity['end_time']
-            );
-
-            $sheet->setCellValue('A' . $row, $i + 1);
-            $sheet->setCellValue('B' . $row, date('d/m/Y', strtotime($activity['activity_date'])));
-            $sheet->setCellValue('C' . $row, $activity['nik']);
-            $sheet->setCellValue('D' . $row, $activity['pbr_tugas']);
-            $sheet->setCellValue('E' . $row, $activity['no_tiket']);
-            $sheet->setCellValue('F' . $row, $activity['task']);
-            $sheet->setCellValue('G' . $row, $activity['description']);
-            $sheet->setCellValue('H' . $row, $activity['location']);
-            $sheet->setCellValue('I' . $row, date('H:i', strtotime($activity['start_time'])));
-            $sheet->setCellValue('J' . $row, date('H:i', strtotime($activity['end_time'])));
-            $sheet->setCellValue('K' . $row, $total_lembur);
-            $row++;
+        // Calculate start and end dates for the filter
+        $startDate = null;
+        $endDate = null;
+        if ($month) {
+            $startDate = "$year-$month-01";
+            $endDate = date('Y-m-t', strtotime($startDate));
         }
 
-        // Auto-size untuk kolom baru
-        foreach (range('A', 'K') as $col) {
-            $sheet->getColumnDimension($col)->setAutoSize(true);
+        // Get filtered activities
+        $activities = $this->activityModel->getAdminActivities($userId, $startDate, $endDate);
+
+        // Check if there's no data
+        if (empty($activities)) {
+            return $this->response->setJSON([
+                'success' => false,
+                'message' => 'No data available for the selected period'
+            ]);
         }
 
-        // Create Excel file
-        $writer = new Xlsx($spreadsheet);
-        $filename = 'activity_report_' . ($month ? date('F_Y', mktime(0, 0, 0, $month, 1, $year)) : $year) . '.xlsx';
-
-        // Set headers for download
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $filename . '"');
-        header('Cache-Control: max-age=0');
-
-        $writer->save('php://output');
-        exit();
-    }
-
-    private function exportPdf($activities, $month, $year)
-    {
         // Prepare the data for the view
         $period = $month ? date('F Y', mktime(0, 0, 0, $month, 1, $year)) : $year;
 
@@ -467,10 +391,12 @@ class AdminActivity extends BaseController
             'totalLembur' => $totalLemburFormatted
         ];
         $data['logo_path'] = FCPATH . 'img/lintas.jpg';
+
         // Retrieve user signature
         $signaturePath = FCPATH . 'img/ttd/' . $userData['signature'];
         $data['signature_path'] = (file_exists($signaturePath) && $userData['signature']) ? $signaturePath : null;
-        // Load mPDF with custom settings
+
+        // Generate PDF content
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 15,
             'margin_right' => 15,
@@ -484,12 +410,15 @@ class AdminActivity extends BaseController
         $html = view('admin/activity/pdf_template', $data);
         $mpdf->WriteHTML($html);
 
-        // Set filename with period information
-        $filename = 'Activity_Report_' . ($month ? date('F_Y', mktime(0, 0, 0, $month, 1, $year)) : $year) . '.pdf';
+        // Output PDF as base64 string
+        $pdfContent = $mpdf->Output('', 'S');
+        $base64Pdf = base64_encode($pdfContent);
 
-        // Output PDF for download
-        $mpdf->Output($filename, 'D');
-        exit();
+        return $this->response->setJSON([
+            'success' => true,
+            'pdf' => $base64Pdf,
+            'filename' => 'Activity_Report_' . ($month ? date('F_Y', mktime(0, 0, 0, $month, 1, $year)) : $year) . '.pdf'
+        ]);
     }
 
     public function exportsuper($type = 'pdf')
@@ -606,9 +535,9 @@ class AdminActivity extends BaseController
                 return $this->response->setJSON(['success' => false, 'message' => 'No data found']);
             }
 
-            // Get username from users table
+            // Get fullname from users table
             $userModel = new \App\Models\UserModel();
-            $userData = $userModel->select('username')->find($selectedUser);
+            $userData = $userModel->select('fullname')->find($selectedUser);
             if (!$userData) {
                 return $this->response->setJSON(['success' => false, 'message' => 'User data not found']);
             }
@@ -638,10 +567,10 @@ class AdminActivity extends BaseController
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Generate custom filename: username_periode
+            // Generate custom filename: fullname_periode
             $periode = date('F_Y', mktime(0, 0, 0, $month, 1, $year));
-            $username = $userData['username']; // Changed from $userData->username to $userData['username']
-            $filename = $username . '_' . $periode . '.pdf';
+            $fullname = $userData['fullname']; // Changed from $userData->fullname to $userData['fullname']
+            $filename = $fullname . '_' . $periode . '.pdf';
             $filepath = $uploadDir . $filename;
 
             // Save PDF to file

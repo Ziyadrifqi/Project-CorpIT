@@ -134,41 +134,41 @@ class CategoryPermissionController extends BaseController
                 ->with('error', 'An error occurred while updating permissions.');
         }
     }
-
-    public function delete($id)
+    // This method should handle the DELETE route
+    public function delete($userId)
     {
         // Begin transaction
         $db = \Config\Database::connect();
         $db->transStart();
 
         try {
-            // Check if permission exists
-            $permission = $this->categoryPermissionModel->find($id);
-            if (!$permission) {
+            // Instead of finding a single permission, get all permissions for this user
+            $permissions = $this->categoryPermissionModel->where('user_id', $userId)->findAll();
+            if (empty($permissions)) {
                 return redirect()->back()
-                    ->with('error', 'Permission not found');
+                    ->with('error', 'No permissions found for this user');
             }
 
-            // Attempt to delete the permission
-            if (!$this->categoryPermissionModel->delete($id)) {
-                throw new \Exception('Failed to delete permission');
+            // Delete all permissions for this user
+            if (!$this->categoryPermissionModel->where('user_id', $userId)->delete()) {
+                throw new \Exception('Failed to delete permissions');
             }
 
             $db->transComplete();
 
             if ($db->transStatus() === false) {
                 return redirect()->back()
-                    ->with('error', 'Failed to delete permission. Please try again.');
+                    ->with('error', 'Failed to delete permissions. Please try again.');
             }
 
             return redirect()->to('/admin/category-permissions')
-                ->with('success', 'Category permission deleted successfully!');
+                ->with('success', 'Category permissions deleted successfully!');
         } catch (\Exception $e) {
             $db->transRollback();
-            log_message('error', 'Error deleting category permission: ' . $e->getMessage());
+            log_message('error', 'Error deleting category permissions: ' . $e->getMessage());
 
             return redirect()->back()
-                ->with('error', 'An error occurred while deleting the permission.');
+                ->with('error', 'An error occurred while deleting the permissions: ' . $e->getMessage());
         }
     }
 }

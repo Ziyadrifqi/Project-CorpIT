@@ -36,7 +36,7 @@
                         <select name="user_id" id="user_id" class="form-control select2-single" required>
                             <option value="">Choose a user</option>
                             <?php foreach ($users as $user) : ?>
-                                <option value="<?= $user['id']; ?>"><?= esc($user['username']); ?></option>
+                                <option value="<?= $user['id']; ?>"><?= esc($user['fullname']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
