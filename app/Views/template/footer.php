@@ -31,8 +31,6 @@
                                     </li>
                                     <li><a href="<?= base_url('pages/publication') ?>"><i class="fa-solid fa-chevrons-right"></i>Work Instruction</a></li>
                                     </li>
-                                    <li><a href="<?= base_url('pages/monitoringTicket') ?>"><i class="fa-solid fa-chevrons-right"></i>Monitoring Ticket</a></li>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

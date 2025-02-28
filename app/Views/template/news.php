@@ -32,17 +32,6 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-12 col-lg-8">
-                <?php if (!empty($categories)): ?>
-                    <div class="mb-4">
-                        <select class="form-select mb-3" id="categorySelect" onchange="filterCategory()">
-                            <option value="all">All Categories</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="category-<?= $category['id'] ?>"><?= esc($category['name']); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                <?php endif; ?>
-
                 <div class="news-standard-wrapper">
                     <?php foreach ($categories as $category): ?>
                         <div class="category-section" id="category-<?= $category['id'] ?>">
@@ -117,6 +106,14 @@
                         </div>
                         <div class="news-widget-categories">
                             <ul>
+                                <li class="mb-2">
+                                    <a href="javascript:void(0)" onclick="filterSingleCategory('all')" class="d-flex justify-content-between align-items-center">
+                                        <span>All Categories</span>
+                                        <span id="count-all">(<?= array_sum(array_map(function ($cat) {
+                                                                    return count($cat);
+                                                                }, $articlesByCategory)) ?>)</span>
+                                    </a>
+                                </li>
                                 <?php foreach ($categories as $category): ?>
                                     <li>
                                         <a href="#" onclick="filterSingleCategory('category-<?= $category['id'] ?>')">
