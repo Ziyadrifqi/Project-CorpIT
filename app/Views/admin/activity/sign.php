@@ -76,9 +76,9 @@
                                     <td><?= date('d M Y', strtotime($pdf['created_at'])) ?></td>
                                     <td>
                                         <?php if ($pdf['file_exists']): ?>
-                                            <a href="<?= esc($pdf['file_path']) ?>" class="btn btn-sm btn-info preview-btn" target="_blank">
+                                            <button class="btn btn-sm btn-info preview-btn" data-file="<?= esc($pdf['file_path']) ?>">
                                                 <i class="fas fa-eye"></i> Preview
-                                            </a>
+                                            </button>
                                         <?php else: ?>
                                             <span class="text-danger">File not found</span>
                                         <?php endif; ?>
@@ -93,18 +93,44 @@
     </div>
 </div>
 
+<!-- Modal for PDF Preview -->
+<div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pdfModalLabel">PDF Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
+        // Initialize Select2
         $('#select2-user').select2({
             theme: 'bootstrap',
             width: '100%',
             placeholder: 'Select User',
             allowClear: true,
             closeOnSelect: false
+        });
+
+        // PDF Preview Modal Handler
+        $('.preview-btn').on('click', function() {
+            var filePath = $(this).data('file');
+            $('#pdfViewer').attr('src', filePath);
+            $('#pdfModal').modal('show');
         });
     });
 </script>

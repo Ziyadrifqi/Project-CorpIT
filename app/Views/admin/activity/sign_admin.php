@@ -20,15 +20,12 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <!-- Filter Form - Only period filter for admin users -->
                 <form action="" method="get" class="mb-4">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Select Periode</label>
-                                <?php
-                                $selectedMonth = $_GET['month'] ?? date('Y-m');
-                                ?>
+                                <?php $selectedMonth = $_GET['month'] ?? date('Y-m'); ?>
                                 <input type="month" name="month" class="form-control" value="<?= $selectedMonth ?>">
                             </div>
                         </div>
@@ -41,7 +38,6 @@
                     </div>
                 </form>
 
-                <!-- Table -->
                 <div class="table-responsive">
                     <table class="table table-bordered table-sm" id="sign" width="100%" cellspacing="0">
                         <thead>
@@ -63,9 +59,9 @@
                                     <td><?= date('d M Y', strtotime($pdf['created_at'])); ?></td>
                                     <td>
                                         <?php if ($pdf['file_exists']): ?>
-                                            <a href="<?= $pdf['file_path']; ?>" class="btn btn-sm btn-info" target="_blank">
+                                            <button class="btn btn-sm btn-info view-pdf" data-file="<?= $pdf['file_path']; ?>" data-toggle="modal" data-target="#pdfModal">
                                                 <i class="fas fa-file-pdf"></i> View
-                                            </a>
+                                            </button>
                                             <a href="<?= $pdf['file_path']; ?>" class="btn btn-sm btn-success" download>
                                                 <i class="fas fa-download"></i> Download
                                             </a>
@@ -87,5 +83,35 @@
         </div>
     </div>
 </div>
+
+<!-- Modal untuk menampilkan PDF -->
+<div class="modal fade" id="pdfModal" tabindex="-1" role="dialog" aria-labelledby="pdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pdfModalLabel">View PDF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="pdfViewer" src="" width="100%" height="500px"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll(".view-pdf").forEach(function(button) {
+            button.addEventListener("click", function() {
+                var filePath = this.getAttribute("data-file");
+                document.getElementById("pdfViewer").src = filePath;
+            });
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>
