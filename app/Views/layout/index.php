@@ -110,6 +110,8 @@
         initializeDataTable('#sign');
         // Inisialisasi DataTables untuk #superadminHistoryAbsen
         initializeDataTable('#superadminHistory');
+        // Inisialisasi DataTables untuk #pjTable
+        initializeDataTable('#pjTable');
     });
 </script>
 

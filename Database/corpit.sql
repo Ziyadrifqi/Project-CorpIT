@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2025 at 08:08 AM
+-- Generation Time: Mar 06, 2025 at 09:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -115,16 +115,35 @@ CREATE TABLE `admin_activities` (
 --
 
 INSERT INTO `admin_activities` (`id`, `task`, `location`, `start_time`, `end_time`, `activity_date`, `description`, `created_at`, `updated_at`, `user_id`, `nik`, `pbr_tugas`, `no_tiket`, `sign_pdf`) VALUES
-(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-02-27 11:05:17', 1, '35647891', 'Rio Facrudin', '637484', 1),
+(1, 'monitoring', 'TB simatupang', '09:00:00', '14:00:00', '2025-01-15', 'Melakukan kegiatan', '2025-01-15 03:48:45', '2025-03-06 09:17:35', 1, '35647891', 'Rio Facrudin', '637484', 1),
 (3, 'Survei', 'Bogor', '09:00:00', '17:00:00', '2025-01-16', 'melakukan survei kepada', '2025-01-16 07:33:09', '2025-02-26 03:34:33', 3, '35279302', 'Randi Salam', '728392', 1),
 (5, 'monitoring', 'jakarta pusat', '10:00:00', '15:00:00', '2025-02-03', 'Melakukan Proses billing', '2025-02-03 06:13:18', '2025-02-26 15:55:14', 1, '35647891', 'Rio Facrudin', '202718', 0),
-(24, 'monitoring', 'jakarta pusat', '17:00:00', '20:00:00', '2025-01-24', 'Melakukan monitoring', '2025-02-24 06:43:29', '2025-02-27 11:05:17', 1, '35647891', 'Randi Salam', '627382', 1),
+(24, 'monitoring', 'jakarta pusat', '17:00:00', '20:00:00', '2025-01-24', 'Melakukan monitoring', '2025-02-24 06:43:29', '2025-03-06 09:17:35', 1, '35647891', 'Randi Salam', '627382', 1),
 (25, 'Meeting', 'Jakarta', '09:00:00', '10:00:00', '2025-02-01', 'Rapat internal', '2025-02-26 16:32:43', '2025-02-26 16:32:43', 1, '12345679', 'John Doe', '637289', 0),
 (26, 'Presentasi', 'Bandung', '14:00:00', '15:30:00', '2025-02-01', 'Presentasi produk', '2025-02-26 16:32:43', '2025-02-26 16:32:43', 1, '98765321', 'Jane Smith', '928023', 0),
 (30, 'Training', 'Surabaya', '08:00:00', '10:00:00', '2025-02-02', 'Pelatihan teknis', '2025-02-26 16:34:16', '2025-02-26 16:34:16', 1, '45689123', 'Mark Lee', '546382', 0),
 (31, 'Meeting', 'Jakarta', '09:00:00', '10:00:00', '2025-02-01', 'Rapat internal', '2025-02-27 09:55:11', '2025-02-27 09:55:11', 3, '12345679', 'Rio Fachrudin', '637289', 0),
 (32, 'Presentasi', 'Bandung', '14:00:00', '15:30:00', '2025-02-01', 'Presentasi produk', '2025-02-27 09:55:11', '2025-02-27 09:55:11', 3, '98765321', 'Randi Salam', '928023', 0),
 (33, 'Training', 'Surabaya', '08:00:00', '10:00:00', '2025-02-02', 'Pelatihan teknis', '2025-02-27 09:55:11', '2025-02-27 09:55:11', 3, '45689123', 'Randi Salam', '546382', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aplikasi`
+--
+
+CREATE TABLE `aplikasi` (
+  `id` int(11) NOT NULL,
+  `nama_aplikasi` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `aplikasi`
+--
+
+INSERT INTO `aplikasi` (`id`, `nama_aplikasi`) VALUES
+(1, 'BCR'),
+(2, 'CRM');
 
 -- --------------------------------------------------------
 
@@ -783,7 +802,24 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (476, '::1', 'ziyad@gmail.com', 1, '2025-02-27 03:52:13', 1),
 (477, '::1', 'ziyad@gmail.com', 1, '2025-02-27 04:04:21', 1),
 (478, '::1', 'ziyad@gmail.com', NULL, '2025-02-27 06:32:21', 0),
-(479, '::1', 'ziyad@gmail.com', 1, '2025-02-27 06:32:29', 1);
+(479, '::1', 'ziyad@gmail.com', 1, '2025-02-27 06:32:29', 1),
+(480, '::1', 'ziyad@gmail.com', 1, '2025-02-27 08:38:21', 1),
+(481, '::1', 'syakira02@gmail.com', 5, '2025-02-28 01:54:27', 1),
+(482, '::1', 'ziyad@gmail.com', 1, '2025-02-28 03:06:30', 1),
+(483, '::1', 'ziyad@gmail.com', 1, '2025-02-28 03:07:22', 1),
+(484, '::1', 'ziyad@gmail.com', 1, '2025-02-28 03:07:52', 1),
+(485, '::1', 'ziyad@gmail.com', 1, '2025-02-28 03:09:14', 1),
+(486, '::1', 'syakira02@gmail.com', 5, '2025-02-28 06:50:55', 1),
+(487, '::1', 'Rassya@gmail.com', 2, '2025-02-28 06:55:59', 1),
+(488, '::1', 'raihan@gmail.com', NULL, '2025-02-28 06:57:35', 0),
+(489, '::1', 'raihan@gmail.com', 3, '2025-02-28 06:57:47', 1),
+(490, '::1', 'ziyad@gmail.com', 1, '2025-02-28 07:21:51', 1),
+(491, '::1', 'syakira02@gmail.com', 5, '2025-03-05 01:21:43', 1),
+(492, '::1', 'ziyad@gmail.com', 1, '2025-03-05 01:38:50', 1),
+(493, '::1', 'syakira02@gmail.com', 5, '2025-03-05 07:03:13', 1),
+(494, '::1', 'ziyad@gmail.com', 1, '2025-03-06 01:36:26', 1),
+(495, '::1', 'syakira02@gmail.com', 5, '2025-03-06 01:38:07', 1),
+(496, '::1', 'syakira02@gmail.com', 5, '2025-03-06 04:53:15', 1);
 
 -- --------------------------------------------------------
 
@@ -1068,7 +1104,31 @@ INSERT INTO `guest_visitors` (`id`, `guest_name`, `user_id`, `status`, `created_
 (13, 'GUEST21022025_001\n', 1, 1, '2025-02-21 11:07:37', '2025-02-21 11:07:37', 'Rassya@gmail.com', '082627372743', '2025-02-23 11:07:37', 'syaa21'),
 (14, 'GUEST21022025_002', 1, 1, '2025-02-21 11:12:33', '2025-02-21 11:12:33', 'annindita@gmail.com', '088280197652', '2025-02-22 11:12:33', 'ditdit21'),
 (15, 'GUEST23022025_001', 1, 1, '2025-02-23 16:29:59', '2025-02-23 16:29:59', 'ziyadrpe@gmail.com', '082678394443', '2025-02-24 16:29:59', 'zizi23'),
-(16, 'GUEST26022025_001', 1, 1, '2025-02-26 09:34:28', '2025-02-26 09:34:28', 'ziyadrpe@gmail.com', '088280764865', '2025-02-27 09:34:28', 'zizi1234');
+(16, 'GUEST26022025_001', 1, 1, '2025-02-26 09:34:28', '2025-02-26 09:34:28', 'ziyadrpe@gmail.com', '088280764865', '2025-02-27 09:34:28', 'zizi1234'),
+(17, 'GUEST06032025_001', 1, 1, '2025-03-06 09:05:26', '2025-03-06 09:05:26', 'Rassya@gmail.com', '082676372443', '2025-03-07 09:05:26', 'ssyaa12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mapping`
+--
+
+CREATE TABLE `mapping` (
+  `id` int(11) NOT NULL,
+  `nama_user` varchar(100) NOT NULL,
+  `aplikasi_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `mapping`
+--
+
+INSERT INTO `mapping` (`id`, `nama_user`, `aplikasi_id`) VALUES
+(1, 'Rio Facrudin', 1),
+(2, 'Rifkha', 2),
+(3, 'Distra', 1),
+(4, 'Distra\r\n', 2),
+(5, 'Rio Facrudin', 2);
 
 -- --------------------------------------------------------
 
@@ -1122,9 +1182,10 @@ INSERT INTO `menus` (`id`, `name`, `icon`, `url`, `parent_id`, `order_pos`, `is_
 (31, 'Guest Visitor', 'fas fa-users', 'guest-visitor', 29, 1, 1, '2025-02-04 08:32:50', '2025-02-04 08:32:50'),
 (33, 'Guest Visitor history', 'fas fa-redo', 'guest-visitor/history', 29, 1, 1, '2025-02-12 02:51:49', '2025-02-12 02:58:47'),
 (34, 'Monitoring Overtime Admin', 'fas fa-history', '/overtime', 19, 4, NULL, '2025-02-19 04:16:29', '2025-02-20 03:01:18'),
-(35, '', NULL, NULL, NULL, 0, 1, '2025-02-24 12:28:12', '2025-02-24 12:28:12'),
 (36, 'Signed Overtime Documents', 'fas fa-signature', 'admin/activity/sign', 19, 5, 1, '2025-02-24 12:28:12', '2025-02-24 12:29:27'),
-(37, 'Signed Overtime Reports', 'fas fa-signature', 'admin/activity/sign_admin', 19, 6, 1, '2025-02-26 07:11:30', '2025-02-26 07:11:30');
+(37, 'Signed Overtime Reports', 'fas fa-signature', 'admin/activity/sign_admin', 19, 6, 1, '2025-02-26 07:11:30', '2025-02-26 07:11:30'),
+(39, 'PJ Assignment System', NULL, NULL, NULL, 1, 1, '2025-03-06 04:50:30', '2025-03-06 05:27:34'),
+(40, 'Auto Signed PJ', 'fas fa-user-check', 'pj-assignment', 39, 1, 1, '2025-03-06 04:51:24', '2025-03-06 05:45:09');
 
 -- --------------------------------------------------------
 
@@ -1180,6 +1241,30 @@ INSERT INTO `monitoring_tickets` (`id`, `user_id`, `ticket_number`, `subject`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pj_status`
+--
+
+CREATE TABLE `pj_status` (
+  `id` int(11) NOT NULL,
+  `mapping_id` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pj_status`
+--
+
+INSERT INTO `pj_status` (`id`, `mapping_id`, `status`, `created_at`) VALUES
+(1, 1, 1, '2025-03-06 13:13:03'),
+(2, 3, 1, '2025-03-06 14:12:55'),
+(3, 2, 1, '2025-03-06 14:18:11'),
+(4, 4, 1, '2025-03-06 14:19:10'),
+(5, 5, 1, '2025-03-06 14:19:18');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `role_menus`
 --
 
@@ -1230,7 +1315,9 @@ INSERT INTO `role_menus` (`id`, `role_id`, `menu_id`, `created_at`) VALUES
 (39, 3, 33, '2025-02-12 02:53:20'),
 (40, 3, 34, '2025-02-19 04:16:50'),
 (41, 3, 36, '2025-02-24 12:28:38'),
-(42, 1, 37, '2025-02-26 07:11:51');
+(42, 1, 37, '2025-02-26 07:11:51'),
+(43, 3, 40, '2025-03-06 04:53:03'),
+(44, 3, 39, '2025-03-06 04:53:03');
 
 -- --------------------------------------------------------
 
@@ -1253,7 +1340,7 @@ CREATE TABLE `sign_pdf` (
 
 INSERT INTO `sign_pdf` (`id`, `user_id`, `periode`, `name_pdf`, `created_at`, `updated_at`) VALUES
 (1, 3, 'January_2025', 'Raihan Putra_January_2025.pdf', '2025-02-25 20:34:34', '2025-02-26 03:34:34'),
-(2, 1, 'January_2025', 'ZiyadRifqi Permana_January_2025.pdf', '2025-02-27 04:05:18', '2025-02-27 11:05:18');
+(3, 1, 'January_2025', 'ZiyadRifqi Permana_January_2025.pdf', '2025-03-06 02:17:36', '2025-03-06 09:17:36');
 
 -- --------------------------------------------------------
 
@@ -1314,7 +1401,8 @@ INSERT INTO `tokens` (`id`, `access_token`, `refresh_token`, `expires_in`, `crea
 (20, 'SjOyS5Iiw25ieTmoSeCtjiAlPskPzwkU', 'Oc9zsLPhwPEV1L0n9YASVbK0W6SkBmYo', 7200, '2025-02-20 09:14:31', '2025-02-20 09:14:31'),
 (21, '1NXrJz384NpcD3zj7pWmye25vWhU59ID', 'CcaCydRfqdEG7MbPHu3K4m82gauNpKlG', 7200, '2025-02-21 11:07:33', '2025-02-21 11:12:28'),
 (22, 'uVexHdRmz6yNv23pfsYtmVUhKA9kLY3Z', '750x5MfIeuLYrAOUmXrqitznq9HkQ0ZQ', 7200, '2025-02-23 16:29:55', '2025-02-23 16:29:55'),
-(23, '63w6NckAn38rA2qR64tVjo0R0WDGdbL6', '5mZauh6SkK6ncaTp7DTgNh6xkSmlSflp', 7200, '2025-02-26 09:34:23', '2025-02-26 09:34:23');
+(23, '63w6NckAn38rA2qR64tVjo0R0WDGdbL6', '5mZauh6SkK6ncaTp7DTgNh6xkSmlSflp', 7200, '2025-02-26 09:34:23', '2025-02-26 09:34:23'),
+(24, 'MOU3ncM3kreNSSQz87Y9iDCEnrF7Quux', 'rjDMvuMmxMQ0giwThPmVdcD4zlRgYvaz', 7200, '2025-03-06 09:05:23', '2025-03-06 09:05:23');
 
 -- --------------------------------------------------------
 
@@ -1383,6 +1471,12 @@ ALTER TABLE `absen_category`
 ALTER TABLE `admin_activities`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_admin_activities_users` (`user_id`);
+
+--
+-- Indexes for table `aplikasi`
+--
+ALTER TABLE `aplikasi`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `articles`
@@ -1529,6 +1623,13 @@ ALTER TABLE `guest_visitors`
   ADD KEY `fk_guest_user` (`user_id`);
 
 --
+-- Indexes for table `mapping`
+--
+ALTER TABLE `mapping`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `aplikasi_id` (`aplikasi_id`);
+
+--
 -- Indexes for table `menus`
 --
 ALTER TABLE `menus`
@@ -1548,6 +1649,13 @@ ALTER TABLE `monitoring_tickets`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `ticket_number` (`ticket_number`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `pj_status`
+--
+ALTER TABLE `pj_status`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `mapping_id` (`mapping_id`);
 
 --
 -- Indexes for table `role_menus`
@@ -1612,6 +1720,12 @@ ALTER TABLE `admin_activities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT for table `aplikasi`
+--
+ALTER TABLE `aplikasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
@@ -1645,7 +1759,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=480;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=497;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -1717,13 +1831,19 @@ ALTER TABLE `file_distributions`
 -- AUTO_INCREMENT for table `guest_visitors`
 --
 ALTER TABLE `guest_visitors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `mapping`
+--
+ALTER TABLE `mapping`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -1738,16 +1858,22 @@ ALTER TABLE `monitoring_tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `pj_status`
+--
+ALTER TABLE `pj_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `role_menus`
 --
 ALTER TABLE `role_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `sign_pdf`
 --
 ALTER TABLE `sign_pdf`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sub_departments`
@@ -1759,7 +1885,7 @@ ALTER TABLE `sub_departments`
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1863,6 +1989,12 @@ ALTER TABLE `guest_visitors`
   ADD CONSTRAINT `fk_guest_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
+-- Constraints for table `mapping`
+--
+ALTER TABLE `mapping`
+  ADD CONSTRAINT `mapping_ibfk_1` FOREIGN KEY (`aplikasi_id`) REFERENCES `aplikasi` (`id`);
+
+--
 -- Constraints for table `menus`
 --
 ALTER TABLE `menus`
@@ -1873,6 +2005,12 @@ ALTER TABLE `menus`
 --
 ALTER TABLE `monitoring_tickets`
   ADD CONSTRAINT `monitoring_tickets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pj_status`
+--
+ALTER TABLE `pj_status`
+  ADD CONSTRAINT `pj_status_ibfk_1` FOREIGN KEY (`mapping_id`) REFERENCES `mapping` (`id`);
 
 --
 -- Constraints for table `role_menus`

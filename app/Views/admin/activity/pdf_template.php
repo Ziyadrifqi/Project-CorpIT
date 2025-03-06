@@ -275,7 +275,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($item['pbr_tugas']) ?></td>
                             </tr>
                         </table>
 
@@ -340,7 +340,7 @@
                             </tr>
                             <tr>
                                 <td style="padding: 2px;">Pemberi Tugas</td>
-                                <td style="padding: 2px;">: <?= esc($activity['pbr_tugas']) ?></td>
+                                <td style="padding: 2px;">: <?= esc($item['pbr_tugas']) ?></td>
                             </tr>
                         </table>
 

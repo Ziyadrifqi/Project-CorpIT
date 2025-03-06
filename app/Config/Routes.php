@@ -162,6 +162,10 @@ $routes->group('admin', function ($routes) {
     $routes->get('signpdf/downloadPdfsZip', 'SignPdfController::downloadPdfsZip');
 });
 
+$routes->get('pj-assignment', 'PjAssignmentController::index');
+$routes->get('pj-assignment/get-users/(:num)', 'PjAssignmentController::getUsers/$1');
+$routes->get('pj-assignment/get-pj/(:num)', 'PjAssignmentController::getPj/$1');
+
 $routes->get('activity/history', 'Activity\AdminActivity::history'); //halaman history tracking activity di superadmin
 
 $routes->get('guest-visitor', 'GuestVisitorController::index');
