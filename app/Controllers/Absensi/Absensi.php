@@ -585,18 +585,6 @@ class Absensi extends BaseController
             $endDate = date('Y-m-t', strtotime($selectedMonth));
             $absensi = $this->absensiModel->getSuperAdminHistory($startDate, $endDate, null, $userId);
 
-            // Add a default NIK value to each item in absensi array if not present
-            foreach ($absensi as &$item) {
-                if (!isset($item['nik']) || empty($item['nik'])) {
-                    $item['nik'] = $userDetails['nik'] ?? 'N/A';
-                }
-                // Add default pbr_tugas if not set
-                if (!isset($item['pbr_tugas']) || empty($item['pbr_tugas'])) {
-                    $item['pbr_tugas'] = 'Manager';
-                }
-            }
-            unset($item); // Break the reference
-
             // Check if user has signature file
             if ($isSigned && isset($currentUser) && isset($currentUser->signature)) {
                 $signaturePath = FCPATH . 'img/ttd/' . $currentUser->signature;

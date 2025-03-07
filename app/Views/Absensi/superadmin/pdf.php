@@ -301,7 +301,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">NIK</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= $item['nik']  ?></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">Bagian/Divisi</td>
@@ -313,7 +313,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">Pemberi Tugas</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['pbr_tugas'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? 'N/A' ?></td>
                                 </tr>
                             </table>
 
@@ -379,7 +379,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">NIK</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['nik'] ?? $userData['nik'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= $item['nik'] ??  'N/A' ?></td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">Bagian/Divisi</td>
@@ -391,7 +391,7 @@
                                 </tr>
                                 <tr>
                                     <td style="padding: 2px;">Pemberi Tugas</td>
-                                    <td style="padding: 2px;">: <?= htmlspecialchars($item['pbr_tugas'] ?? 'N/A') ?></td>
+                                    <td style="padding: 2px;">: <?= $item['pbr_tugas'] ?? 'N/A' ?></td>
                                 </tr>
                             </table>
 
